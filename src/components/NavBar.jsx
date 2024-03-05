@@ -4,7 +4,7 @@ function NavBar() {
 
 <nav className="navbar sticky-top navbar navbar-dark bg-primary">
   <div className="container-fluid">
-  <img src="FreshStart.png" alt="FreshStart Logo" width="75" height="75"/>
+  <img src="Logo.png" alt="FreshStart Logo" width="75" height="75"/>
     <form className="d-flex">
     {/* <label htmlFor="search">Search by category or location: </label> */}
       <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
