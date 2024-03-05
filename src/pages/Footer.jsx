@@ -6,17 +6,17 @@ function Footer() {
         <a className="navbar-brand" href="#">Jobs</a>
         <a className="navbar-brand" href="#">Housing</a>
            
-    <div class="btn-group dropup">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    <div className="btn-group dropup">
+  <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     More Categories...
   </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Healthcare</a></li>
-    <li><a class="dropdown-item" href="#">Food Banks</a></li>
-    <li><a class="dropdown-item" href="#">Government Services</a></li>
-    <li><a class="dropdown-item" href="#">Banking Services</a></li>
-    <li><a class="dropdown-item" href="#">DMV Services</a></li>
-    <li><a class="dropdown-item" href="#">Faith Based Services</a></li>
+  <ul className="dropdown-menu">
+    <li><a className="dropdown-item" href="#">Healthcare</a></li>
+    <li><a className="dropdown-item" href="#">Food Banks</a></li>
+    <li><a className="dropdown-item" href="#">Government Services</a></li>
+    <li><a className="dropdown-item" href="#">Banking Services</a></li>
+    <li><a className="dropdown-item" href="#">DMV Services</a></li>
+    <li><a className="dropdown-item" href="#">Faith Based Services</a></li>
   </ul>
 </div>
     </div>

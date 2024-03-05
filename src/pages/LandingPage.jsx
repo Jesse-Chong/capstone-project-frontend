@@ -143,7 +143,7 @@ function LandingPage() {
                     className="shadow-1-strong rounded"
                     src="https://www.youtube.com/embed/vlDzYIIOYmM"
                     title="YouTube video"
-                    allowfullscreen
+                    allowFullScreen
                   ></iframe>
                 </div>
               </div>
@@ -156,7 +156,7 @@ function LandingPage() {
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
           © 2024 Copyright:
-          <a className="text-white" href="https://mdbootstrap.com/">
+          <a className="text-white" href="https://FreshStart.com/">
             FreshStart.com
           </a>
         </div>
