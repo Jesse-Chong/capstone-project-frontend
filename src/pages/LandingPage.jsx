@@ -118,13 +118,12 @@ function LandingPage() {
         <div className="row">
           <div className="col">
             <p className="fs-2 mt-5 px-5 ">
-              Traditional Indian food is renowned worldwide for its wonderful
-              use of herbs and spices, and its diverse range of deep-fried
-              snacks, pastries, curries, gravies, sauces, rice dishes,
-              tandoor-cooked meats, vegetable dishes, chutneys, breads and
-              sweets. This unique approach to using ingredients makes our food
-              incredibly appealing! Our food is a combination of all six tastes
-              like sweet, sour, salty, bitter, spicy and astringent.
+              To create a seamless transition for immigrants so they can access
+              the information they need. When immigrants arrive they are not
+              aware of the resources they may need. To provide legal and
+              accurate information for immigrants who are immigrating to the
+              U.S. The information is accessible in one app and also enables
+              users to choose their language.
             </p>
           </div>
           {/* <div class="col">Column</div>
