@@ -16,7 +16,7 @@ const center = {
   lng: -74.005974,
 };
 
-const GoogleMapsComponent = ({ places, apiKey }) => {
+const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
   // console.log('apiKey', apiKey);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
@@ -55,6 +55,7 @@ const GoogleMapsComponent = ({ places, apiKey }) => {
             }}
             title={place.name}
             onClick={() => handleMarkerClick(place)}
+            options={{ icon: markerIcon }}
           />
         ))}
         {selectedPlace && (
