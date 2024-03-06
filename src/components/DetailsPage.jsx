@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import GoogleMaps from "./GoogleMaps";
 import axios from "axios";
+import food from "../assets/burger.png";
+import jobs from "../assets/university.png";
+import shelter from "../assets/apartment-3.png";
 
 function DetailsPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
+  const [markerIcon, setMarkerIcon] = useState("");
 
   // Make call to proxy server
   const endpoint = "http://localhost:3001/places";
@@ -60,13 +64,32 @@ function DetailsPage() {
     <div>
       <h1>Nearby Places</h1>
       <div>
-        <button onClick={() => handleSearch("food+bank")}>Food Banks</button>
-        <button onClick={() => handleSearch("job+agency")}>Job Agencies</button>
-        <button onClick={() => handleSearch("homeless+shelter")}>
+        <button
+          onClick={() => {
+            handleSearch("food+bank");
+            setMarkerIcon(food);
+          }}
+        >
+          Food Banks
+        </button>
+        <button
+          onClick={() => {
+            handleSearch("job+agency");
+            setMarkerIcon(jobs);
+          }}
+        >
+          Job Agencies
+        </button>
+        <button
+          onClick={() => {
+            handleSearch("homeless+shelter");
+            setMarkerIcon(shelter);
+          }}
+        >
           Homeless Shelters
         </button>
       </div>
-      <GoogleMaps places={places} apiKey={API_KEY} />
+      <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
     </div>
   );
 }
