@@ -3,13 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import ShowDetailsPage from "./pages/ShowDetailsPage";
+import AppDescription from "./components/AppDescription";
 
 function App() {
   return (
     <Router>
       {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<AppDescription />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />
         {/* <Route path="/foods" element={<IndexPage />} />
