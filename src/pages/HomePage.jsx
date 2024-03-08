@@ -21,7 +21,8 @@ function Home() {
         <h1>Choose a Category</h1><br/><br/>
         <div className="container">
   <div className="row row-cols-3">
-    <div className="col"><h2>Education</h2>  
+    <div className="col">
+        <h2>Education</h2>  
         <img src="education.png" alt="Picture for Education Card" width="200" height="200"/> <br/>
     </div><br/><br/><br/><br/><br/><br/>
     <div className="col"><h2>Jobs</h2>   
@@ -50,7 +51,9 @@ function Home() {
     </div><br/><br/><br/><br/><br/><br/>
   </div>
 </div>
-        <button>Back</button> 
+        <button>
+        <Link to={'/'}>Back</Link>
+        </button> 
         <br/><br/>
         <footer>
             <Footer/>
