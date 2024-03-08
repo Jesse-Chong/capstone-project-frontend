@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GoogleMaps from "./GoogleMaps";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import food from "../assets/burger.png";
 import jobs from "../assets/university.png";
@@ -90,7 +91,13 @@ function DetailsPage() {
         </button>
       </div>
       <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
+      <br/>
+      <button>
+        <Link to={'/home'}>Back</Link>
+        </button> 
+        <br/>
     </div>
+    
   );
 }
 
