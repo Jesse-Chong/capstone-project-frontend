@@ -1,5 +1,4 @@
 import React from "react";
-
 function LandingPage() {
   return (
     <div className="container">
@@ -22,11 +21,15 @@ function LandingPage() {
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{ padding: "15px" }}
+              style={{ padding: "15px", width: "100%" }}
             >
               Choose Your Language
             </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul
+              className="dropdown-menu"
+              aria-labelledby="dropdownMenuButton1"
+              style={{ width: "100%" }}
+            >
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
                   English
@@ -82,11 +85,15 @@ function LandingPage() {
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{ padding: "15px" }}
+              style={{ padding: "15px", width: "100%" }}
             >
               Choose Your Location
             </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul
+              className="dropdown-menu"
+              aria-labelledby="dropdownMenuButton1"
+              style={{ width: "100%" }}
+            >
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
                   Manhattan
@@ -132,7 +139,7 @@ function LandingPage() {
       </div>
       <footer
         className="text-center text-white"
-        style={{ backgroundColor: "#45637d" }}
+        style={{ backgroundColor: "#45637D" }}
       >
         <div className="container p-4">
           <section className="">
@@ -151,7 +158,6 @@ function LandingPage() {
             </div>
           </section>
         </div>
-
         <div
           className="text-center p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
@@ -165,5 +171,4 @@ function LandingPage() {
     </div>
   );
 }
-
 export default LandingPage;
