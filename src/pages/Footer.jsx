@@ -1,6 +1,7 @@
 function Footer() {
     return (
-    <nav className="navbar sticky-bottom navbar navbar-dark bg-primary ">
+    <nav className="navbar sticky-bottom navbar navbar-dark"
+    style={{backgroundColor: "#38B6FF"}}>
     <div className="container-fluid">
         <a className="navbar-brand" href="#">Education</a>
         <a className="navbar-brand" href="#">Jobs</a>

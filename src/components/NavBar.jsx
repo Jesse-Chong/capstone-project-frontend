@@ -2,7 +2,8 @@ function NavBar() {
     return (
     
 
-<nav className="navbar sticky-top navbar navbar-dark bg-primary">
+<nav className="navbar sticky-top navbar navbar-dark"
+    style={{backgroundColor: "#38B6FF"}}>
   <div className="container-fluid">
   <img src="Logo.png" alt="FreshStart Logo" width="75" height="75"/>
     <form className="d-flex">
