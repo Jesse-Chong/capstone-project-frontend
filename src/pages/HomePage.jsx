@@ -55,9 +55,7 @@ function Home() {
         <Link to={'/'}>Back</Link>
         </button> 
         <br/><br/>
-        <footer>
-            <Footer/>
-        </footer>
+            <Footer/>   
     </div>
     )
 };
