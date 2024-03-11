@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 // import government from "/Government1.png";
 // import bank from "/Bank.png"
 // import dmv from "./car.png";
-// import religious from "/public/Religious.png"
 
 function Home() {
   return (
