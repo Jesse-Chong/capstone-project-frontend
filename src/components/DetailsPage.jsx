@@ -5,6 +5,7 @@ import axios from "axios";
 import food from "../assets/burger.png";
 import jobs from "../assets/university.png";
 import shelter from "../assets/apartment-3.png";
+import { useNavigate } from "react-router-dom";
 
 function DetailsPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;

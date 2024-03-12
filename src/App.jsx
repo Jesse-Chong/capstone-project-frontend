@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import ShowDetailsPage from "./pages/ShowDetailsPage";
 import AppDescription from "./components/AppDescription";
+import FoodPage from "./components/FoodPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<AppDescription />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />
+        <Route path="/food" element={<FoodPage />} />
         {/* <Route path="/foods" element={<IndexPage />} />
           <Route path="/foods/new" element={<NewPage />} />
           <Route path="/foods/:index" element={<ShowPage />} />
