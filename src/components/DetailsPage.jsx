@@ -14,6 +14,7 @@ function DetailsPage() {
 
   // Make call to proxy server
   const endpoint = "http://localhost:3001/places";
+  
 
   // solely used to grab place_id from nearby search and then get place details
   // for all nearby place
