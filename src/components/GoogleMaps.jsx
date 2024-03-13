@@ -1,10 +1,12 @@
 import { React, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import {
   GoogleMap,
   Marker,
   LoadScript,
   InfoWindow,
 } from "@react-google-maps/api";
+
 
 const containerStyle = {
   width: "800px",
@@ -17,6 +19,7 @@ const center = {
 };
 
 const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
+  const { t } = useTranslation();
   // console.log('apiKey', apiKey);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
@@ -68,29 +71,27 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
           >
             <div>
               {selectedPlaceDetails ? (
-                <>
-                  <p>Name: {selectedPlaceDetails.name}</p>
-                  <p>Address: {selectedPlaceDetails.formatted_address}</p>
-                  {selectedPlaceDetails.formatted_phone_number && (
-                    <p>Phone: {selectedPlaceDetails.formatted_phone_number}</p>
-                  )}
-                  <p>Rating: {selectedPlaceDetails.rating}</p>
-                  {selectedPlaceDetails.website && (
-                    <p>Website: {selectedPlaceDetails.website}</p>
-                  )}
+        <>
+        <p>{t("infoWindow.name")}: {selectedPlaceDetails.name}</p>
+        <p>{t("infoWindow.address")}: {selectedPlaceDetails.formatted_address}</p>
+        {selectedPlaceDetails.formatted_phone_number && (
+          <p>{t("infoWindow.phone")}: {selectedPlaceDetails.formatted_phone_number}</p>
+        )}
+        <p>{t("infoWindow.rating")}: {selectedPlaceDetails.rating}</p>
+        {selectedPlaceDetails.website && (
+          <p>{t("infoWindow.website")}: {selectedPlaceDetails.website}</p>
+        )}
 
-                  {selectedPlaceDetails.opening_hours && (
-                    <>
-                      <p>Opening hours:</p>
-                      <ul>
-                        {selectedPlaceDetails.opening_hours.weekday_text.map(
-                          (hours, index) => (
-                            <li key={index}>{hours}</li>
-                          )
-                        )}
-                      </ul>
-                    </>
-                  )}
+        {selectedPlaceDetails.opening_hours && (
+          <>
+            <p>{t("infoWindow.openingHours")}:</p>
+            <ul>
+              {selectedPlaceDetails.opening_hours.weekday_text.map((hours, index) => (
+                <li key={index}>{hours}</li>
+              ))}
+            </ul>
+          </>
+        )}
 
                   {selectedPlaceDetails.photos &&
                     selectedPlaceDetails.photos.length > 0 && (
@@ -101,7 +102,7 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
                     )}
                 </>
               ) : (
-                <p>No details available</p>
+                <p>{t("infoWindow.noDetails")}</p>
               )}
             </div>
           </InfoWindow>
