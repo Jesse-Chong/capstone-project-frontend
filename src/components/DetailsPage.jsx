@@ -5,10 +5,12 @@ import axios from "axios";
 import food from "../assets/burger.png";
 import jobs from "../assets/university.png";
 import shelter from "../assets/apartment-3.png";
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 
 function DetailsPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;
+  const { t } = useTranslation();
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
   const [markerIcon, setMarkerIcon] = useState("");
@@ -57,7 +59,7 @@ function DetailsPage() {
 
   return (
     <div>
-      <h1>Nearby Places</h1>
+       {t('googlemap.header')}
       <div>
         <button
           onClick={() => {
@@ -65,7 +67,7 @@ function DetailsPage() {
             setMarkerIcon(food);
           }}
         >
-          Food Banks
+           {t('food_bank')}
         </button>
         <button
           onClick={() => {
@@ -73,7 +75,7 @@ function DetailsPage() {
             setMarkerIcon(jobs);
           }}
         >
-          Job Agencies
+           {t('job_agency')}
         </button>
         <button
           onClick={() => {
@@ -81,13 +83,13 @@ function DetailsPage() {
             setMarkerIcon(shelter);
           }}
         >
-          Homeless Shelters
+           {t('homeless_shelter')}
         </button>
       </div>
       <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
       <br/>
       <button>
-        <Link to={'/home'}>Back</Link>
+        <Link to={'/home'}> {t('button.back')}</Link>
         </button> 
         <br/>
     </div>

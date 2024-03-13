@@ -1,6 +1,13 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 export default function AppDescription() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <div>
       <div className="dropdown d-flex justify-content-center">
@@ -12,7 +19,7 @@ export default function AppDescription() {
           aria-expanded="false"
           style={{ padding: "15px", width: "65%", fontSize: "50px" }}
         >
-          Choose Your Language
+         {t('landing.language')}
         </button>
         <ul
           className="dropdown-menu"
@@ -20,33 +27,43 @@ export default function AppDescription() {
           style={{ width: "65%" }}
         >
           <li>
-            <a className="dropdown-item fs-3 text-center" href="#">
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('en')}>
               English
             </a>
           </li>
           <li>
-            <a className="dropdown-item fs-3 text-center" href="#">
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('es')}>
               Spanish
             </a>
           </li>
           <li>
-            <a className="dropdown-item fs-3 text-center" href="#">
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('zh_CN')}>
               Chinese
             </a>
           </li>
           <li>
-            <a className="dropdown-item fs-3 text-center" href="#">
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('hi')}>
               Hindi
             </a>
           </li>
           <li>
-            <a className="dropdown-item fs-3 text-center" href="#">
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('ar')}>
               Arabic
             </a>
           </li>
           <li>
-            <a className="dropdown-item fs-3 text-center" href="#">
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('fr')}>
               French
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('ru')}>
+              Russian
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('ko')}>
+              Korean
             </a>
           </li>
         </ul>
@@ -71,7 +88,7 @@ export default function AppDescription() {
           aria-expanded="false"
           style={{ padding: "15px", width: "45%" }}
         >
-          Choose Your Location
+          {t('landing.city')}
         </button>
         <ul
           className="dropdown-menu"
@@ -80,27 +97,27 @@ export default function AppDescription() {
         >
           <li>
             <a className="dropdown-item fs-3 text-center" href="#">
-              Manhattan
+            {t('borough.manhattan')}
             </a>
           </li>
           <li>
             <a className="dropdown-item fs-3 text-center" href="#">
-              Queens
+            {t('borough.queens')}
             </a>
           </li>
           <li>
             <a className="dropdown-item fs-3 text-center" href="#">
-              Brooklyn
+            {t('borough.brooklyn')}
             </a>
           </li>
           <li>
             <a className="dropdown-item fs-3 text-center" href="#">
-              Bronx
+            {t('borough.bronx')}
             </a>
           </li>
           <li>
             <a className="dropdown-item fs-3 text-center" href="#">
-              Staten Island
+            {t('borough.staten_island')}
             </a>
           </li>
         </ul>

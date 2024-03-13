@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Suspense } from 'react';
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import ShowDetailsPage from "./pages/ShowDetailsPage";
@@ -26,4 +27,10 @@ function App() {
   );
 }
 
-export default App;
+export default function WrappedApp() {
+  return (
+    <Suspense fallback="...loading">
+      <App />
+    </Suspense>
+  );
+}
