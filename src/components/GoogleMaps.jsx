@@ -1,3 +1,4 @@
+import JobsPage from "./JobsPage";
 import { React, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import {
@@ -108,6 +109,7 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
           </InfoWindow>
         )}
       </GoogleMap>
+      <JobsPage selectedPlace={selectedPlace} selectedPlaceDetails={selectedPlaceDetails} />
     </LoadScript>
   );
 };
