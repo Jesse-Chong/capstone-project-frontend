@@ -13,7 +13,7 @@ function App() {
       {/* <Navbar /> */}
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
-        <Route path="/" element={<AppDescription />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />
         <Route path="/food" element={<FoodPage />} />
