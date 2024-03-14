@@ -1,5 +1,12 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
+
 function LandingPage() {
+  const { t, i18n } = useTranslation()
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -21,45 +28,51 @@ function LandingPage() {
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{ padding: "15px", width: "100%" }}
+              style={{ padding: "15px" }}
             >
-              Choose Your Language
+                 {t('landing.language')}
             </button>
-            <ul
-              className="dropdown-menu"
-              aria-labelledby="dropdownMenuButton1"
-              style={{ width: "100%" }}
-            >
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
-                <a className="dropdown-item fs-3 text-center" href="#">
+                <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('en')}>
                   English
                 </a>
               </li>
               <li>
-                <a className="dropdown-item fs-3 text-center" href="#">
+                <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('es')}>
                   Spanish
                 </a>
               </li>
               <li>
-                <a className="dropdown-item fs-3 text-center" href="#">
+                <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('zh_CN')}>
                   Chinese
                 </a>
               </li>
               <li>
-                <a className="dropdown-item fs-3 text-center" href="#">
+                <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('hi')}>
                   Hindi
                 </a>
               </li>
               <li>
-                <a className="dropdown-item fs-3 text-center" href="#">
+                <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('ar')}>
                   Arabic
                 </a>
               </li>
               <li>
-                <a className="dropdown-item fs-3 text-center" href="#">
+                <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('fr')}>
                   French
                 </a>
               </li>
+              <li>
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('ru')}>
+              Russian
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item fs-3 text-center" href="#" onClick={() => changeLanguage('ko')}>
+              Korean
+            </a>
+          </li>
             </ul>
           </div>
         </div>
@@ -85,38 +98,34 @@ function LandingPage() {
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{ padding: "15px", width: "100%" }}
+              style={{ padding: "15px" }}
             >
-              Choose Your Location
+              {t('landing.city')}
             </button>
-            <ul
-              className="dropdown-menu"
-              aria-labelledby="dropdownMenuButton1"
-              style={{ width: "100%" }}
-            >
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
-                  Manhattan
+                {t('borough.manhattan')}
                 </a>
               </li>
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
-                  Queens
+                {t('borough.queens')}
                 </a>
               </li>
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
-                  Brooklyn
+                {t('borough.brooklyn')}
                 </a>
               </li>
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
-                  Bronx
+                {t('borough.bronx')}
                 </a>
               </li>
               <li>
                 <a className="dropdown-item fs-3 text-center" href="#">
-                  Staten Island
+                {t('borough.staten_island')}
                 </a>
               </li>
             </ul>
@@ -125,12 +134,13 @@ function LandingPage() {
         <div className="row">
           <div className="col">
             <p className="fs-2 mt-5 px-5 ">
-              To create a seamless transition for immigrants so they can access
+            {t('mission_statement')}
+              {/* To create a seamless transition for immigrants so they can access
               the information they need. When immigrants arrive they are not
               aware of the resources they may need. To provide legal and
               accurate information for immigrants who are immigrating to the
               U.S. The information is accessible in one app and also enables
-              users to choose their language.
+              users to choose their language. */}
             </p>
           </div>
           {/* <div class="col">Column</div>
@@ -139,7 +149,7 @@ function LandingPage() {
       </div>
       <footer
         className="text-center text-white"
-        style={{ backgroundColor: "#45637D" }}
+        style={{ backgroundColor: "#45637d" }}
       >
         <div className="container p-4">
           <section className="">
@@ -158,11 +168,12 @@ function LandingPage() {
             </div>
           </section>
         </div>
+
         <div
           className="text-center p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
-          © 2024 Copyright:
+          © 2024 {t('copyright')}:
           <a className="text-white" href="https://FreshStart.com/">
             FreshStart.com
           </a>
@@ -171,4 +182,5 @@ function LandingPage() {
     </div>
   );
 }
+
 export default LandingPage;

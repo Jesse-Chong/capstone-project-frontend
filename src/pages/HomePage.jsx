@@ -1,13 +1,15 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import NavBar from "../components/NavBar";
 
 function HomePage() {
+  const { t } = useTranslation();
   return (
     <div>
       <NavBar />
-      <h2 className="m-5">Choose a Category</h2>
+      <h2 className="m-5">{t('home.category')}</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
         <div className="col">
           <div className="card h-100 p-2">
@@ -22,7 +24,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Education</h4>
+                <h4 className="card-title text-center">{t('home.education')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -43,7 +45,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Jobs</h4>
+                <h4 className="card-title text-center">{t('home.jobs')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -64,7 +66,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Healthcare</h4>
+                <h4 className="card-title text-center">{t('home.healthcare')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -85,7 +87,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Banking Services</h4>
+                <h4 className="card-title text-center">{t('home.banking')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -106,7 +108,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Food Banks</h4>
+                <h4 className="card-title text-center">{t('home.food_banks')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -127,7 +129,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Housing</h4>
+                <h4 className="card-title text-center">{t('home.housing')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -148,7 +150,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Government Services</h4>
+                <h4 className="card-title text-center">{t('home.government_services')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -169,7 +171,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">DMV Services</h4>
+                <h4 className="card-title text-center">{t('home.dmv')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -190,7 +192,7 @@ function HomePage() {
                 }}
               />
               <div className="card-body" style={{ color: "black" }}>
-                <h4 className="card-title text-center">Faith Based Services</h4>
+                <h4 className="card-title text-center">{t('home.faith')}</h4>
                 {/* <div className="card-footer bg-transparent border-success px-1">
                 food
               </div> */}
@@ -201,7 +203,7 @@ function HomePage() {
       </div>
       <button className="m-5">
         <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-          Back
+        {t('button.back')}
         </Link>
       </button>
       <Footer />
