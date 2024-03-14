@@ -7,6 +7,13 @@ import ShowDetailsPage from "./pages/ShowDetailsPage";
 import AppDescription from "./components/AppDescription";
 import FoodPage from "./components/FoodPage";
 import JobsPage from "./components/JobsPage";
+import BankingPage from "./components/BankingPage";
+import DMVPage from "./components/DMVPage";
+import EducationPage from "./components/EducationPage";
+import FaithPage from "./components/FaithPage";
+import GovernmentPage from "./components/GovernmentPage";
+import HealthcarePage from "./components/HealthcarePage";
+import HousingPage from "./components/HousingPage";
 
 function App() {
   return (
@@ -19,11 +26,13 @@ function App() {
         <Route path="/details" element={<ShowDetailsPage />} />
         <Route path="/food" element={<FoodPage />} />
         <Route path="/jobs" element={<JobsPage />} />
-        {/* <Route path="/foods" element={<IndexPage />} />
-          <Route path="/foods/new" element={<NewPage />} />
-          <Route path="/foods/:index" element={<ShowPage />} />
-          <Route path="/foods/:index/edit" element={<EditPage />} />
-          <Route path="*" element={<PageNotFound />} /> */}
+        <Route path="/banking" element={<BankingPage />} />
+        <Route path="/dmv" element={<DMVPage/>} />
+        <Route path="/education" element={<EducationPage />} />
+        <Route path="/faith" element={<FaithPage/>} />
+        <Route path="/government" element={<GovernmentPage />} />
+        <Route path="/healthcare" element={<HealthcarePage />} />
+        <Route path="/housing" element={<HousingPage />} />
       </Routes>
     </Router>
   );
