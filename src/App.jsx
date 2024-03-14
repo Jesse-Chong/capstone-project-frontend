@@ -14,6 +14,8 @@ import FaithPage from "./components/FaithPage";
 import GovernmentPage from "./components/GovernmentPage";
 import HealthcarePage from "./components/HealthcarePage";
 import HousingPage from "./components/HousingPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUp";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="/government" element={<GovernmentPage />} />
         <Route path="/healthcare" element={<HealthcarePage />} />
         <Route path="/housing" element={<HousingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </Router>
   );
