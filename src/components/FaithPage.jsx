@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
 
-function JobsPage() {
+function FaithPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
@@ -66,12 +66,12 @@ function JobsPage() {
         <div className="col text-center">
         <button
           onClick={() => {
-            handleSearch("job+agency");
-            setMarkerIcon(jobs);
+            handleSearch("Religious");
+            // setMarkerIcon();
             
           }}
         >
-          Jobs
+          Faith Based Services
         </button>
         <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
           {places.map((item)=>{
@@ -94,4 +94,4 @@ function JobsPage() {
   )
 }
 
-export default JobsPage;
+export default FaithPage;

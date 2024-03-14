@@ -6,11 +6,12 @@ import food from "../assets/burger.png";
 import jobs from "../assets/university.png";
 import shelter from "../assets/apartment-3.png";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./NavBar";
+import Footer from "../pages/Footer";
 
 function FoodPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const [places, setPlaces] = useState([]);
-  const [selectedPlaceDetails, setSelectedPlaceDetails] = useState([]);
   const [search, setSearch] = useState([]);
   const [markerIcon, setMarkerIcon] = useState("");
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ function FoodPage() {
   };
   return (
     <div>
+      <NavBar/>
         <div className="col text-center">
         <button
           onClick={() => {
@@ -73,20 +75,14 @@ function FoodPage() {
             console.log(places)
                 return (
                 <div key={item.place_id}>
-                    <p>Name: {item.name}</p>
-                          <p>Address: {item.formatted_address}</p>
-                          {item.formatted_phone_number && (
-                            <p>Phone: {item.formatted_phone_number}</p>
-                          )}
-                          <p>Rating: {item.rating}</p>
-                          {/* {item.website && ( */}
-                            <p>Website: {item.website}</p>
-                          {/* )} */}
+                  <br/>
+                    <p>{item.name}</p>
+                    <br/>
         
           </div>)
           }) } 
           </div>
-        
+        <Footer/>
     </div>
   )
 }
