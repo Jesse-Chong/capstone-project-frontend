@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function NavBar() {
     return (
     
@@ -6,11 +8,16 @@ function NavBar() {
     style={{backgroundColor: "#38B6FF"}}>
   <div className="container-fluid">
   <img src="Logo.png" alt="FreshStart Logo" width="75" height="75"/>
-    <form className="d-flex">
-    {/* <label htmlFor="search">Search by category or location: </label> */}
-      <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button className="" type="submit">Search</button>
-    </form>
+  <button className="m-5">
+     <Link to={"/login"} style={{ textDecoration: "none", color: "black" }}>
+         Login
+        </Link>
+      </button>
+      <button className="m-5">
+     <Link to={"/signup"} style={{ textDecoration: "none", color: "black" }}>
+         Sign Up
+        </Link>
+      </button>
   </div>
 </nav>
         
