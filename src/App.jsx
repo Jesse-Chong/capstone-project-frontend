@@ -1,10 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Suspense } from 'react';
+import { Suspense } from "react";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import ShowDetailsPage from "./pages/ShowDetailsPage";
-import AppDescription from "./components/AppDescription";
 import FoodPage from "./components/FoodPage";
 import JobsPage from "./components/JobsPage";
 import BankingPage from "./components/BankingPage";
@@ -29,9 +28,9 @@ function App() {
         <Route path="/food" element={<FoodPage />} />
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/banking" element={<BankingPage />} />
-        <Route path="/dmv" element={<DMVPage/>} />
+        <Route path="/dmv" element={<DMVPage />} />
         <Route path="/education" element={<EducationPage />} />
-        <Route path="/faith" element={<FaithPage/>} />
+        <Route path="/faith" element={<FaithPage />} />
         <Route path="/government" element={<GovernmentPage />} />
         <Route path="/healthcare" element={<HealthcarePage />} />
         <Route path="/housing" element={<HousingPage />} />
