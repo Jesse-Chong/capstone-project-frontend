@@ -1,11 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-  };
+  }
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="clearfix">
@@ -151,7 +154,8 @@ function LandingPage() {
                 style={{ width: "100%" }}
               >
                 <li>
-                  <a className="dropdown-item fs-3 text-center" href="#">
+                  <a className="dropdown-item fs-3 text-center" href="#"
+                  onClick={()=>navigate("/home")}>
                     {t("borough.manhattan")}
                   </a>
                 </li>
