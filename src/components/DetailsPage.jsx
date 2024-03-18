@@ -5,7 +5,7 @@ import axios from "axios";
 import food from "../assets/burger.png";
 import jobs from "../assets/university.png";
 import shelter from "../assets/apartment-3.png";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 function DetailsPage() {
@@ -17,13 +17,12 @@ function DetailsPage() {
 
   // Make call to proxy server
   const endpoint = "http://localhost:3001/places";
-  
 
   // solely used to grab place_id from nearby search and then get place details
   // for all nearby place
   const handleSearch = async (type) => {
     setSearch(type);
-  
+
     try {
       const response = await axios.get(endpoint, {
         params: {
@@ -34,22 +33,28 @@ function DetailsPage() {
           keyword: type,
         },
       });
-  
+
       const placeIds = response.data.results.map((place) => place.place_id);
-  
+
       try {
-        const detailsResponse = await axios.get("http://localhost:3001/placeDetails", {
-          params: {
-            key: API_KEY,
-            placeIds: placeIds.join(","),
-          },
-        });
-  
-        console.log("Place details inserted successfully:", detailsResponse.data);
+        const detailsResponse = await axios.get(
+          "http://localhost:3001/placeDetails",
+          {
+            params: {
+              key: API_KEY,
+              placeIds: placeIds.join(","),
+            },
+          }
+        );
+
+        console.log(
+          "Place details inserted successfully:",
+          detailsResponse.data
+        );
       } catch (detailsError) {
         console.error("Error inserting place details:", detailsError);
       }
-  
+
       setPlaces(response.data.results);
     } catch (error) {
       console.error("Error fetching nearby places:", error);
@@ -59,7 +64,7 @@ function DetailsPage() {
 
   return (
     <div>
-       {t('googlemap.header')}
+      {t("googlemap.header")}
       <div>
         <button
           onClick={() => {
@@ -67,7 +72,7 @@ function DetailsPage() {
             setMarkerIcon(food);
           }}
         >
-           {t('food_bank')}
+          {t("food_bank")}
         </button>
         <button
           onClick={() => {
@@ -75,7 +80,7 @@ function DetailsPage() {
             setMarkerIcon(jobs);
           }}
         >
-           {t('job_agency')}
+          {t("job_agency")}
         </button>
         <button
           onClick={() => {
@@ -83,85 +88,17 @@ function DetailsPage() {
             setMarkerIcon(shelter);
           }}
         >
-           {t('homeless_shelter')}
+          {t("homeless_shelter")}
         </button>
       </div>
       <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
-      <br/>
+      <br />
       <button>
-        <Link to={'/home'}> {t('button.back')}</Link>
-        </button> 
-        <br/>
+        <Link to={"/home"}> {t("button.back")}</Link>
+      </button>
+      <br />
     </div>
-    
   );
 }
 
 export default DetailsPage;
-
-// Get nearby search for food bank, job agency, or homeless shelter
-// const handleSearch = (type) => {
-//   setSearch(type)
-
-//   axios.get(endpoint, {
-//     params: {
-//       key: API_KEY,
-//       location: '40.712776,-74.005974', // Example: '40.712776,-74.005974'
-//       radius: '5000', // Example: Search within a 5km radius
-//       type: type, // Example: Search for restaurants
-//       keyword: search
-//     }
-//   })
-//   .then(response => {
-//     // Handle successful response
-//     // console.log(response.data);
-//     setPlaces(response.data.results);
-//   })
-//   .catch(error => {
-//     // Handle error
-//     console.error('Error fetching nearby places:', error);
-//     console.error('Error response data:', error.response.data);
-//   });
-// }
-
-// import React from 'react';
-
-// const DetailsPage = () => {
-//     return (
-
-//            <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
-//               {food
-//                 .sort((a, b) => (a.name > b.name ? 1 : -1))
-//                 .map((item) => {
-//                 return (
-//                 <div className="col " key={item.id}>
-//                 <div className="card h-100 p-2">
-//                 <Link
-//                 to={`/foods/${item.id}`}
-//                 style={{ textDecoration: "none" }}
-//                  >
-//                 <img
-//                     src={item.image}
-//                     className="card-img-top"
-//                     alt={item.name}
-//                     style={{
-//                     objectFit: "cover",
-//                     height: "250px",
-//                     }}
-//                     />
-//                 <div className="card-body" style={{ color: "green" }}>
-//                 <h5 className="card-title">{item.name}</h5>
-//                 <div className="card-footer bg-transparent border-success px-1">
-//                 ${item.price}
-//                 </div>
-//                 </div>
-//                 </Link>
-//                 </div>
-//                 </div>
-//                 );
-//                 })}
-//            </div>
-//     );
-// };
-
-// export default DetailsPage;
