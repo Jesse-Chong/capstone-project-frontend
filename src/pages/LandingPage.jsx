@@ -6,7 +6,7 @@ function LandingPage() {
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-  }
+  };
   const navigate = useNavigate();
 
   return (
@@ -21,11 +21,6 @@ function LandingPage() {
           <br />
           <br />
           {t("mission_statement")}
-          {/* To create a seamless transition for immigrants so they can access the
-          information they need. When immigrants arrive they are not aware of
-          the resources they may need. To provide legal and accurate information
-          for immigrants who are immigrating to the U.S. The information is
-          accessible in one app and also enables users to choose their language. */}
         </p>
       </div>
       <div className="container mt-1">
@@ -154,8 +149,11 @@ function LandingPage() {
                 style={{ width: "100%" }}
               >
                 <li>
-                  <a className="dropdown-item fs-3 text-center" href="#"
-                  onClick={()=>navigate("/home")}>
+                  <a
+                    className="dropdown-item fs-3 text-center"
+                    href="#"
+                    onClick={() => navigate("/home")}
+                  >
                     {t("borough.manhattan")}
                   </a>
                 </li>

@@ -45,18 +45,18 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-/* img:hover {
-  transform: scale(1.4);
-} */
-
 img:hover {
+  transform: scale(1.03);
+}
+
+/* img:hover {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-}
+} */
 
-.text-center:hover {
+/* .text-center:hover {
   text-decoration: underline;
-}
+} */
 
 button {
   display: inline-block;

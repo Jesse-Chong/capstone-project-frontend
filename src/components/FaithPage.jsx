@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import GoogleMaps from "./GoogleMaps";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import food from "../assets/burger.png";
-import jobs from "../assets/university.png";
-import shelter from "../assets/apartment-3.png";
 import church from "../assets/church.png";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -69,7 +66,7 @@ function FaithPage() {
   return (
     <div>
       <NavBar />
-      <div className="col text-center">
+      <div className="col text-center mt-5">
         <button
           onClick={() => {
             handleSearch("Religious");
@@ -78,7 +75,13 @@ function FaithPage() {
         >
           Faith Based Services
         </button>
-        <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
+        <div className="m-5">
+          <GoogleMaps
+            places={places}
+            apiKey={API_KEY}
+            markerIcon={markerIcon}
+          />
+        </div>
         {places.map((item) => {
           console.log(places);
           return (

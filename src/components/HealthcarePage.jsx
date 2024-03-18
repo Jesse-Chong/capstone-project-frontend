@@ -3,8 +3,6 @@ import GoogleMaps from "./GoogleMaps";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import health from "../assets/health.png";
-import jobs from "../assets/university.png";
-import shelter from "../assets/apartment-3.png";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NavBar from "./NavBar";
@@ -68,7 +66,7 @@ function HealthcarePage() {
   return (
     <div>
       <NavBar />
-      <div className="col text-center">
+      <div className="col text-center mt-5">
         <button
           onClick={() => {
             handleSearch("healthcare");
@@ -77,7 +75,13 @@ function HealthcarePage() {
         >
           Healthcare Services
         </button>
-        <GoogleMaps places={places} apiKey={API_KEY} markerIcon={markerIcon} />
+        <div className="m-5">
+          <GoogleMaps
+            places={places}
+            apiKey={API_KEY}
+            markerIcon={markerIcon}
+          />
+        </div>
         {places.map((item) => {
           console.log(places);
           return (
