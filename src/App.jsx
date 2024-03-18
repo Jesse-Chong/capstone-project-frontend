@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense } from "react";
 import HomePage from "./pages/HomePage";
@@ -15,8 +16,14 @@ import HealthcarePage from "./components/HealthcarePage";
 import HousingPage from "./components/HousingPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUp";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import Users from "./pages/Users";
 
 function App() {
+   const [user, setUser] = useState(null)
+   const [token, setToken] = useState(null)
+
+
   return (
     <Router>
       {/* <Navbar /> */}
@@ -34,8 +41,20 @@ function App() {
         <Route path="/government" element={<GovernmentPage />} />
         <Route path="/healthcare" element={<HealthcarePage />} />
         <Route path="/housing" element={<HousingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage setUser={setUser} setToken={setToken} />} />
+        <Route path="/signup" element={<SignUpPage setUser={setUser} setToken={setToken}/>} />
+        <Route path="/users" element={<Users />} />
+        {/* <Route 
+         path="/users"
+         element={
+         <ProtectedRoute
+         element={user}
+         isAuthenticated={!!user && !!token}
+         user={user}
+         token={token}
+          />
+         }
+         /> */}
       </Routes>
     </Router>
   );

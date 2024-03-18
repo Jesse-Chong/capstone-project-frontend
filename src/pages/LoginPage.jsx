@@ -2,15 +2,67 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Footer from "./Footer";
 import LoginNavBar from "./LoginNavBar";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import SignUpPage from "./SignUp";
 
-const LoginPage = () => {
+const LoginPage = ({ setUser, setToken }) => {
+  const API = import.meta.env.VITE_API_KEY;
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
+  const [loginForm, setLoginForm] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password_hash: '',
+  })
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setLoginForm((prev) => ({
+        ...prev,
+        [name]: value
+    }))
+}
+
+const handleLogin = (event) => {
+  event.preventDefault()
+
+  fetch(`${API}/login`, {
+      method: "POST",
+      body: JSON.stringify(loginForm),
+      headers: {
+          "Content-Type": "application/json"
+      }
+  })
+      .then(res => res.json())
+      .then(res => {
+          // console.log(res)
+          if(res.user.user_id){
+              setUser(res.user)
+              setToken(res.token)
+              setLoginForm((prev) => ({
+                  email: '',
+                  password_hash: ''
+              }))
+
+              navigate('/users')
+          } else {
+              console.log(res)
+          }
+      })
+      .catch(err => console.log(err))
+}
+
+
   return (
     <div>
       <LoginNavBar />
+      <form onSubmit={handleLogin}>
       <section className="vh-100 gradient-custom">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -33,6 +85,9 @@ const LoginPage = () => {
                         id="typeEmailX"
                         className="form-control form-control-lg"
                         placeholder="Email"
+                        name="email"
+                        value={loginForm.email}
+                        onChange={handleInputChange}
                         required
                       />
                     </div>
@@ -43,6 +98,9 @@ const LoginPage = () => {
                         id="typePasswordX"
                         className="form-control form-control-lg"
                         placeholder="Password"
+                        name="password_hash"
+                        value={loginForm.password_hash}
+                        onChange={handleInputChange}
                         required
                       />
                     </div>
@@ -93,6 +151,7 @@ const LoginPage = () => {
           {t("button.back")}
         </Link>
       </button>
+      </form>
       <Footer />
     </div>
   );
