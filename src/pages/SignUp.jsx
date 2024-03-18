@@ -1,16 +1,65 @@
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Footer from "./Footer";
 import NavBarSignUp from "../pages/NavBarSignUp";
+import { useNavigate } from "react-router-dom";
 
-const SignUpPage = () => {
+const SignUpPage = ({ setUser, setToken }) => {
+  const navigate = useNavigate()
+  const API = import.meta.env.VITE_API_KEY
   const { t, i18n } = useTranslation();
+  const [signupForm, setSignupForm] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password_hash: '',
+})
+
+const handleInputChange = (event) => {
+  const { name, value } = event.target
+  setSignupForm((prev) => ({
+      ...prev,
+      [name]: value
+  }))
+}
+
+const handleSubmit = (event) => {
+  event.preventDefault()
+  fetch(`${API}/users`, {
+      method: "POST",
+      body: JSON.stringify(signupForm),
+      headers: {
+          "Content-Type": "application/json"
+      }
+  })
+  .then(res => res.json())
+  .then(res => {
+      // console.log(res)
+      if(res.user.user_id){
+          setUser(res.user)
+          setToken(res.token)
+          setSignupForm((prev) => ({
+              firstname: '',
+              lastname: '',
+              email: '',
+              password_hash: ''
+          }))
+          navigate('/users')
+      } else {
+          console.log(res)
+      }
+  })
+  .catch(err => console.log(err))
+}
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
   return (
     <div>
       <NavBarSignUp />
+      <form onSubmit={handleSubmit}>
       <section className="vh-100 gradient-custom">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -30,6 +79,9 @@ const SignUpPage = () => {
                         id="text"
                         className="form-control form-control-lg"
                         placeholder="First Name"
+                        name="firstname"
+                        value={signupForm.firstname}
+                        onChange={handleInputChange}
                         required
                       />
                     </div>
@@ -40,6 +92,9 @@ const SignUpPage = () => {
                         id="text"
                         className="form-control form-control-lg"
                         placeholder="Last Name"
+                        name="lastname"
+                        value={signupForm.lastname}
+                        onChange={handleInputChange}
                         required
                       />
                     </div>
@@ -50,6 +105,9 @@ const SignUpPage = () => {
                         id="typeEmailX"
                         className="form-control form-control-lg"
                         placeholder="Email"
+                        name='email'
+                        value={signupForm.email}
+                        onChange={handleInputChange}
                         required
                       />
                     </div>
@@ -60,6 +118,9 @@ const SignUpPage = () => {
                         id="typePasswordX"
                         className="form-control form-control-lg"
                         placeholder="Password"
+                        name='password_hash'
+                        value={signupForm.password_hash}
+                        onChange={handleInputChange}
                         required
                       />
                     </div>
@@ -92,6 +153,7 @@ const SignUpPage = () => {
           {t("button.back")}
         </Link>
       </button>
+      </form>
       <Footer />
     </div>
   );
