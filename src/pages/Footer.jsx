@@ -1,4 +1,6 @@
+import { useTranslation } from "react-i18next";
 function Footer() {
+  const { t } = useTranslation();
   return (
     <nav
       className="navbar sticky-bottom navbar navbar-dark"
@@ -10,16 +12,16 @@ function Footer() {
           href="/education"
           style={{ color: "black" }}
         >
-          Education
+          {t("footer.education")}
         </a>
         <a className="navbar-brand" href="jobs" style={{ color: "black" }}>
-          Jobs
+          {t("footer.jobs")}
         </a>
         <a className="navbar-brand" href="housing" style={{ color: "black" }}>
-          Housing
+          {t("footer.housing")}
         </a>
 
-        <div className="btn-group dropup">
+        <div className="btn-group dropup px-5">
           <button
             type="button"
             className="btn btn-secondary dropdown-toggle"
@@ -31,7 +33,7 @@ function Footer() {
               color: "black",
             }}
           >
-            More Categories...
+            {t("footer.more_categories")}
           </button>
           <ul className="dropdown-menu">
             <li>
@@ -40,7 +42,7 @@ function Footer() {
                 href="/healthcare"
                 style={{ color: "black" }}
               >
-                Healthcare
+                {t("footer.healthcare")}
               </a>
             </li>
             <li>
@@ -49,7 +51,7 @@ function Footer() {
                 href="food"
                 style={{ color: "black" }}
               >
-                Food Banks
+                {t("footer.food_banks")}
               </a>
             </li>
             <li>
@@ -58,7 +60,7 @@ function Footer() {
                 href="/government"
                 style={{ color: "black" }}
               >
-                Government Services
+                {t("footer.government_services")}
               </a>
             </li>
             <li>
@@ -67,7 +69,7 @@ function Footer() {
                 href="/banking"
                 style={{ color: "black" }}
               >
-                Banking Services
+                {t("footer.banking_services")}
               </a>
             </li>
             <li>
@@ -76,7 +78,7 @@ function Footer() {
                 href="/dmv"
                 style={{ color: "black" }}
               >
-                DMV Services
+                {t("footer.dmv_services")}
               </a>
             </li>
             <li>
@@ -85,7 +87,7 @@ function Footer() {
                 href="/faith"
                 style={{ color: "black" }}
               >
-                Faith Based Services
+                {t("footer.faith_based_services")}
               </a>
             </li>
           </ul>
