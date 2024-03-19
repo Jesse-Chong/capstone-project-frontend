@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function NavBar() {
+  const { t } = useTranslation();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid" style={{ backgroundColor: "#38B6FF" }}>
@@ -18,7 +20,7 @@ function NavBar() {
               to={"/home"}
               style={{ textDecoration: "none", color: "black" }}
             >
-              Home
+              {t("navbar.home")}
             </Link>
           </button>
           <button className="m-3">
@@ -26,7 +28,7 @@ function NavBar() {
               to={"/login"}
               style={{ textDecoration: "none", color: "black" }}
             >
-              Login
+              {t("navbar.login")}
             </Link>
           </button>
           <button className="m-3">
@@ -34,7 +36,7 @@ function NavBar() {
               to={"/signup"}
               style={{ textDecoration: "none", color: "black" }}
             >
-              Signup
+              {t("navbar.signup")}
             </Link>
           </button>
         </div>

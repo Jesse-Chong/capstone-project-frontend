@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function NavBarSignUp() {
+  const { t } = useTranslation();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid" style={{ backgroundColor: "#38B6FF" }}>
@@ -19,7 +20,7 @@ function NavBarSignUp() {
               to={"/home"}
               style={{ textDecoration: "none", color: "black" }}
             >
-              Home
+              {t("navbar.home")}
             </Link>
           </button>
           <button className="m-3">
@@ -27,7 +28,7 @@ function NavBarSignUp() {
               to={"/login"}
               style={{ textDecoration: "none", color: "black" }}
             >
-              Login
+              {t("navbar.login")}
             </Link>
           </button>
         </div>
