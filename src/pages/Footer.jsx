@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { FaBookReader } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import { FaHouseChimneyUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const { t } = useTranslation();
@@ -20,7 +21,9 @@ function Footer() {
             >
               {t("footer.education")}
             </a>
-            <FaBookReader className="icon" />
+            <Link to={"/education"} style={{ color: "black" }}>
+              <FaBookReader className="icon" />
+            </Link>
           </div>
         </div>
         <div className="col text-icon">
@@ -32,7 +35,9 @@ function Footer() {
             >
               {t("footer.jobs")}
             </a>
-            <MdWork className="icon" />
+            <Link to={"/jobs"} style={{ color: "black" }}>
+              <MdWork className="icon" />
+            </Link>
           </div>
         </div>
         <div className="col text-icon">
@@ -44,8 +49,9 @@ function Footer() {
             >
               {t("footer.housing")}
             </a>
-
-            <FaHouseChimneyUser className="icon" />
+            <Link to={"/housing"} style={{ color: "black" }}>
+              <FaHouseChimneyUser className="icon" />
+            </Link>
           </div>
         </div>
 

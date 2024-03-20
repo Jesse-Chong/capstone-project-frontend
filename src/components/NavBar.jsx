@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid" style={{ backgroundColor: "#38B6FF" }}>
-        <a className="navbar-brand fw-bold fs-1 py-3" href="/">
+        <a className="navbar-brand fw-bold fs-1 py-3" href="/home">
           <img
             src="Logo.png"
             alt="FreshStart Logo"
@@ -15,14 +15,14 @@ function NavBar() {
         </a>
 
         <div className="d-flex justify-content-center" id="navbarNavAltMarkup">
-          <button className="m-3">
+          {/* <button className="m-3">
             <Link
               to={"/home"}
               style={{ textDecoration: "none", color: "black" }}
             >
               {t("navbar.home")}
             </Link>
-          </button>
+          </button> */}
           <button className="m-3">
             <Link
               to={"/login"}
