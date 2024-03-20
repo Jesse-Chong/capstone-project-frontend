@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
+import Scroll from "../components/Scroll";
 
 function BankingPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -98,6 +99,7 @@ function BankingPage() {
           Back
         </Link>
       </button>
+      <Scroll />
       <Footer />
     </div>
   );

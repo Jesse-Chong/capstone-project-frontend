@@ -5,6 +5,7 @@ import LoginNavBar from "./LoginNavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SignUpPage from "./SignUp";
+import Scroll from "../components/Scroll";
 
 const LoginPage = ({ setUser, setToken }) => {
   const API = import.meta.env.VITE_API_KEY;
@@ -153,6 +154,7 @@ const LoginPage = ({ setUser, setToken }) => {
           </Link>
         </button>
       </form>
+      <Scroll />
       <Footer />
     </div>
   );

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Footer from "./Footer";
 import NavBarSignUp from "../pages/NavBarSignUp";
 import { useNavigate } from "react-router-dom";
+import Scroll from "../components/Scroll";
 
 const SignUpPage = ({ setUser, setToken }) => {
   const navigate = useNavigate();
@@ -156,6 +157,7 @@ const SignUpPage = ({ setUser, setToken }) => {
           </Link>
         </button>
       </form>
+      <Scroll />
       <Footer />
     </div>
   );
