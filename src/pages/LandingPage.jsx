@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Scroll from "../components/Scroll";
 
 function LandingPage() {
   const { t, i18n } = useTranslation();
@@ -219,6 +220,7 @@ function LandingPage() {
           </a>
         </div>
       </footer>
+      <Scroll />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import food from "../assets/burger.png";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
+import Scroll from "../components/Scroll";
 
 function FoodPage() {
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -96,6 +97,7 @@ function FoodPage() {
           Back
         </Link>
       </button>
+      <Scroll />
       <Footer />
     </div>
   );

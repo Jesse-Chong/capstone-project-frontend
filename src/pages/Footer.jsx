@@ -1,4 +1,8 @@
 import { useTranslation } from "react-i18next";
+import { FaBookReader } from "react-icons/fa";
+import { MdWork } from "react-icons/md";
+import { FaHouseChimneyUser } from "react-icons/fa6";
+
 function Footer() {
   const { t } = useTranslation();
   return (
@@ -6,20 +10,44 @@ function Footer() {
       className="navbar sticky-bottom navbar navbar-dark"
       style={{ backgroundColor: "#38B6FF" }}
     >
-      <div className="container-fluid ">
-        <a
-          className="navbar-brand"
-          href="/education"
-          style={{ color: "black" }}
-        >
-          {t("footer.education")}
-        </a>
-        <a className="navbar-brand" href="jobs" style={{ color: "black" }}>
-          {t("footer.jobs")}
-        </a>
-        <a className="navbar-brand" href="housing" style={{ color: "black" }}>
-          {t("footer.housing")}
-        </a>
+      <div className="container-fluid">
+        <div className="col text-icon">
+          <div>
+            <a
+              className="navbar-brand text"
+              href="/education"
+              style={{ color: "black" }}
+            >
+              {t("footer.education")}
+            </a>
+            <FaBookReader className="icon" />
+          </div>
+        </div>
+        <div className="col text-icon">
+          <div>
+            <a
+              className="navbar-brand text"
+              href="/jobs"
+              style={{ color: "black" }}
+            >
+              {t("footer.jobs")}
+            </a>
+            <MdWork className="icon" />
+          </div>
+        </div>
+        <div className="col text-icon">
+          <div>
+            <a
+              className="navbar-brand text"
+              href="/housing"
+              style={{ color: "black" }}
+            >
+              {t("footer.housing")}
+            </a>
+
+            <FaHouseChimneyUser className="icon" />
+          </div>
+        </div>
 
         <div className="btn-group dropup px-5">
           <button

@@ -1,6 +1,6 @@
-import HelperFile from "./HelperFile"
+import HelperFile from "./HelperFile";
 import { React, useState } from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import {
   GoogleMap,
   Marker,
@@ -8,9 +8,8 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 
-
 const containerStyle = {
-  width: "800px",
+  width: "100%",
   height: "600px",
 };
 
@@ -72,27 +71,41 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
           >
             <div>
               {selectedPlaceDetails ? (
-        <>
-        <p>{t("infoWindow.name")}: {selectedPlaceDetails.name}</p>
-        <p>{t("infoWindow.address")}: {selectedPlaceDetails.formatted_address}</p>
-        {selectedPlaceDetails.formatted_phone_number && (
-          <p>{t("infoWindow.phone")}: {selectedPlaceDetails.formatted_phone_number}</p>
-        )}
-        <p>{t("infoWindow.rating")}: {selectedPlaceDetails.rating}</p>
-        {selectedPlaceDetails.website && (
-          <p>{t("infoWindow.website")}: {selectedPlaceDetails.website}</p>
-        )}
+                <>
+                  <p>
+                    {t("infoWindow.name")}: {selectedPlaceDetails.name}
+                  </p>
+                  <p>
+                    {t("infoWindow.address")}:{" "}
+                    {selectedPlaceDetails.formatted_address}
+                  </p>
+                  {selectedPlaceDetails.formatted_phone_number && (
+                    <p>
+                      {t("infoWindow.phone")}:{" "}
+                      {selectedPlaceDetails.formatted_phone_number}
+                    </p>
+                  )}
+                  <p>
+                    {t("infoWindow.rating")}: {selectedPlaceDetails.rating}
+                  </p>
+                  {selectedPlaceDetails.website && (
+                    <p>
+                      {t("infoWindow.website")}: {selectedPlaceDetails.website}
+                    </p>
+                  )}
 
-        {selectedPlaceDetails.opening_hours && (
-          <>
-            <p>{t("infoWindow.openingHours")}:</p>
-            <ul>
-              {selectedPlaceDetails.opening_hours.weekday_text.map((hours, index) => (
-                <li key={index}>{hours}</li>
-              ))}
-            </ul>
-          </>
-        )}
+                  {selectedPlaceDetails.opening_hours && (
+                    <>
+                      <p>{t("infoWindow.openingHours")}:</p>
+                      <ul>
+                        {selectedPlaceDetails.opening_hours.weekday_text.map(
+                          (hours, index) => (
+                            <li key={index}>{hours}</li>
+                          )
+                        )}
+                      </ul>
+                    </>
+                  )}
 
                   {selectedPlaceDetails.photos &&
                     selectedPlaceDetails.photos.length > 0 && (
@@ -109,7 +122,10 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
           </InfoWindow>
         )}
       </GoogleMap>
-      <HelperFile selectedPlace={selectedPlace} selectedPlaceDetails={selectedPlaceDetails} />
+      <HelperFile
+        selectedPlace={selectedPlace}
+        selectedPlaceDetails={selectedPlaceDetails}
+      />
     </LoadScript>
   );
 };
