@@ -8,18 +8,18 @@ import Scroll from "../components/Scroll";
 
 const SignUpPage = ({ setUser, setToken }) => {
   const navigate = useNavigate();
-  const API = import.meta.env.VITE_API_KEY;
+  const API = import.meta.env.VITE_BASE_URL;
   const { t, i18n } = useTranslation();
-  const [signupForm, setSignupForm] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password_hash: "",
+  const [signUp, setSignUp] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password_hash: '',
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setSignupForm((prev) => ({
+    setSignUp((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -29,24 +29,23 @@ const SignUpPage = ({ setUser, setToken }) => {
     event.preventDefault();
     fetch(`${API}/users`, {
       method: "POST",
-      body: JSON.stringify(signupForm),
+      body: JSON.stringify(signUp),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log(res)
+      .then(res => res.json())
+      .then(res => {
         if (res.user.user_id) {
           setUser(res.user);
           setToken(res.token);
-          setSignupForm((prev) => ({
-            firstname: "",
-            lastname: "",
-            email: "",
-            password_hash: "",
+          setSignUp((prev) => ({
+            first_name: '',
+            last_name: '',
+            email: '',
+            password_hash: '',
           }));
-          navigate("/users");
+          navigate("/favorite");
         } else {
           console.log(res);
         }
@@ -79,11 +78,11 @@ const SignUpPage = ({ setUser, setToken }) => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="text"
-                          id="text"
+                          id="first_name"
                           className="form-control form-control-lg"
                           placeholder={t("signup.first_name")}
-                          name="firstname"
-                          value={signupForm.firstname}
+                          name="first_name"
+                          value={signUp.first_name}
                           onChange={handleInputChange}
                           required
                         />
@@ -92,11 +91,11 @@ const SignUpPage = ({ setUser, setToken }) => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="text"
-                          id="text"
+                          id="last_name"
                           className="form-control form-control-lg"
                           placeholder={t("signup.last_name")}
-                          name="lastname"
-                          value={signupForm.lastname}
+                          name="last_name"
+                          value={signUp.last_name}
                           onChange={handleInputChange}
                           required
                         />
@@ -105,11 +104,11 @@ const SignUpPage = ({ setUser, setToken }) => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="email"
-                          id="typeEmailX"
+                          id="email"
                           className="form-control form-control-lg"
                           placeholder={t("loginpage.email")}
                           name="email"
-                          value={signupForm.email}
+                          value={signUp.email}
                           onChange={handleInputChange}
                           required
                         />
@@ -118,11 +117,11 @@ const SignUpPage = ({ setUser, setToken }) => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="password"
-                          id="typePasswordX"
+                          id="password"
                           className="form-control form-control-lg"
                           placeholder={t("loginpage.password")}
                           name="password_hash"
-                          value={signupForm.password_hash}
+                          value={signUp.password_hash}
                           onChange={handleInputChange}
                           required
                         />

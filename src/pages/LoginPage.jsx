@@ -3,28 +3,27 @@ import { useTranslation } from "react-i18next";
 import Footer from "./Footer";
 import LoginNavBar from "./LoginNavBar";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import SignUpPage from "./SignUp";
+import React, {useState} from "react";
 import Scroll from "../components/Scroll";
 
-const LoginPage = ({ setUser, setToken }) => {
-  const API = import.meta.env.VITE_API_KEY;
+const LoginPage = ({setUser, setToken}) => {
+  const API = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
+
   const { t, i18n } = useTranslation();
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
-  const [loginForm, setLoginForm] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password_hash: "",
+  const [login, setLogin] = useState({
+    email: '',
+    password_hash: ''
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setLoginForm((prev) => ({
+    setLogin((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -33,30 +32,30 @@ const LoginPage = ({ setUser, setToken }) => {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    fetch(`${API}/login`, {
+    fetch(`${API}/users/login`, {
       method: "POST",
-      body: JSON.stringify(loginForm),
+      body: JSON.stringify(login),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log(res)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
         if (res.user.user_id) {
-          setUser(res.user);
-          setToken(res.token);
-          setLoginForm((prev) => ({
-            email: "",
-            password_hash: "",
-          }));
-
-          navigate("/users");
+          const {user, token} = res
+          setUser(user);
+          setToken(token);
+          setLogin(() => ({
+            email: '',
+            password_hash: ''
+          }))
+          navigate('/favorite');
         } else {
           console.log(res);
         }
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err))
   };
 
   return (
@@ -84,11 +83,11 @@ const LoginPage = ({ setUser, setToken }) => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="email"
-                          id="typeEmailX"
+                          id="email"
                           className="form-control form-control-lg"
                           placeholder={t("loginpage.email")}
                           name="email"
-                          value={loginForm.email}
+                          value={login.email}
                           onChange={handleInputChange}
                           required
                         />
@@ -97,11 +96,11 @@ const LoginPage = ({ setUser, setToken }) => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="password"
-                          id="typePasswordX"
+                          id="password"
                           className="form-control form-control-lg"
                           placeholder={t("loginpage.password")}
                           name="password_hash"
-                          value={loginForm.password_hash}
+                          value={login.password_hash}
                           onChange={handleInputChange}
                           required
                         />
