@@ -17,12 +17,13 @@ import HousingPage from "./components/HousingPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUp";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import Users from "./pages/Users";
+import Favorite from "./pages/Favorite";
+import HelperFile from "./components/HelperFile";
+
 
 function App() {
    const [user, setUser] = useState(null)
    const [token, setToken] = useState(null)
-
 
   return (
     <Router>
@@ -41,20 +42,21 @@ function App() {
         <Route path="/government" element={<GovernmentPage />} />
         <Route path="/healthcare" element={<HealthcarePage />} />
         <Route path="/housing" element={<HousingPage />} />
+        <Route path="/helperfile" element={<HelperFile />} />
         <Route path="/login" element={<LoginPage setUser={setUser} setToken={setToken} />} />
-        <Route path="/signup" element={<SignUpPage setUser={setUser} setToken={setToken}/>} />
-        <Route path="/users" element={<Users />} />
-        {/* <Route 
-         path="/users"
+        <Route path="/signup" element={<SignUpPage setUser={setUser} setToken={setToken} />} />
+        {/* <Route path="/users" element={<Users />} /> */}
+        <Route 
+         path="/favorite"
          element={
          <ProtectedRoute
-         element={user}
+         element={Favorite}
          isAuthenticated={!!user && !!token}
          user={user}
          token={token}
           />
          }
-         /> */}
+         />
       </Routes>
     </Router>
   );
