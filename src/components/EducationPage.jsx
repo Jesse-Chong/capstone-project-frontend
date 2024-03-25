@@ -78,26 +78,26 @@ function EducationPage() {
         </button>
         <div className="row">
           <div className="col-md-6">
-          <GoogleMaps
-            places={places}
-            apiKey={API_KEY}
-            markerIcon={markerIcon}
-          />
+            <GoogleMaps
+              places={places}
+              apiKey={API_KEY}
+              markerIcon={markerIcon}
+            />
+          </div>
+          <div className="col-md-6">
+            {places.map((item) => {
+              console.log(places);
+              return (
+                <div key={item.place_id}>
+                  <br />
+                  <p>{item.name}</p>
+                  {item.opening_hours?.open_now ? "Open Now" : "Closed"}
+                  <br />
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="col-md-6">
-        {places.map((item) => {
-          console.log(places);
-          return (
-            <div key={item.place_id}>
-              <br />
-              <p>{item.name}</p>
-              {item.opening_hours?.open_now ? 'Open Now' : 'Closed'}
-              <br />
-            </div>
-          );
-        })}
-      </div>
-      </div>
       </div>
       <button className="m-5">
         <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>
