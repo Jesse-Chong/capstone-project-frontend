@@ -10,7 +10,7 @@ function HomePage() {
   return (
     <div>
       <NavBar />
-      <h2 className="m-5">{t("home.category")}</h2>
+      <h2 className="m-5">Available Resources</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
         <div className="col">
           <div className="card h-100 p-2">
