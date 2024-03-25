@@ -64,7 +64,7 @@ function FoodPage() {
   return (
     <div>
       <NavBar />
-      <div className="col text-center mt-5">
+      <div className="container mt-5">
         <button
           onClick={() => {
             handleSearch("food+bank");
@@ -74,23 +74,28 @@ function FoodPage() {
         >
           Food Banks
         </button>
-        <div className="m-5">
+        <div className="row">
+          <div className="col-md-6">
           <GoogleMaps
             places={places}
             apiKey={API_KEY}
             markerIcon={markerIcon}
           />
         </div>
+        <div className="col-md-6">
         {places.map((item) => {
           console.log(places);
           return (
             <div key={item.place_id}>
               <br />
               <p>{item.name}</p>
+              {item.opening_hours?.open_now ? 'Open Now' : 'Closed'}
               <br />
             </div>
           );
         })}
+      </div>
+      </div>
       </div>
       <button className="m-5">
         <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>

@@ -19,6 +19,7 @@ import SignUpPage from "./pages/SignUp";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Favorite from "./pages/Favorite";
 import HelperFile from "./components/HelperFile";
+import FavNavBar from "./pages/FavNavBar";
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <Router>
-      {/* <Navbar /> */}
+        <FavNavBar user={user} setUser={setUser} setToken={setToken}/>
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<LandingPage />} />
