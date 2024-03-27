@@ -1,5 +1,4 @@
 import HelperFile from "./HelperFile";
-import { React, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   GoogleMap,
@@ -18,15 +17,15 @@ const center = {
   lng: -74.005974,
 };
 
-const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
+const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSelectedPlace, selectedPlaceDetails, setSelectedPlaceDetails, handlePlaceClick}) => {
   const { t } = useTranslation();
   // console.log('apiKey', apiKey);
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
 
   const handleMarkerClick = async (place) => {
     setSelectedPlace(place);
-
+    handlePlaceClick(place);
+     console.log("Marker clicked. Place:", place);
+  
     try {
       const response = await fetch(
         `http://localhost:3001/placeDetails?key=${apiKey}&place_id=${place.place_id}`
@@ -34,7 +33,13 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon }) => {
       console.log("Raw response:", response);
       const data = await response.json();
       console.log("Parsed data:", data);
-      setSelectedPlaceDetails(data.result);
+      
+      // Check if the response is an array and extract the first object
+      if (Array.isArray(data) && data.length > 0) {
+        setSelectedPlaceDetails(data[0].result);
+      } else {
+        setSelectedPlaceDetails(null);
+      }
     } catch (err) {
       // Handle non-JSON response
       console.log("Error parsing response:", err);

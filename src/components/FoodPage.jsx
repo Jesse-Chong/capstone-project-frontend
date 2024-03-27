@@ -1,101 +1,131 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import food from "../assets/burger.png";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
 import Scroll from "../components/Scroll";
 
-function FoodPage() {
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const [places, setPlaces] = useState([]);
-  const [search, setSearch] = useState([]);
-  const [markerIcon, setMarkerIcon] = useState("");
-  const navigate = useNavigate();
+const API_KEY = import.meta.env.VITE_API_KEY;
 
-  // Make call to proxy server
-  const endpoint = "http://localhost:3001/places";
+const fetchData = async (setPlaces) => {
+  try {
+    const response = await axios.get("http://localhost:3001/places", {
+      params: {
+        key: API_KEY,
+        location: "40.712776,-74.005974",
+        radius: "5000",
+        type: "food_banks",
+        keyword: "food_banks"
+      },
+    });
 
-  // solely used to grab place_id from nearby search and then get place details
-  // for all nearby place
-  const handleSearch = async (type) => {
-    setSearch(type);
+    const placeIds = response.data.results.map((place) => place.place_id);
 
     try {
-      const response = await axios.get(endpoint, {
-        params: {
-          key: API_KEY,
-          location: "40.712776,-74.005974",
-          radius: "5000",
-          type: type,
-          keyword: type,
-        },
-      });
+      const detailsResponse = await axios.get(
+        "http://localhost:3001/placeDetails",
+        {
+          params: {
+            key: API_KEY,
+            place_id: placeIds.join(",")
+          },
+        }
+      );
 
-      const placeIds = response.data.results.map((place) => place.place_id);
+      console.log(
+        "Place details inserted successfully:",
+        detailsResponse.data
+      );
+    } catch (detailsError) {
+      console.error("Error inserting place details:", detailsError);
+    }
 
-      try {
-        const detailsResponse = await axios.get(
-          "http://localhost:3001/placeDetails",
-          {
-            params: {
-              key: API_KEY,
-              placeIds: placeIds.join(","),
-            },
-          }
-        );
+    setPlaces(response.data.results);
+  } catch (error) {
+    console.error("Error fetching nearby places:", error);
+    console.error("Error response data:", error.response.data);
+  }
+};
 
-        console.log(
-          "Place details inserted successfully:",
-          detailsResponse.data
-        );
-      } catch (detailsError) {
-        console.error("Error inserting place details:", detailsError);
+function FoodPage () {
+  const [places, setPlaces] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
+  const [markerIcon, setMarkerIcon] = useState("");
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+
+  const handlePlaceClick = async (place) => {
+    setSelectedPlace(place);
+    console.log("Place clicked. Place:", place);
+  
+    try {
+      const response = await fetch(
+        `http://localhost:3001/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
+      );
+      const data = await response.json();
+  
+      if (Array.isArray(data) && data.length > 0) {
+        setSelectedPlaceDetails(data[0].result);
+      } else {
+        setSelectedPlaceDetails(null);
       }
-
-      setPlaces(response.data.results);
-    } catch (error) {
-      console.error("Error fetching nearby places:", error);
-      console.error("Error response data:", error.response.data);
+    } catch (err) {
+      console.log("Error fetching place details:", err);
+      setSelectedPlaceDetails(null);
     }
   };
+
+
+  useEffect(() => {
+    fetchData(setPlaces);
+  }, []);
+
   return (
     <div>
       <NavBar />
       <div className="container mt-5">
         <button
           onClick={() => {
-            handleSearch("food+bank");
+            setSearch("food+bank");
             setMarkerIcon(food);
-            navigate("/food");
           }}
         >
-          Food Banks
+        Food Banks
         </button>
         <div className="row">
           <div className="col-md-6">
-          <GoogleMaps
-            places={places}
-            apiKey={API_KEY}
-            markerIcon={markerIcon}
-          />
+            <GoogleMaps
+      places={places}
+      apiKey={API_KEY}
+      markerIcon={markerIcon}
+      selectedPlace={selectedPlace}
+      setSelectedPlace={setSelectedPlace}
+      selectedPlaceDetails={selectedPlaceDetails}
+      setSelectedPlaceDetails={setSelectedPlaceDetails}
+      handlePlaceClick={handlePlaceClick}
+            />
+          </div>
+          <div className="col-md-6">
+            {places.map((item) => {
+              // console.log(places);
+              return (
+                <div key={item.place_id} onClick={() => handlePlaceClick(item)}>
+                  <br />
+                  <p>{item.name}</p>
+                  {item.opening_hours?.open_now ? "Open Now" : "Closed"}
+                  <br />
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="col-md-6">
-        {places.map((item) => {
-          console.log(places);
-          return (
-            <div key={item.place_id}>
-              <br />
-              <p>{item.name}</p>
-              {item.opening_hours?.open_now ? 'Open Now' : 'Closed'}
-              <br />
-            </div>
-          );
-        })}
-      </div>
-      </div>
       </div>
       <button className="m-5">
         <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>

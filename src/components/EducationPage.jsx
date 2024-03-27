@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState,useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -9,60 +9,83 @@ import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
 import Scroll from "../components/Scroll";
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+
+const fetchData = async (setPlaces) => {
+  try {
+    const response = await axios.get("http://localhost:3001/places", {
+      params: {
+        key: API_KEY,
+        location: "40.712776,-74.005974",
+        radius: "5000",
+        type: "school",
+        keyword: "school"
+      },
+    });
+
+    const placeIds = response.data.results.map((place) => place.place_id);
+
+    try {
+      const detailsResponse = await axios.get(
+        "http://localhost:3001/placeDetails",
+        {
+          params: {
+            key: API_KEY,
+            place_id: placeIds.join(",")
+          },
+        }
+      );
+
+      console.log(
+        "Place details inserted successfully:",
+        detailsResponse.data
+      );
+    } catch (detailsError) {
+      console.error("Error inserting place details:", detailsError);
+    }
+
+    setPlaces(response.data.results);
+  } catch (error) {
+    console.error("Error fetching nearby places:", error);
+    console.error("Error response data:", error.response.data);
+  }
+};
+
 function EducationPage() {
-  const API_KEY = import.meta.env.VITE_API_KEY;
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
   const [markerIcon, setMarkerIcon] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // Make call to proxy server
-  const endpoint = "http://localhost:3001/places";
 
-  // solely used to grab place_id from nearby search and then get place details
-  // for all nearby place
-  const handleSearch = async (type) => {
-    setSearch(type);
-
+  const handlePlaceClick = async (place) => {
+    setSelectedPlace(place);
+    console.log("Place clicked. Place:", place);
+  
     try {
-      const response = await axios.get(endpoint, {
-        params: {
-          key: API_KEY,
-          location: "40.712776,-74.005974",
-          radius: "5000",
-          type: type,
-          keyword: type,
-        },
-      });
-
-      const placeIds = response.data.results.map((place) => place.place_id);
-
-      try {
-        const detailsResponse = await axios.get(
-          "http://localhost:3001/placeDetails",
-          {
-            params: {
-              key: API_KEY,
-              placeIds: placeIds.join(","),
-            },
-          }
-        );
-
-        console.log(
-          "Place details inserted successfully:",
-          detailsResponse.data
-        );
-      } catch (detailsError) {
-        console.error("Error inserting place details:", detailsError);
+      const response = await fetch(
+        `http://localhost:3001/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
+      );
+      const data = await response.json();
+  
+      if (Array.isArray(data) && data.length > 0) {
+        setSelectedPlaceDetails(data[0].result);
+      } else {
+        setSelectedPlaceDetails(null);
       }
-
-      setPlaces(response.data.results);
-    } catch (error) {
-      console.error("Error fetching nearby places:", error);
-      console.error("Error response data:", error.response.data);
+    } catch (err) {
+      console.log("Error fetching place details:", err);
+      setSelectedPlaceDetails(null);
     }
   };
+
+
+  useEffect(() => {
+    fetchData(setPlaces);
+  }, []);
 
   return (
     <div>
@@ -70,7 +93,7 @@ function EducationPage() {
       <div className="container mt-5">
         <button
           onClick={() => {
-            handleSearch("education");
+            setSearch("education");
             setMarkerIcon(education);
           }}
         >
@@ -79,16 +102,21 @@ function EducationPage() {
         <div className="row">
           <div className="col-md-6">
             <GoogleMaps
-              places={places}
-              apiKey={API_KEY}
-              markerIcon={markerIcon}
+      places={places}
+      apiKey={API_KEY}
+      markerIcon={markerIcon}
+      selectedPlace={selectedPlace}
+      setSelectedPlace={setSelectedPlace}
+      selectedPlaceDetails={selectedPlaceDetails}
+      setSelectedPlaceDetails={setSelectedPlaceDetails}
+      handlePlaceClick={handlePlaceClick}
             />
           </div>
           <div className="col-md-6">
             {places.map((item) => {
-              console.log(places);
+              // console.log(places);
               return (
-                <div key={item.place_id}>
+                <div key={item.place_id} onClick={() => handlePlaceClick(item)}>
                   <br />
                   <p>{item.name}</p>
                   {item.opening_hours?.open_now ? "Open Now" : "Closed"}
