@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import food from "../assets/burger.png";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +10,12 @@ import Footer from "../pages/Footer";
 import Scroll from "../components/Scroll";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-
-const fetchData = async (setPlaces) => {
+const fetchData = async (setPlaces, coordinates) => {
   try {
     const response = await axios.get("http://localhost:3001/places", {
       params: {
         key: API_KEY,
-        location: "40.712776,-74.005974",
+        location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "food_banks",
         keyword: "food_banks"
@@ -59,7 +58,10 @@ function FoodPage () {
   const [markerIcon, setMarkerIcon] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
-
+  const location = useLocation();
+  console.log("FoodPage location.state:", location.state);
+const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 };
+console.log("FoodPage coordinates:", coordinates);
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
@@ -84,8 +86,8 @@ function FoodPage () {
 
 
   useEffect(() => {
-    fetchData(setPlaces);
-  }, []);
+    fetchData(setPlaces, coordinates);
+  }, [coordinates]);
 
   return (
     <div>
@@ -102,6 +104,7 @@ function FoodPage () {
         <div className="row">
           <div className="col-md-6">
             <GoogleMaps
+            key={`${coordinates.lat},${coordinates.lng}`}
       places={places}
       apiKey={API_KEY}
       markerIcon={markerIcon}
@@ -110,6 +113,7 @@ function FoodPage () {
       selectedPlaceDetails={selectedPlaceDetails}
       setSelectedPlaceDetails={setSelectedPlaceDetails}
       handlePlaceClick={handlePlaceClick}
+      coordinates={coordinates}
             />
           </div>
           <div className="col-md-6">
