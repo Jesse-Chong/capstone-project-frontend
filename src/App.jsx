@@ -20,7 +20,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Favorite from "./pages/Favorite";
 import HelperFile from "./components/HelperFile";
 import FavNavBar from "./pages/FavNavBar";
-
+import GeolocationComponent from "./pages/Geolocation";
 
 function App() {
    const [user, setUser] = useState(null)
@@ -31,6 +31,7 @@ function App() {
         <FavNavBar user={user} setUser={setUser} setToken={setToken}/>
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/geolocation" element={<GeolocationComponent />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />

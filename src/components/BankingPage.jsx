@@ -120,7 +120,9 @@ function BankingPage() {
               return (
                 <div key={item.place_id} onClick={() => handlePlaceClick(item)}>
                   <br />
+                  <span className="fw-bold">Name: </span>
                   <p>{item.name}</p>
+                  <span className="fw-bold">Currently: </span>
                   {item.opening_hours?.open_now ? "Open Now" : "Closed"}
                   <br />
                 </div>
