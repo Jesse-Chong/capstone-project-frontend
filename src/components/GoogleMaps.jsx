@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   GoogleMap,
   Marker,
-  LoadScript,
+  useJsApiLoader,
   InfoWindow,
 } from "@react-google-maps/api";
 
@@ -12,14 +12,17 @@ const containerStyle = {
   height: "600px",
 };
 
-const center = {
-  lat: 40.712776,
-  lng: -74.005974,
-};
-
-const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSelectedPlace, selectedPlaceDetails, setSelectedPlaceDetails, handlePlaceClick}) => {
+const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSelectedPlace, selectedPlaceDetails, setSelectedPlaceDetails, handlePlaceClick, coordinates }) => {
   const { t } = useTranslation();
-  // console.log('apiKey', apiKey);
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: apiKey,
+    libraries: ["places"]
+  });
+
+  const center = {
+    lat: coordinates.lat,
+    lng: coordinates.lng
+  };
 
   const handleMarkerClick = async (place) => {
     setSelectedPlace(place);
@@ -51,8 +54,12 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
     setSelectedPlace(null);
   };
 
-  return (
-    <LoadScript googleMapsApiKey={apiKey} loading="async">
+  if (loadError) {
+    return <div>Error loading Google Maps API</div>;
+  }
+
+  return isLoaded ? (
+    <>
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
         {places.map((place) => (
           <Marker
@@ -131,7 +138,9 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
         selectedPlace={selectedPlace}
         selectedPlaceDetails={selectedPlaceDetails}
       />
-    </LoadScript>
+    </>
+  ) : (
+    <div>Loading...</div>
   );
 };
 

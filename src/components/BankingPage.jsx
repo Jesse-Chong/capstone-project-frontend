@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import bank from "../assets/bank.png";
 import { useNavigate } from "react-router-dom";
@@ -11,12 +11,12 @@ import Scroll from "../components/Scroll";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const fetchData = async (setPlaces) => {
+const fetchData = async (setPlaces, coordinates) => {
   try {
     const response = await axios.get("http://localhost:3001/places", {
       params: {
         key: API_KEY,
-        location: "40.712776,-74.005974",
+        location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "banks",
         keyword: "banks"
@@ -59,6 +59,8 @@ function BankingPage() {
   const [markerIcon, setMarkerIcon] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const location = useLocation();
+  const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 };
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
@@ -83,8 +85,8 @@ function BankingPage() {
 
 
   useEffect(() => {
-    fetchData(setPlaces);
-  }, []);
+    fetchData(setPlaces, coordinates);
+  }, [coordinates]);
 
   return (
     <div>
@@ -109,6 +111,7 @@ function BankingPage() {
       selectedPlaceDetails={selectedPlaceDetails}
       setSelectedPlaceDetails={setSelectedPlaceDetails}
       handlePlaceClick={handlePlaceClick}
+      coordinates={coordinates}
             />
           </div>
           <div className="col-md-6">
