@@ -9,7 +9,9 @@ import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
 import Scroll from "../components/Scroll";
 
+const url = import.meta.env.VITE_BASE_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
+
 const fetchData = async (setPlaces, coordinates) => {
   try {
     const response = await axios.get(`${url}/places`, {
