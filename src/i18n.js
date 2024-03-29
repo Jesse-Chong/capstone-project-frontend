@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
-
 i18n
   .use(Backend)
   .use(LanguageDetector)
@@ -16,7 +15,7 @@ i18n
       escapeValue: false
     },
     backend: {
-        loadPath: 'http://localhost:3001/translations/{{lng}}',
+        loadPath: `${import.meta.env.VITE_BASE_URL}/translations/{{lng}}`,
         parse: (data) => {
             const parsedData = JSON.parse(data);
             // Return first key of the parsed json data basically extracting tranlsations
