@@ -10,10 +10,11 @@ import Footer from "../pages/Footer";
 import Scroll from "../components/Scroll";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
+const url = import.meta.env.VITE_BASE_URL;
 
 const fetchData = async (setPlaces, coordinates) => {
   try {
-    const response = await axios.get("http://localhost:3001/places", {
+    const response = await axios.get(`${url}/places`, {
       params: {
         key: API_KEY,
         location: `${coordinates.lat},${coordinates.lng}`,
@@ -27,7 +28,7 @@ const fetchData = async (setPlaces, coordinates) => {
 
     try {
       const detailsResponse = await axios.get(
-        "http://localhost:3001/placeDetails",
+        `${url}/placeDetails`,
         {
           params: {
             key: API_KEY,
@@ -68,7 +69,7 @@ const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 
   
     try {
       const response = await fetch(
-        `http://localhost:3001/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
+        `${url}/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
       );
       const data = await response.json();
   
