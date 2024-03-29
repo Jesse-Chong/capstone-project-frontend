@@ -14,6 +14,7 @@ const containerStyle = {
 
 const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSelectedPlace, selectedPlaceDetails, setSelectedPlaceDetails, handlePlaceClick, coordinates }) => {
   const { t } = useTranslation();
+  const url = import.meta.env.VITE_BASE_URL;
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
     libraries: ["places"]
@@ -31,7 +32,7 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
   
     try {
       const response = await fetch(
-        `http://localhost:3001/placeDetails?key=${apiKey}&place_id=${place.place_id}`
+        `${url}/placeDetails?key=${apiKey}&place_id=${place.place_id}`
       );
       console.log("Raw response:", response);
       const data = await response.json();
