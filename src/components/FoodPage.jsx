@@ -12,7 +12,7 @@ import Scroll from "../components/Scroll";
 const API_KEY = import.meta.env.VITE_API_KEY;
 const fetchData = async (setPlaces, coordinates) => {
   try {
-    const response = await axios.get("http://localhost:3001/places", {
+    const response = await axios.get(`${url}/places`, {
       params: {
         key: API_KEY,
         location: `${coordinates.lat},${coordinates.lng}`,
@@ -26,7 +26,7 @@ const fetchData = async (setPlaces, coordinates) => {
 
     try {
       const detailsResponse = await axios.get(
-        "http://localhost:3001/placeDetails",
+        `${url}/placeDetails`,
         {
           params: {
             key: API_KEY,
@@ -69,7 +69,7 @@ console.log("FoodPage coordinates:", coordinates);
   
     try {
       const response = await fetch(
-        `http://localhost:3001/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
+        `${url}/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
       );
       const data = await response.json();
   
