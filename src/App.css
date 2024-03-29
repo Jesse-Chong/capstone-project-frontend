@@ -1,42 +1,80 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* image */
+
+img:hover {
+  transform: scale(1.03);
+}
+
+/* button */
+
+button {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgba(255, 255, 255, 0);
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
   text-align: center;
+  transition: all 0.2s;
+}
+button:hover {
+  border-color: orange;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* scroll to top */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.scroll-to-top.visible {
+  opacity: 1;
+}
+
+.scroll-to-top-btn {
+  background-color: #38b6ff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* footer icon */
+
+.icon {
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .text-icon .text {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+
+  .text-icon .icon {
+    display: inline;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (min-width: 769px) {
+  .text-icon .icon {
+    display: none;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
