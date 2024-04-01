@@ -86,30 +86,32 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
               {selectedPlaceDetails ? (
                 <>
                   <p>
-                    {t("infoWindow.name")}: {selectedPlaceDetails.name}
+                  <span className="fw-bold border fs-6"> {t("infoWindow.name")}:</span> {selectedPlaceDetails.name}
                   </p>
                   <p>
-                    {t("infoWindow.address")}:{" "}
+                  <span className="fw-bold fs-6"> {t("infoWindow.address")}:</span>
                     {selectedPlaceDetails.formatted_address}
                   </p>
                   {selectedPlaceDetails.formatted_phone_number && (
                     <p>
-                      {t("infoWindow.phone")}:{" "}
+                      <span className="fw-bold fs-6"> {t("infoWindow.phone")}:</span>
                       {selectedPlaceDetails.formatted_phone_number}
                     </p>
                   )}
                   <p>
-                    {t("infoWindow.rating")}: {selectedPlaceDetails.rating}
+                  <span className="fw-bold fs-6">{t("infoWindow.rating")}: </span>{selectedPlaceDetails.rating}
                   </p>
                   {selectedPlaceDetails.website && (
                     <p>
-                      {t("infoWindow.website")}: {selectedPlaceDetails.website}
+                     <span className="fw-bold fs-6"> {t("infoWindow.website")}: </span>{selectedPlaceDetails.website}
                     </p>
                   )}
 
                   {selectedPlaceDetails.opening_hours && (
                     <>
-                      <p>{t("infoWindow.openingHours")}:</p>
+                      <p>
+                      <span className="fw-bold fs-6"> {t("infoWindow.openingHours")}:</span>
+                      </p>
                       <ul>
                         {selectedPlaceDetails.opening_hours.weekday_text.map(
                           (hours, index) => (
