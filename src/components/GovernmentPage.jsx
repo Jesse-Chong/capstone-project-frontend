@@ -20,27 +20,21 @@ const fetchData = async (setPlaces, coordinates) => {
         location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "local_government_office",
-        keyword: "government"
+        keyword: "government",
       },
     });
 
     const placeIds = response.data.results.map((place) => place.place_id);
 
     try {
-      const detailsResponse = await axios.get(
-        `${url}/placeDetails`,
-        {
-          params: {
-            key: API_KEY,
-            place_id: placeIds.join(",")
-          },
-        }
-      );
+      const detailsResponse = await axios.get(`${url}/placeDetails`, {
+        params: {
+          key: API_KEY,
+          place_id: placeIds.join(","),
+        },
+      });
 
-      console.log(
-        "Place details inserted successfully:",
-        detailsResponse.data
-      );
+      console.log("Place details inserted successfully:", detailsResponse.data);
     } catch (detailsError) {
       console.error("Error inserting place details:", detailsError);
     }
@@ -52,27 +46,35 @@ const fetchData = async (setPlaces, coordinates) => {
   }
 };
 
-function GovernmentPage () {
+function GovernmentPage() {
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
   const [markerIcon, setMarkerIcon] = useState("");
+  const [visible, setVisible] = useState(3);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
-const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 };
+  const coordinates = location.state?.coordinates || {
+    lat: 40.7128,
+    lng: -74.006,
+  };
+
+  function Loadmore() {
+    setVisible(visible + 3);
+  }
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
     console.log("Place clicked. Place:", place);
-  
+
     try {
       const response = await fetch(
         `${url}/placeDetails?key=${API_KEY}&place_id=${place.place_id}`
       );
       const data = await response.json();
-  
+
       if (Array.isArray(data) && data.length > 0) {
         setSelectedPlaceDetails(data[0].result);
       } else {
@@ -84,7 +86,6 @@ const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 
     }
   };
 
-
   useEffect(() => {
     fetchData(setPlaces, coordinates);
   }, [coordinates]);
@@ -92,43 +93,55 @@ const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 
   return (
     <div>
       <NavBar />
-      <div className="container mt-5">
+      <div className="container text-center mt-3">
         <button
           onClick={() => {
             setSearch("government+services");
             setMarkerIcon(administration);
           }}
         >
-        Government Services
+          Government Services
         </button>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 mt-3">
             <GoogleMaps
-      places={places}
-      apiKey={API_KEY}
-      markerIcon={markerIcon}
-      selectedPlace={selectedPlace}
-      setSelectedPlace={setSelectedPlace}
-      selectedPlaceDetails={selectedPlaceDetails}
-      setSelectedPlaceDetails={setSelectedPlaceDetails}
-      handlePlaceClick={handlePlaceClick}
-      coordinates={coordinates}
+              places={places}
+              apiKey={API_KEY}
+              markerIcon={markerIcon}
+              selectedPlace={selectedPlace}
+              setSelectedPlace={setSelectedPlace}
+              selectedPlaceDetails={selectedPlaceDetails}
+              setSelectedPlaceDetails={setSelectedPlaceDetails}
+              handlePlaceClick={handlePlaceClick}
+              coordinates={coordinates}
             />
           </div>
           <div className="col-md-6">
-            {places.map((item) => {
+            {places.slice(0, visible).map((item) => {
               // console.log(places);
               return (
-                <div key={item.place_id} onClick={() => handlePlaceClick(item)}>
+                <div
+                  className="col"
+                  key={item.place_id}
+                  onClick={() => handlePlaceClick(item)}
+                >
                   <br />
-                  <span className="fw-bold">Name: </span>
-                  <p>{item.name}</p>
-                  <span className="fw-bold">Currently: </span>
-                  {item.opening_hours?.open_now ? "Open Now" : "Closed"}
-                  <br />
+                  <div className="card h-100 p-2">
+                    <div className="card-body" style={{ color: "#38B6FF" }}>
+                      <span className="fw-bold ">Name: </span>
+                      <p className="card-title">{item.name}</p>
+                      <span className="fw-bold">Currently: </span>
+                      {item.opening_hours?.open_now ? "Open Now" : "Closed"}
+                    </div>
+                  </div>
                 </div>
               );
             })}
+            {visible < places.length && (
+              <button type="button" className="m-5" onClick={Loadmore}>
+                LOAD MORE
+              </button>
+            )}
           </div>
         </div>
       </div>

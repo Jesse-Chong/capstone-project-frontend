@@ -11,10 +11,10 @@ const SignUpPage = ({ setUser, setToken }) => {
   const API = import.meta.env.VITE_BASE_URL;
   const { t, i18n } = useTranslation();
   const [signUp, setSignUp] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password_hash: '',
+    first_name: "",
+    last_name: "",
+    email: "",
+    password_hash: "",
   });
 
   const handleInputChange = (event) => {
@@ -34,16 +34,16 @@ const SignUpPage = ({ setUser, setToken }) => {
         "Content-Type": "application/json",
       },
     })
-      .then(res => res.json())
-      .then(res => {
+      .then((res) => res.json())
+      .then((res) => {
         if (res.user.user_id) {
           setUser(res.user);
           setToken(res.token);
           setSignUp((prev) => ({
-            first_name: '',
-            last_name: '',
-            email: '',
-            password_hash: '',
+            first_name: "",
+            last_name: "",
+            email: "",
+            password_hash: "",
           }));
           navigate("/favorite");
         } else {
@@ -60,8 +60,8 @@ const SignUpPage = ({ setUser, setToken }) => {
     <div>
       <NavBarSignUp />
       <form onSubmit={handleSubmit}>
-        <section className="vh-100 gradient-custom">
-          <div className="container py-5 h-100">
+        <section className="vh-50 gradient-custom">
+          <div className="container py-5 h-50">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div
@@ -128,7 +128,7 @@ const SignUpPage = ({ setUser, setToken }) => {
                       </div>
 
                       <button
-                        className="btn-lg px-5 mt-4"
+                        className="btn-lg px-5"
                         type="submit"
                         style={{ textDecoration: "none", color: "black" }}
                       >
@@ -149,12 +149,12 @@ const SignUpPage = ({ setUser, setToken }) => {
               </div>
             </div>
           </div>
+          <button className="m-3">
+            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
+              {t("button.back")}
+            </Link>
+          </button>
         </section>
-        <button className="m-5">
-          <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-            {t("button.back")}
-          </Link>
-        </button>
       </form>
       <Scroll />
       <Footer />
