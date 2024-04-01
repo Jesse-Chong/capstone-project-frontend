@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { FaBookReader } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import { FaHouseChimneyUser } from "react-icons/fa6";
+import { CgDetailsMore } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -13,7 +14,7 @@ function Footer() {
     >
       <div className="container-fluid">
         <div className="col text-icon">
-          <div>
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
             <a
               className="navbar-brand text"
               href="/education"
@@ -58,16 +59,11 @@ function Footer() {
         <div className="btn-group dropup px-5">
           <button
             type="button"
-            className="btn btn-secondary dropdown-toggle"
+            className="button dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            style={{
-              borderRadius: "2em",
-              backgroundColor: "lightgray",
-              color: "black",
-            }}
           >
-            {t("footer.more_categories")}
+            <CgDetailsMore className="icon" />
           </button>
           <ul className="dropdown-menu">
             <li>

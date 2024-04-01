@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import Footer from "./Footer";
 import LoginNavBar from "./LoginNavBar";
 import { useNavigate } from "react-router-dom";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Scroll from "../components/Scroll";
 
-const LoginPage = ({setUser, setToken}) => {
+const LoginPage = ({ setUser, setToken }) => {
   const API = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
 
@@ -17,8 +17,8 @@ const LoginPage = ({setUser, setToken}) => {
   };
 
   const [login, setLogin] = useState({
-    email: '',
-    password_hash: ''
+    email: "",
+    password_hash: "",
   });
 
   const handleInputChange = (event) => {
@@ -39,31 +39,31 @@ const LoginPage = ({setUser, setToken}) => {
         "Content-Type": "application/json",
       },
     })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
         if (res.user.user_id) {
-          const {user, token} = res
+          const { user, token } = res;
           setUser(user);
           setToken(token);
           setLogin(() => ({
-            email: '',
-            password_hash: ''
-          }))
-          navigate('/favorite');
+            email: "",
+            password_hash: "",
+          }));
+          navigate("/favorite");
         } else {
           console.log(res);
         }
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   };
 
   return (
     <div>
       <LoginNavBar />
       <form onSubmit={handleLogin}>
-        <section className="vh-100 gradient-custom">
-          <div className="container py-5 h-100">
+        <section className="vh-50 gradient-custom">
+          <div className="container py-5 h-50">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div
@@ -72,7 +72,7 @@ const LoginPage = ({setUser, setToken}) => {
                   style={{ borderRadius: "1rem" }}
                 >
                   <div className="card-body p-5 text-center">
-                    <div className="mb-md-5 mt-md-4 pb-5">
+                    <div className="mb-md-2 mt-md-4 pb-5">
                       <h2 className="fw-bold mb-2 text-uppercase">
                         {t("navbar.login")}
                       </h2>
@@ -146,12 +146,12 @@ const LoginPage = ({setUser, setToken}) => {
               </div>
             </div>
           </div>
+          <button className="m-3">
+            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
+              {t("button.back")}
+            </Link>
+          </button>
         </section>
-        <button className="m-5">
-          <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-            {t("button.back")}
-          </Link>
-        </button>
       </form>
       <Scroll />
       <Footer />
