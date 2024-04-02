@@ -14,7 +14,7 @@ function Footer() {
     >
       <div className="container-fluid">
         <div className="col text-icon">
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <div>
             <a
               className="navbar-brand text"
               href="/education"
