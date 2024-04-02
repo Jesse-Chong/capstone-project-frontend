@@ -149,7 +149,7 @@ function FoodPage() {
         </div>
       </div>
       <button className="m-5">
-        <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>
+        <Link to={"/resources"} style={{ textDecoration: "none", color: "black" }}>
           Back
         </Link>
       </button>

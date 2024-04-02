@@ -17,7 +17,7 @@ function LoginNavBar() {
         <div className="d-flex justify-content-center" id="navbarNavAltMarkup">
           <button className="m-3">
             <Link
-              to={"/home"}
+              to={"/resources"}
               style={{ textDecoration: "none", color: "black" }}
             >
               {t("navbar.home")}
