@@ -1,5 +1,14 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { MdHealthAndSafety } from "react-icons/md";
+import { MdFastfood } from "react-icons/md";
+import { RiGovernmentLine } from "react-icons/ri";
+import { GiBanknote } from "react-icons/gi";
+import { IoSchool } from "react-icons/io5";
+import { FaHouseChimney } from "react-icons/fa6";
+import { MdOutlineWork } from "react-icons/md";
+import { FaCar } from "react-icons/fa";
+import { TbBuildingChurch } from "react-icons/tb";
 
 function NavBar() {
   const { t } = useTranslation();
@@ -66,8 +75,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/healthcare"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger" }}
                     >
+                        <MdHealthAndSafety className="icon"
+                        style={{ marginRight:".5rem", fontSize: "40px"}}
+                        />
                       {t("footer.healthcare")}
                     </a>
                   </li>
@@ -75,8 +87,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="food"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger" }}
                     >
+                       <MdFastfood 
+                       style={{  marginRight:".5rem", fontSize: "40px" }}
+                       />
                       {t("footer.food_banks")}
                     </a>
                   </li>
@@ -84,8 +99,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/government"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger" }}
                     >
+                        <RiGovernmentLine 
+                       style={{  marginRight:".5rem", fontSize: "40px"}}
+                       />
                       {t("footer.government_services")}
                     </a>
                   </li>
@@ -93,8 +111,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/banking"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger" }}
                     >
+                      <GiBanknote
+                      style={{  marginRight:".5rem", fontSize: "40px"}} 
+                      />
                       {t("footer.banking_services")}
                     </a>
                   </li>
@@ -102,8 +123,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/education"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger" }}
                     >
+                      <IoSchool
+                       style={{  marginRight:".5rem", fontSize: "40px" }}
+                       />
                       {t("footer.education")}
                     </a>
                   </li>
@@ -111,8 +135,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/housing"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger"  }}
                     >
+                      <FaHouseChimney 
+                      style={{  marginRight:".5rem", fontSize: "40px" }}
+                      />
                       {t("footer.housing")}
                     </a>
                   </li>
@@ -120,8 +147,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/jobs"
-                      style={{ color: "black" }}
-                    >
+                      style={{ color: "black", fontSize: "larger" }}
+                      >
+                      <MdOutlineWork 
+                      style={{  marginRight:".5rem", fontSize: "40px" }}
+                      />
                       {t("footer.jobs")}
                     </a>
                   </li>
@@ -129,8 +159,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/dmv"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger"  }}
                     >
+                      <FaCar 
+                      style={{  marginRight:".5rem", fontSize: "40px" }}
+                      />
                       {t("footer.dmv_services")}
                     </a>
                   </li>
@@ -138,8 +171,11 @@ function NavBar() {
                     <a
                       className="dropdown-item"
                       href="/faith"
-                      style={{ color: "black" }}
+                      style={{ color: "black", fontSize: "larger"  }}
                     >
+                        <TbBuildingChurch 
+                        style={{  marginRight:".5rem", fontSize: "40px" }}
+                       />
                       {t("footer.faith_based_services")}
                     </a>
                   </li>
