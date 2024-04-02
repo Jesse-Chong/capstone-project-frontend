@@ -4,6 +4,15 @@ import { MdWork } from "react-icons/md";
 import { FaHouseChimneyUser } from "react-icons/fa6";
 import { CgDetailsMore } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { MdHealthAndSafety } from "react-icons/md";
+import { MdFastfood } from "react-icons/md";
+import { RiGovernmentLine } from "react-icons/ri";
+import { GiBanknote } from "react-icons/gi";
+import { IoSchool } from "react-icons/io5";
+import { FaHouseChimney } from "react-icons/fa6";
+import { MdOutlineWork } from "react-icons/md";
+import { FaCar } from "react-icons/fa";
+import { TbBuildingChurch } from "react-icons/tb";
 
 function Footer() {
   const { t } = useTranslation();
@@ -69,56 +78,74 @@ function Footer() {
             <ul className="dropdown-menu">
               <li>
                 <a
-                  className="dropdown-item"
+                  className="dropdown-item text-center"
                   href="/healthcare"
                   style={{ color: "black" }}
                 >
-                  {t("footer.healthcare")}
+                   <MdHealthAndSafety className="icon"
+                   style={{ color: "black", fontSize: "40px"}}
+                  />
+                  {/* {t("footer.healthcare")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item"
+                  className="dropdown-item text-center"
                   href="food"
                   style={{ color: "black" }}
-                >
-                  {t("footer.food_banks")}
+                > 
+                   <MdFastfood 
+                  style={{ fontSize: "40px"}}
+                  />
+                  {/* {t("footer.food_banks")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item"
+                  className="dropdown-item text-center"
                   href="/government"
                   style={{ color: "black" }}
                 >
-                  {t("footer.government_services")}
+                    <RiGovernmentLine 
+                    style={{ fontSize: "40px"}}
+                    />
+                  {/* {t("footer.government_services")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item"
+                  className="dropdown-item text-center"
                   href="/banking"
                   style={{ color: "black" }}
                 >
-                  {t("footer.banking_services")}
+                   <GiBanknote
+                  style={{ fontSize: "40px"}} 
+                  />
+                  {/* {t("footer.banking_services")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item"
+                  className="dropdown-item text-center"
                   href="/dmv"
                   style={{ color: "black" }}
                 >
-                  {t("footer.dmv_services")}
+                  <FaCar 
+                  style={{ fontSize: "40px" }}
+                  />
+                  {/* {t("footer.dmv_services")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item"
+                  className="dropdown-item text-center"
                   href="/faith"
                   style={{ color: "black" }}
                 >
-                  {t("footer.faith_based_services")}
+                  <TbBuildingChurch 
+                  style={{ fontSize: "40px" }}
+                  />
+                  {/* {t("footer.faith_based_service")} */}
                 </a>
               </li>
             </ul>
