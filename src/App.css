@@ -70,20 +70,25 @@ button:hover {
   margin-right: 5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .text-icon .text {
     display: none;
   }
 
   .text-icon .icon {
-    /* display: inline; */
     display: flex;
     justify-content: space-evenly;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .text-icon .icon {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  footer {
     display: none;
   }
 }
