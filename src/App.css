@@ -76,7 +76,9 @@ button:hover {
   }
 
   .text-icon .icon {
-    display: inline;
+    /* display: inline; */
+    display: flex;
+    justify-content: space-evenly;
   }
 }
 
