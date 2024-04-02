@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "./Footer";
-import NavBar from "../components/NavBar";
 import Scroll from "../components/Scroll";
+import HomeNavBar from "./HomeNavBar";
 
 function HomePage() {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ function HomePage() {
 
   return (
     <div>
-      <NavBar />
+      <HomeNavBar />
       <h2 className="m-5">Available Resources</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
         <div className="col">

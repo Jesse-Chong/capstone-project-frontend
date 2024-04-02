@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-function NavBarSignUp() {
+function HomeNavBar() {
   const { t } = useTranslation();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
@@ -17,18 +17,18 @@ function NavBarSignUp() {
         <div className="d-flex justify-content-center" id="navbarNavAltMarkup">
           <button className="m-3">
             <Link
-              to={"/resources"}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              {t("navbar.home")}
-            </Link>
-          </button>
-          <button className="m-3">
-            <Link
               to={"/login"}
               style={{ textDecoration: "none", color: "black" }}
             >
               {t("navbar.login")}
+            </Link>
+          </button>
+          <button className="m-3">
+            <Link
+              to={"/signup"}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              {t("navbar.signup")}
             </Link>
           </button>
         </div>
@@ -37,4 +37,4 @@ function NavBarSignUp() {
   );
 }
 
-export default NavBarSignUp;
+export default HomeNavBar;

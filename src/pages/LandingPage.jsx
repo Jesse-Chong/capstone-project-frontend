@@ -161,7 +161,7 @@ function LandingPage() {
                     className="dropdown-item fs-3 text-center"
                     href="#"
                     onClick={() => { console.log("Selected coordinates:", boroughCoordinates.manhattan); 
-                    navigate("/home", { state: { coordinates: boroughCoordinates.manhattan } }) }}>
+                    navigate("/resources", { state: { coordinates: boroughCoordinates.manhattan } }) }}>
                     {t("borough.manhattan")}
                   </a>
                 </li>
@@ -169,7 +169,7 @@ function LandingPage() {
                   <a className="dropdown-item fs-3 text-center" 
                   href="#"
                   onClick={() => { console.log("Selected coordinates:", boroughCoordinates.queens); 
-                  navigate("/home", { state: { coordinates: boroughCoordinates.queens } }) }}>
+                  navigate("/resources", { state: { coordinates: boroughCoordinates.queens } }) }}>
                     {t("borough.queens")}
                   </a>
                 </li>
@@ -177,7 +177,7 @@ function LandingPage() {
                   <a className="dropdown-item fs-3 text-center" 
                   href="#"
                   onClick={() => { console.log("Selected coordinates:", boroughCoordinates.brooklyn); 
-                  navigate("/home", { state: { coordinates: boroughCoordinates.brooklyn } }) }}>
+                  navigate("/resources", { state: { coordinates: boroughCoordinates.brooklyn } }) }}>
                     {t("borough.brooklyn")}
                   </a>
                 </li>
@@ -185,7 +185,7 @@ function LandingPage() {
                   <a className="dropdown-item fs-3 text-center" 
                   href="#"
                   onClick={() => { console.log("Selected coordinates:", boroughCoordinates.bronx); 
-                  navigate("/home", { state: { coordinates: boroughCoordinates.bronx } }) }}>
+                  navigate("/resources", { state: { coordinates: boroughCoordinates.bronx } }) }}>
                     {t("borough.bronx")}
                   </a>
                 </li>
@@ -193,7 +193,7 @@ function LandingPage() {
                   <a className="dropdown-item fs-3 text-center" 
                   href="#"
                   onClick={() => { console.log("Selected coordinates:", boroughCoordinates.statenIsland); 
-                  navigate("/home", { state: { coordinates: boroughCoordinates.statenIsland } }) }}>
+                  navigate("/resources", { state: { coordinates: boroughCoordinates.statenIsland } }) }}>
                     {t("borough.staten_island")}
                   </a>
                 </li>

@@ -33,7 +33,7 @@ function App() {
         {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/geolocation" element={<GeolocationComponent />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/resources" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />
         <Route path="/food" element={<FoodPage />} />
         <Route path="/jobs" element={<JobsPage />} />
