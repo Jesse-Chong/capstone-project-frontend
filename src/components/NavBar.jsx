@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid" style={{ backgroundColor: "#38B6FF" }}>
-        <a className="navbar-brand fw-bold fs-1 py-3" href="/home">
+        <a className="navbar-brand fw-bold fs-1 py-3" href="/">
           <img
             src="Logo.png"
             alt="FreshStart Logo"
