@@ -47,21 +47,22 @@ const fetchData = async (setPlaces, coordinates) => {
 };
 
 function FoodPage() {
+  const [isLoadingDirections, setIsLoadingDirections] = useState(false);
+  const [visible, setVisible] = useState(3);
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
   const [markerIcon, setMarkerIcon] = useState("");
-  const [visible, setVisible] = useState(3);
+  const [origin, setOrigin] = useState(null);
+  const [showDirectionsButton, setShowDirectionsButton] = useState(false);
+  const [directions, setDirections] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
   console.log("FoodPage location.state:", location.state);
-  const coordinates = location.state?.coordinates || {
-    lat: 40.7128,
-    lng: -74.006,
-  };
-  console.log("FoodPage coordinates:", coordinates);
+const coordinates = location.state?.coordinates || { lat: 40.7128, lng: -74.006 };
+console.log("FoodPage coordinates:", coordinates);
 
   function Loadmore() {
     setVisible(visible + 3);
@@ -69,6 +70,7 @@ function FoodPage() {
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
+    setShowDirectionsButton(true);
     console.log("Place clicked. Place:", place);
 
     try {
@@ -88,6 +90,34 @@ function FoodPage() {
     }
   };
 
+  const handleDirectionsClick = () => {
+    if (selectedPlace && !isLoadingDirections) {
+      setIsLoadingDirections(true);
+      fetchDirections(selectedPlace.geometry.location);
+    }
+  };
+
+  const fetchDirections = async (destination) => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/directions", {
+        params: {
+          origin: `${coordinates.lat},${coordinates.lng}`,
+          destination: `${destination.lat},${destination.lng}`
+        },
+      });
+      console.log("Directions response:", response.data);
+      setDirections(response.data.routes[0].legs[0].steps);
+      console.log("Directions state:", response.data.routes[0].legs[0].steps);
+      setOrigin(coordinates);
+    } catch (error) {
+      console.error("Error fetching directions:", error);
+    } finally {
+      setIsLoadingDirections(false);
+    }
+  };
+
+
+
   useEffect(() => {
     fetchData(setPlaces, coordinates);
   }, [coordinates]);
@@ -106,17 +136,23 @@ function FoodPage() {
         </button>
         <div className="row">
           <div className="col-md-6 mt-3">
-            <GoogleMaps
-              key={`${coordinates.lat},${coordinates.lng}`}
-              places={places}
-              apiKey={API_KEY}
-              markerIcon={markerIcon}
-              selectedPlace={selectedPlace}
-              setSelectedPlace={setSelectedPlace}
-              selectedPlaceDetails={selectedPlaceDetails}
-              setSelectedPlaceDetails={setSelectedPlaceDetails}
-              handlePlaceClick={handlePlaceClick}
-              coordinates={coordinates}
+          <GoogleMaps
+            key={`${coordinates.lat},${coordinates.lng}`}
+      places={places}
+      apiKey={API_KEY}
+      markerIcon={markerIcon}
+      selectedPlace={selectedPlace}
+      setSelectedPlace={setSelectedPlace}
+      selectedPlaceDetails={selectedPlaceDetails}
+      setSelectedPlaceDetails={setSelectedPlaceDetails}
+      handlePlaceClick={handlePlaceClick}
+      coordinates={coordinates}
+      showDirectionsButton={showDirectionsButton}
+      handleDirectionsClick={handleDirectionsClick}
+      origin={origin}
+      setDirections={setDirections}
+      directions={directions}
+      isLoadingDirections={isLoadingDirections}
             />
           </div>
           <div className="col-md-6">

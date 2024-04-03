@@ -1,10 +1,13 @@
 import HelperFile from "./HelperFile";
 import { useTranslation } from "react-i18next";
+import { useState, useRef, useCallback } from "react";
 import {
   GoogleMap,
   Marker,
   useJsApiLoader,
   InfoWindow,
+  DirectionsService,
+  DirectionsRenderer
 } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -12,18 +15,55 @@ const containerStyle = {
   height: "600px",
 };
 
-const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSelectedPlace, selectedPlaceDetails, setSelectedPlaceDetails, handlePlaceClick, coordinates }) => {
+const libraries = ["places", "routes"];
+
+const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSelectedPlace, selectedPlaceDetails, 
+  setSelectedPlaceDetails, handlePlaceClick, coordinates, origin, showDirectionsButton, handleDirectionsClick, 
+  directions, setDirections, isLoadingDirections }) => {
+  // console.log("Directions prop in GoogleMapsComponent:", directions);
   const { t } = useTranslation();
-  const url = import.meta.env.VITE_BASE_URL;
+  const [directionsInfo, setDirectionsInfo] = useState([]);
+  const [travelMode, setTravelMode] = useState("DRIVING");
+  const [transitMode, setTransitMode] = useState("BUS");
+  
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
-    libraries: ["places"]
+    libraries: libraries
   });
 
   const center = {
     lat: coordinates.lat,
     lng: coordinates.lng
   };
+
+  const [response, setResponse] = useState(null);
+  const count = useRef(0);
+
+  // The guard clause is to stop the api from being called in a endless loop.
+  const directionsCallback = useCallback(res => {
+    console.log(count.current);
+    console.log("Directions callback response:", res);
+    if (res !== null) {
+      if (res.status === 'OK' && count.current < 2) {
+        count.current += 1;
+        setResponse(res);
+        // Extract the directions information
+        const directionsSteps = res.routes[0].legs[0].steps;
+        const formattedDirections = directionsSteps.map((step, index) => ({
+          key: index,
+          // Regex is used to remove the <b> that google uses to bold text and <div> google uses to change font
+          instruction: step.instructions.replace(/<\/?(?:b|div[^>]*?|wbr\/?)>/g, ''),
+          distance: step.distance.text,
+          duration: step.duration.text
+        }));
+        console.log(directionsSteps)
+        setDirectionsInfo(formattedDirections);
+      } else {
+        count.current = 0;
+        console.log('res: ', res);
+      }
+    }
+  }, []);
 
   const handleMarkerClick = async (place) => {
     setSelectedPlace(place);
@@ -32,7 +72,7 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
   
     try {
       const response = await fetch(
-        `${url}/placeDetails?key=${apiKey}&place_id=${place.place_id}`
+        `http://localhost:3001/placeDetails?key=${apiKey}&place_id=${place.place_id}`
       );
       console.log("Raw response:", response);
       const data = await response.json();
@@ -51,6 +91,14 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
     }
   };
 
+  const handleTravelModeChange = (mode) => {
+    setTravelMode(mode);
+  };
+
+  const handleTransitModeChange = (mode) => {
+    setTransitMode(mode);
+  };
+
   const handleCloseInfoWindow = () => {
     setSelectedPlace(null);
   };
@@ -61,6 +109,36 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
 
   return isLoaded ? (
     <>
+      <div>
+        <label htmlFor="travelMode">Travel Mode:</label>
+        <select
+          id="travelMode"
+          value={travelMode}
+          onChange={(e) => handleTravelModeChange(e.target.value)}
+        >
+          <option value="DRIVING">Driving</option>
+          <option value="TRANSIT">Transit</option>
+          <option value="BICYCLING">Bicycling</option>
+          <option value="WALKING">Walking</option>
+        </select>
+      </div>
+      {travelMode === "TRANSIT" && (
+        <div>
+          <label htmlFor="transitMode">Transit Mode:</label>
+          <select
+            id="transitMode"
+            value={transitMode}
+            onChange={(e) => handleTransitModeChange(e.target.value)}
+          >
+            <option value="BUS">Bus</option>
+            <option value="SUBWAY">Subway</option>
+            <option value="TRAIN">Train</option>
+            <option value="TRAM">Tram</option>
+            <option value="RAIL">Rail</option>
+          </select>
+        </div>
+      )}
+
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
         {places.map((place) => (
           <Marker
@@ -86,32 +164,30 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
               {selectedPlaceDetails ? (
                 <>
                   <p>
-                  <span className="fw-bold border fs-6"> {t("infoWindow.name")}:</span> {selectedPlaceDetails.name}
+                    {t("infoWindow.name")}: {selectedPlaceDetails.name}
                   </p>
                   <p>
-                  <span className="fw-bold fs-6"> {t("infoWindow.address")}:</span>
+                    {t("infoWindow.address")}:{" "}
                     {selectedPlaceDetails.formatted_address}
                   </p>
                   {selectedPlaceDetails.formatted_phone_number && (
                     <p>
-                      <span className="fw-bold fs-6"> {t("infoWindow.phone")}:</span>
+                      {t("infoWindow.phone")}:{" "}
                       {selectedPlaceDetails.formatted_phone_number}
                     </p>
                   )}
                   <p>
-                  <span className="fw-bold fs-6">{t("infoWindow.rating")}: </span>{selectedPlaceDetails.rating}
+                    {t("infoWindow.rating")}: {selectedPlaceDetails.rating}
                   </p>
                   {selectedPlaceDetails.website && (
                     <p>
-                     <span className="fw-bold fs-6"> {t("infoWindow.website")}: </span>{selectedPlaceDetails.website}
+                      {t("infoWindow.website")}: {selectedPlaceDetails.website}
                     </p>
                   )}
 
                   {selectedPlaceDetails.opening_hours && (
                     <>
-                      <p>
-                      <span className="fw-bold fs-6"> {t("infoWindow.openingHours")}:</span>
-                      </p>
+                      <p>{t("infoWindow.openingHours")}:</p>
                       <ul>
                         {selectedPlaceDetails.opening_hours.weekday_text.map(
                           (hours, index) => (
@@ -133,10 +209,46 @@ const GoogleMapsComponent = ({ places, apiKey, markerIcon, selectedPlace, setSel
               ) : (
                 <p>{t("infoWindow.noDetails")}</p>
               )}
+                            {showDirectionsButton && (
+                              <button
+  onClick={handleDirectionsClick}
+  disabled={isLoadingDirections}
+>
+  {isLoadingDirections ? "Loading Directions..." : "Get Directions"}
+</button>
+              )}
             </div>
           </InfoWindow>
         )}
+        {origin && selectedPlace && (
+          <DirectionsService
+            options={{
+              origin: `${origin.lat},${origin.lng}`,
+              destination: `${selectedPlace.geometry.location.lat},${selectedPlace.geometry.location.lng}`,
+              travelMode: travelMode,
+              provideRouteAlternatives: true
+            }}
+            callback={directionsCallback}
+          />
+        )}
+{response && (
+  <DirectionsRenderer options={{ directions: response }} />
+)}
       </GoogleMap>
+      {directionsInfo.length > 0 && (
+        <div>
+          <h3>Directions:</h3>
+          <ol>
+            {directionsInfo.map(direction => (
+              <li key={direction.key}>
+                <div>{direction.instruction}</div>
+                <div>Distance: {direction.distance}</div>
+                <div>Duration: {direction.duration}</div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
       <HelperFile
         selectedPlace={selectedPlace}
         selectedPlaceDetails={selectedPlaceDetails}
