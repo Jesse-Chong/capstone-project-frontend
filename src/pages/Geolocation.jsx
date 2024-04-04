@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 // const API_KEY = import.meta.env.VITE_API_KEY;
 
-function Geolocation() {
-
-    const [long, setLong] = useState('');
-    const [lat, setLat] = useState('');
+function Geolocation({ userCoordinates, setUserCoordinates }) {
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getUserLocation = async () => {
@@ -19,20 +19,25 @@ function Geolocation() {
                 } else if (permission.state === 'prompt') {
                     // Geolocation permission prompt required, show popup to ask for permission
                     const granted = await showPermissionPopup();
-
                     if (granted) {
                         // User granted permission, proceed with fetching geolocation
                         fetchLocation();
                     } else {
                         // User denied permission, handle accordingly
                         console.log('Geolocation permission denied');
+                        setIsLoading(false);
+                        navigate("/");
                     }
                 } else {
                     // Geolocation permission denied, handle accordingly
                     console.log('Geolocation permission denied');
+                    setIsLoading(false);
+                    navigate("/");
                 }
             } catch (error) {
                 console.error('Error fetching geolocation data:', error);
+                setIsLoading(false);
+                navigate("/");
             }
         };
         const showPermissionPopup = async () => {
@@ -49,29 +54,30 @@ function Geolocation() {
                 });
 
                 const { latitude, longitude } = position.coords;
-
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-                setLat(latitude)
-                setLong(longitude)
-
+                setUserCoordinates({ lat: latitude, lng: longitude });
+                setIsLoading(false);
+                navigate("/");
             } catch (error) {
                 console.error('Error fetching geolocation data:', error);
+                setIsLoading(false);
+                navigate("/");
             }
         };
 
         getUserLocation();
-    }, []);
-
+    }, [setUserCoordinates]);
     return (
         <div>
-            <div>
-                <h1>Geolocation</h1>
-                <p>Lat: {lat}</p>
-                <p>Long: {long}</p>
-            </div>
+            {isLoading ? (
+                <div>
+                    <img src="/loading.gif" alt="Loading" />
+                </div>
+            ) : (
+                <h1>Loading...</h1>
+            )}
         </div>
     );
 }
 
 export default Geolocation;
+
