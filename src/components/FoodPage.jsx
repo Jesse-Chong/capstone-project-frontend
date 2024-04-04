@@ -156,7 +156,7 @@ console.log("FoodPage coordinates:", coordinates);
             />
           </div>
           <div className="col-md-6">
-            {places.slice(0, visible).map((item) => {
+          {places.slice(0, visible).map((item) => {
               // console.log(places);
               return (
                 <div
@@ -167,9 +167,9 @@ console.log("FoodPage coordinates:", coordinates);
                   <br />
                   <div className="card h-100 p-2">
                     <div className="card-body" style={{ color: "#38B6FF" }}>
-                      <span className="fw-bold ">Name: </span>
+                      <span className="fw-bold ">{t("infoWindow.name")} </span>
                       <p className="card-title">{item.name}</p>
-                      <span className="fw-bold">Currently: </span>
+                      <span className="fw-bold">{t("infowindow.currently")} </span>
                       {item.opening_hours?.open_now ? "Open Now" : "Closed"}
                     </div>
                   </div>
