@@ -92,3 +92,17 @@ button:hover {
     display: none;
   }
 }
+
+#footerIcon.dropdown-menu {
+  margin-left: -60px;
+}
+
+#footerIcon.dropdown-menu > li {
+  display: inline-block;
+}
+
+/* dropdown */
+
+.dropdown-item:hover {
+  background-color: #38b6ff;
+}

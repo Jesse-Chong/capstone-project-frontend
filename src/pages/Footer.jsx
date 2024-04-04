@@ -75,76 +75,64 @@ function Footer() {
             >
               <CgDetailsMore className="icon" />
             </button>
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu" id="footerIcon">
               <li>
                 <a
-                  className="dropdown-item text-center"
+                  className="dropdown-item"
                   href="/healthcare"
                   style={{ color: "black" }}
                 >
-                   <MdHealthAndSafety className="icon"
-                   style={{ color: "black", fontSize: "40px"}}
-                  />
+                  <MdHealthAndSafety style={{ fontSize: "40px" }} />
                   {/* {t("footer.healthcare")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item text-center"
-                  href="food"
+                  className="dropdown-item"
+                  href="/food"
                   style={{ color: "black" }}
-                > 
-                   <MdFastfood 
-                  style={{ fontSize: "40px"}}
-                  />
+                >
+                  <MdFastfood style={{ fontSize: "40px" }} />
                   {/* {t("footer.food_banks")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item text-center"
+                  className="dropdown-item"
                   href="/government"
                   style={{ color: "black" }}
                 >
-                    <RiGovernmentLine 
-                    style={{ fontSize: "40px"}}
-                    />
+                  <RiGovernmentLine style={{ fontSize: "40px" }} />
                   {/* {t("footer.government_services")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item text-center"
+                  className="dropdown-item"
                   href="/banking"
                   style={{ color: "black" }}
                 >
-                   <GiBanknote
-                  style={{ fontSize: "40px"}} 
-                  />
+                  <GiBanknote style={{ fontSize: "40px" }} />
                   {/* {t("footer.banking_services")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item text-center"
+                  className="dropdown-item"
                   href="/dmv"
                   style={{ color: "black" }}
                 >
-                  <FaCar 
-                  style={{ fontSize: "40px" }}
-                  />
+                  <FaCar style={{ fontSize: "40px" }} />
                   {/* {t("footer.dmv_services")} */}
                 </a>
               </li>
               <li>
                 <a
-                  className="dropdown-item text-center"
+                  className="dropdown-item"
                   href="/faith"
                   style={{ color: "black" }}
                 >
-                  <TbBuildingChurch 
-                  style={{ fontSize: "40px" }}
-                  />
+                  <TbBuildingChurch style={{ fontSize: "40px" }} />
                   {/* {t("footer.faith_based_service")} */}
                 </a>
               </li>
