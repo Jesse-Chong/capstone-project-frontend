@@ -1,9 +1,24 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Scroll from "../components/Scroll";
+import { useNavigate } from "react-router-dom";
 
-function LandingPage() {
-  const { t } = useTranslation();
+const boroughCoordinates = {
+  manhattan: { lat: 40.7831, lng: -73.9712 },
+  queens: { lat: 40.7282, lng: -73.7949 },
+  brooklyn: { lat: 40.6782, lng: -73.9442 },
+  bronx: { lat: 40.8448, lng: -73.8648 },
+  statenIsland: { lat: 40.5795, lng: -74.1502 },
+};
+
+function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPopup, setShowGeolocationPopup, userCoordinates, setUserCoordinates }) {
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    setLanguageSelected(true);
+    navigate("/geolocation");
+  }
+  const navigate = useNavigate();
   return (
     <div>
       <div className="container">
@@ -145,34 +160,70 @@ function LandingPage() {
                     style={{ width: "100%" }}
                   >
                     <li>
-                      <a
-                        className="dropdown-item fs-5 text-center"
-                        href="#"
-                        onClick={() => navigate("/home")}
-                      >
-                        {t("borough.manhattan")}
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item fs-5 text-center" href="#">
-                        {t("borough.queens")}
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item fs-5 text-center" href="#">
-                        {t("borough.brooklyn")}
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item fs-5 text-center" href="#">
-                        {t("borough.bronx")}
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item fs-5 text-center" href="#">
-                        {t("borough.staten_island")}
-                      </a>
-                    </li>
+                  <a
+                    className="dropdown-item fs-3 text-center"
+                    href="#"
+                    onClick={() => {
+                      const coordinates = userCoordinates || boroughCoordinates.manhattan;
+                      console.log("Selected coordinates:", coordinates);
+                      navigate("/resources", { state: { coordinates } });
+                    }}
+                  >
+                    {t("borough.manhattan")}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item fs-3 text-center"
+                    href="#"
+                    onClick={() => {
+                      const coordinates = userCoordinates || boroughCoordinates.queens;
+                      console.log("Selected coordinates:", coordinates);
+                      navigate("/resources", { state: { coordinates } });
+                    }}
+                  >
+                    {t("borough.queens")}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item fs-3 text-center"
+                    href="#"
+                    onClick={() => {
+                      const coordinates = userCoordinates || boroughCoordinates.brooklyn;
+                      console.log("Selected coordinates:", coordinates);
+                      navigate("/resources", { state: { coordinates } });
+                    }}
+                  >
+                    {t("borough.brooklyn")}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item fs-3 text-center"
+                    href="#"
+                    onClick={() => {
+                      const coordinates = userCoordinates || boroughCoordinates.bronx
+                      console.log("Selected coordinates:", coordinates);
+                      navigate("/resources", { state: { coordinates } });
+                    }}
+                  >
+                    {t("borough.bronx")}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item fs-3 text-center"
+                    href="#"
+                    onClick={() => {
+                      const coordinates = userCoordinates || boroughCoordinates.statenIsland;
+                      console.log("Selected coordinates:", coordinates);
+                      navigate("/resources", { state: { coordinates } });
+                    }}
+                  >
+                    {t("borough.staten_island")}
+                  </a>
+                </li>
                   </ul>
                 </div>
               </div>
