@@ -64,7 +64,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("en")}
                       >
-                        English
+                                             {t("language.english")} / English
                       </a>
                     </li>
                     <li>
@@ -73,7 +73,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("es")}
                       >
-                        Spanish
+                        {t("language.spanish")} / Spanish
                       </a>
                     </li>
                     <li>
@@ -82,7 +82,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("zh_CN")}
                       >
-                        Chinese
+                       {t("language.chinese")} / Chinese
                       </a>
                     </li>
                     <li>
@@ -91,7 +91,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("hi")}
                       >
-                        Hindi
+                        {t("language.hindi")} / Hindi
                       </a>
                     </li>
                     <li>
@@ -100,7 +100,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("ar")}
                       >
-                        Arabic
+                       {t("language.arabic")} / Arabic
                       </a>
                     </li>
                     <li>
@@ -109,7 +109,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("fr")}
                       >
-                        French
+                       {t("language.french")} / French
                       </a>
                     </li>
                     <li>
@@ -118,7 +118,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("ru")}
                       >
-                        Russian
+                       {t("language.russian")} / Russian
                       </a>
                     </li>
                     <li>
@@ -127,7 +127,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("ko")}
                       >
-                        Korean
+                        {t("language.korean")} / Korean
                       </a>
                     </li>
                   </ul>
@@ -169,7 +169,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                       navigate("/resources", { state: { coordinates } });
                     }}
                   >
-                    {t("borough.manhattan")}
+                    {t("borough.manhattan")} / Manhattan
                   </a>
                 </li>
                 <li>
@@ -182,7 +182,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                       navigate("/resources", { state: { coordinates } });
                     }}
                   >
-                    {t("borough.queens")}
+                    {t("borough.queens")} / Queens
                   </a>
                 </li>
                 <li>
@@ -195,7 +195,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                       navigate("/resources", { state: { coordinates } });
                     }}
                   >
-                    {t("borough.brooklyn")}
+                    {t("borough.brooklyn")} / Brooklyn
                   </a>
                 </li>
                 <li>
@@ -208,7 +208,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                       navigate("/resources", { state: { coordinates } });
                     }}
                   >
-                    {t("borough.bronx")}
+                    {t("borough.bronx")} / Bronx
                   </a>
                 </li>
                 <li>
@@ -221,7 +221,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                       navigate("/resources", { state: { coordinates } });
                     }}
                   >
-                    {t("borough.staten_island")}
+                    {t("borough.staten_island")} / Staten Island
                   </a>
                 </li>
                   </ul>
