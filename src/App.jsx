@@ -21,24 +21,42 @@ import Favorite from "./pages/Favorite";
 import HelperFile from "./components/HelperFile";
 import FavNavBar from "./pages/FavNavBar";
 import Geolocation from "./pages/Geolocation";
+import FavoritePractice from "./components/FavoritePractice";
 
 function App() {
-   const [user, setUser] = useState(null)
-   const [token, setToken] = useState(null)
-   const [languageSelected, setLanguageSelected] = useState(false); // State to track
-   const [showGeolocationPopup, setShowGeolocationPopup] = useState(false); // State to track geolocation popup
-   const [userCoordinates, setUserCoordinates] = useState(null);
- 
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [languageSelected, setLanguageSelected] = useState(false); // State to track
+  const [showGeolocationPopup, setShowGeolocationPopup] = useState(false); // State to track geolocation popup
+  const [userCoordinates, setUserCoordinates] = useState(null);
+
   return (
     <Router>
-        <FavNavBar user={user} setUser={setUser} setToken={setToken}/>
+      <FavNavBar user={user} setUser={setUser} setToken={setToken} />
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
-        <Route path="/geolocation" element={<Geolocation userCoordinates={userCoordinates} setUserCoordinates={setUserCoordinates} />} />
-       <Route path="/" element={<LandingPage 
-       userCoordinates={userCoordinates} setUserCoordinates={setUserCoordinates}
-       languageSelected={languageSelected} setLanguageSelected={setLanguageSelected} 
-       showGeolocationPopup={showGeolocationPopup} setShowGeolocationPopup={setShowGeolocationPopup}/>} />
+        <Route
+          path="/geolocation"
+          element={
+            <Geolocation
+              userCoordinates={userCoordinates}
+              setUserCoordinates={setUserCoordinates}
+            />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <LandingPage
+              userCoordinates={userCoordinates}
+              setUserCoordinates={setUserCoordinates}
+              languageSelected={languageSelected}
+              setLanguageSelected={setLanguageSelected}
+              showGeolocationPopup={showGeolocationPopup}
+              setShowGeolocationPopup={setShowGeolocationPopup}
+            />
+          }
+        />
         <Route path="/resources" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />
         <Route path="/food" element={<FoodPage />} />
@@ -51,20 +69,28 @@ function App() {
         <Route path="/healthcare" element={<HealthcarePage />} />
         <Route path="/housing" element={<HousingPage />} />
         <Route path="/helperfile" element={<HelperFile />} />
-        <Route path="/login" element={<LoginPage setUser={setUser} setToken={setToken} />} />
-        <Route path="/signup" element={<SignUpPage setUser={setUser} setToken={setToken} />} />
+        <Route path="/favoritepractice" element={<FavoritePractice />} />
+
+        <Route
+          path="/login"
+          element={<LoginPage setUser={setUser} setToken={setToken} />}
+        />
+        <Route
+          path="/signup"
+          element={<SignUpPage setUser={setUser} setToken={setToken} />}
+        />
         {/* <Route path="/users" element={<Users />} /> */}
-        <Route 
-         path="/favorite"
-         element={
-         <ProtectedRoute
-         element={Favorite}
-         isAuthenticated={!!user && !!token}
-         user={user}
-         token={token}
-          />
-         }
-         />
+        <Route
+          path="/favorite"
+          element={
+            <ProtectedRoute
+              element={Favorite}
+              isAuthenticated={!!user && !!token}
+              user={user}
+              token={token}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
