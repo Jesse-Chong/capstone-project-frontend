@@ -20,19 +20,25 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Favorite from "./pages/Favorite";
 import HelperFile from "./components/HelperFile";
 import FavNavBar from "./pages/FavNavBar";
-import GeolocationComponent from "./pages/Geolocation";
+import Geolocation from "./pages/Geolocation";
 
 function App() {
    const [user, setUser] = useState(null)
    const [token, setToken] = useState(null)
-
+   const [languageSelected, setLanguageSelected] = useState(false); // State to track
+   const [showGeolocationPopup, setShowGeolocationPopup] = useState(false); // State to track geolocation popup
+   const [userCoordinates, setUserCoordinates] = useState(null);
+ 
   return (
     <Router>
         <FavNavBar user={user} setUser={setUser} setToken={setToken}/>
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
-        <Route path="/geolocation" element={<GeolocationComponent />} />
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/geolocation" element={<Geolocation userCoordinates={userCoordinates} setUserCoordinates={setUserCoordinates} />} />
+       <Route path="/" element={<LandingPage 
+       userCoordinates={userCoordinates} setUserCoordinates={setUserCoordinates}
+       languageSelected={languageSelected} setLanguageSelected={setLanguageSelected} 
+       showGeolocationPopup={showGeolocationPopup} setShowGeolocationPopup={setShowGeolocationPopup}/>} />
         <Route path="/resources" element={<HomePage />} />
         <Route path="/details" element={<ShowDetailsPage />} />
         <Route path="/food" element={<FoodPage />} />
