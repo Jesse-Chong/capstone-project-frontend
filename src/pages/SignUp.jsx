@@ -38,6 +38,7 @@ const SignUpPage = ({ setUser, setToken }) => {
       .then((res) => {
         if (res.user.user_id) {
           setUser(res.user);
+          localStorage.setItem('token', res.token);
           setToken(res.token);
           setSignUp((prev) => ({
             first_name: "",
