@@ -17,11 +17,13 @@ import HousingPage from "./components/HousingPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUp";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import Favorite from "./pages/Favorite";
+// import Favorite from "./pages/IndexFav";
 import HelperFile from "./components/HelperFile";
 import FavNavBar from "./pages/FavNavBar";
 import Geolocation from "./pages/Geolocation";
 import FavoritePractice from "./components/FavoritePractice";
+import IndexFav from "./pages/IndexFav";
+import ShowFav from "./pages/ShowFav";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -70,6 +72,7 @@ function App() {
         <Route path="/housing" element={<HousingPage />} />
         <Route path="/helperfile" element={<HelperFile />} />
         <Route path="/favoritepractice" element={<FavoritePractice />} />
+        <Route path="/favorite/:id" element={<ShowFav />} />
 
         <Route
           path="/login"
@@ -84,7 +87,7 @@ function App() {
           path="/favorite"
           element={
             <ProtectedRoute
-              element={Favorite}
+              element={IndexFav}
               isAuthenticated={!!user && !!token}
               user={user}
               token={token}
