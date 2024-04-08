@@ -6,6 +6,7 @@ import { BiSolidPrinter } from "react-icons/bi";
 import { RiFileDownloadFill } from "react-icons/ri";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { LiaStarSolid } from "react-icons/lia";
+import { FaFolderPlus } from "react-icons/fa";
 import Scroll from "./Scroll";
 
 function favorite() {
@@ -22,7 +23,7 @@ function favorite() {
 
   async function fetchShow() {
     try {
-      let result = await axios.get(`${API}/favoritepractice`);
+      let result = await axios.get(`${API}/favorite`);
       console.log(result.data);
       setShow(result.data);
       console.log(show);
@@ -31,27 +32,34 @@ function favorite() {
     }
   }
 
-  function deleteButton() {
-    // try {
-    //   let result = await axios.delete(`${API}/favorite/${id}`);
-    //   console.log(result);
-    //   navigate("/favorite");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  async function deleteButton(id) {
     try {
-      fetch(`${API}/favoritepractice/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(show),
-      })
-        .then((res) => res.json())
-        .then(() => navigate("/favoritepractice"));
+      let result = await axios.delete(`${API}/favorite/${id}`);
+      console.log(result);
+      setShow(show.filter((item) => item.favorite_id !== id));
+      // const confirmDeleteBox = window.confirm(
+      //   `🚨 WAIT!!!!! Are you sure you want to 💥 delete 💥 ${item.name}? 🚨`
+      // );
+      // if (!confirmDeleteBox) {
+      //   return;
+      // }
+      navigate("/favorite");
     } catch (error) {
-      return error;
+      console.log(error);
     }
+    // try {
+    //   fetch(`${API}/favoritepractice/${id}`, {
+    //     method: "DELETE",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //     body: JSON.stringify(show),
+    //   })
+    //     .then((res) => res.json())
+    //     .then(() => navigate("/favoritepractice"));
+    // } catch (error) {
+    //   return error;
+    // }
   }
   // useEffect(() => {
   // function fetchOneFavorite() {
@@ -92,15 +100,16 @@ function favorite() {
 
   return (
     <div>
-      <h2 className="m-5">{t("favorite.my_documents")}</h2>
+      <h2 className="m-5">{t("favorite.available_documents")}</h2>
       <table className="table table-hover table-bordered text-center m-5">
         <thead className="fs-3" style={{ backgroundColor: "#38b6ff" }}>
           <tr>
-            <th scope="col">{t("favorite.number")}</th>
-            <th scope="col">{t("favorite.favorite")}</th>
+            {/* <th scope="col">{t("favorite.number")}</th>
+            <th scope="col">{t("favorite.favorite")}</th> */}
             <th scope="col">{t("favorite.category")}</th>
             <th scope="col">{t("favorite.name")}</th>
             <th scope="col">{t("favorite.document")}</th>
+            <th scope="col">Add Document</th>
             <th scope="col">{t("favorite.delete")}</th>
           </tr>
         </thead>
@@ -108,7 +117,7 @@ function favorite() {
           {show.map((item, index) => {
             return (
               <tr key={index} className="table-row">
-                <td>{item.favorite_id}</td>
+                {/* <td>{item.favorite_id}</td>
                 <td>
                   {item.is_favorite ? (
                     <span>
@@ -117,7 +126,7 @@ function favorite() {
                   ) : (
                     <span>{""}</span>
                   )}
-                </td>
+                </td> */}
                 <td>{item.category}</td>
                 <td>{item.name}</td>
 
@@ -135,8 +144,17 @@ function favorite() {
                     </a>
                   </button>
                 </td>
+
                 <td>
-                  <button onClick={deleteButton} style={{ color: "black" }}>
+                  <button style={{ textDecoration: "none", color: "black" }}>
+                    Add <FaFolderPlus style={{ color: "green" }} />
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => deleteButton(item.favorite_id)}
+                    style={{ color: "black" }}
+                  >
                     {t("favorite.favorite")}{" "}
                     <RiDeleteBin5Fill style={{ color: "red" }} />
                   </button>
