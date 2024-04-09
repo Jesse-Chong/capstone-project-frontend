@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import house from "../assets/house.png";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
@@ -20,7 +19,7 @@ const fetchData = async (setPlaces, coordinates) => {
         location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "homeless_shelter",
-        keyword: "homeless_shelter",
+        keyword: "homeless_shelter"
       },
     });
 
@@ -30,7 +29,7 @@ const fetchData = async (setPlaces, coordinates) => {
       const detailsResponse = await axios.get(`${url}/placeDetails`, {
         params: {
           key: API_KEY,
-          place_id: placeIds.join(","),
+          place_id: placeIds.join(",")
         },
       });
 
@@ -47,12 +46,16 @@ const fetchData = async (setPlaces, coordinates) => {
 };
 
 function HousingPage() {
+  const [isLoadingDirections, setIsLoadingDirections] = useState(false);
+  const [visible, setVisible] = useState(3);
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
   const [markerIcon, setMarkerIcon] = useState("");
-  const [visible, setVisible] = useState(3);
+  const [origin, setOrigin] = useState(null);
+  const [showDirectionsButton, setShowDirectionsButton] = useState(false);
+  const [directions, setDirections] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
@@ -67,6 +70,7 @@ function HousingPage() {
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
+    setShowDirectionsButton(true);
     console.log("Place clicked. Place:", place);
 
     try {
@@ -86,9 +90,35 @@ function HousingPage() {
     }
   };
 
+  const handleDirectionsClick = () => {
+    if (selectedPlace && !isLoadingDirections) {
+      setIsLoadingDirections(true);
+      fetchDirections(selectedPlace.geometry.location);
+    }
+  };
+
+  const fetchDirections = async (destination) => {
+    try {
+      const response = await axios.get( `${url}/api/directions` , {
+        params: {
+          origin: `${coordinates.lat},${coordinates.lng}`,
+          destination: `${destination.lat},${destination.lng}`
+        },
+      });
+      console.log("Directions response:", response.data);
+      setDirections(response.data.routes[0].legs[0].steps);
+      console.log("Directions state:", response.data.routes[0].legs[0].steps);
+      setOrigin(coordinates);
+    } catch (error) {
+      console.error("Error fetching directions:", error);
+    } finally {
+      setIsLoadingDirections(false);
+    }
+  };
+
   useEffect(() => {
     fetchData(setPlaces, coordinates);
-  }, [coordinates]);
+  }, []);
 
   return (
     <div>
@@ -105,6 +135,7 @@ function HousingPage() {
         <div className="row">
           <div className="col-md-6 mt-3">
             <GoogleMaps
+              key={`${coordinates.lat},${coordinates.lng}`}
               places={places}
               apiKey={API_KEY}
               markerIcon={markerIcon}
@@ -114,6 +145,12 @@ function HousingPage() {
               setSelectedPlaceDetails={setSelectedPlaceDetails}
               handlePlaceClick={handlePlaceClick}
               coordinates={coordinates}
+              showDirectionsButton={showDirectionsButton}
+              handleDirectionsClick={handleDirectionsClick}
+              origin={origin}
+              setDirections={setDirections}
+              directions={directions}
+              isLoadingDirections={isLoadingDirections}
             />
           </div>
           <div className="col-md-6">
@@ -128,9 +165,9 @@ function HousingPage() {
                   <br />
                   <div className="card h-100 p-2">
                     <div className="card-body" style={{ color: "#38B6FF" }}>
-                      <span className="fw-bold ">Name: </span>
+                    <span className="fw-bold ">{t("infoWindow.name")} </span>
                       <p className="card-title">{item.name}</p>
-                      <span className="fw-bold">Currently: </span>
+                      <span className="fw-bold">{t("infowindow.currently")} </span>
                       {item.opening_hours?.open_now ? "Open Now" : "Closed"}
                     </div>
                   </div>
