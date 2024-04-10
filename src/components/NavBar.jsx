@@ -15,13 +15,13 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid" style={{ backgroundColor: "#38B6FF" }}>
-        <a className="navbar-brand fw-bold fs-1 py-3" href="/">
+        <Link className="navbar-brand fw-bold fs-1 py-3" to="/">
           <img
             src="Logo.png"
             alt="FreshStart Logo"
             style={{ width: "75px", height: "75px" }}
           />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -36,22 +36,24 @@ function NavBar() {
         <div className="d-flex justify-content-end">
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              <button className="m-3">
+              <li className="nav-item">
                 <Link
-                  to={"/login"}
+                  className="nav-link m-3"
+                  to="/login"
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   {t("navbar.login")}
                 </Link>
-              </button>
-              <button className="m-3">
+              </li>
+              <li className="nav-item">
                 <Link
-                  to={"/signup"}
+                  className="nav-link m-3"
+                  to="/signup"
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   {t("navbar.signup")}
                 </Link>
-              </button>
+              </li>
               <li className="nav-item dropdown">
                 <button
                   type="button"
@@ -73,94 +75,94 @@ function NavBar() {
                   style={{ position: "absolute" }}
                 >
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/healthcare"
+                      to="/healthcare"
                       style={{ color: "black" }}
                     >
                       <MdHealthAndSafety style={{ marginRight: ".5rem" }} />
                       {t("footer.healthcare")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="food"
+                      to="/food"
                       style={{ color: "black" }}
                     >
                       <MdFastfood style={{ marginRight: ".5rem" }} />
                       {t("footer.food_banks")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/government"
+                      to="/government"
                       style={{ color: "black" }}
                     >
                       <RiGovernmentLine style={{ marginRight: ".5rem" }} />
                       {t("footer.government_services")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/banking"
+                      to="/banking"
                       style={{ color: "black" }}
                     >
                       <GiBanknote style={{ marginRight: ".5rem" }} />
                       {t("footer.banking_services")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/education"
+                      to="/education"
                       style={{ color: "black" }}
                     >
                       <IoSchool style={{ marginRight: ".5rem" }} />
                       {t("footer.education")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/housing"
+                      to="/housing"
                       style={{ color: "black" }}
                     >
                       <FaHouseChimney style={{ marginRight: ".5rem" }} />
                       {t("footer.housing")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/jobs"
+                      to="/jobs"
                       style={{ color: "black" }}
                     >
                       <MdOutlineWork style={{ marginRight: ".5rem" }} />
                       {t("footer.jobs")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/dmv"
+                      to="/dmv"
                       style={{ color: "black" }}
                     >
                       <FaCar style={{ marginRight: ".5rem" }} />
                       {t("footer.dmv_services")}
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="/faith"
+                      to="/faith"
                       style={{ color: "black" }}
                     >
                       <TbBuildingChurch style={{ marginRight: ".5rem" }} />
                       {t("footer.faith_based_services")}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
