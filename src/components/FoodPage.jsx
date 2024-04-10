@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import food from "../assets/burger.png";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NavBar from "./NavBar";
 import Footer from "../pages/Footer";
@@ -20,7 +19,7 @@ const fetchData = async (setPlaces, coordinates) => {
         location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "food_banks",
-        keyword: "food_banks",
+        keyword: "food_banks"
       },
     });
 
@@ -30,7 +29,7 @@ const fetchData = async (setPlaces, coordinates) => {
       const detailsResponse = await axios.get(`${url}/placeDetails`, {
         params: {
           key: API_KEY,
-          place_id: placeIds.join(","),
+          place_id: placeIds.join(",")
         },
       });
 
@@ -99,7 +98,7 @@ console.log("FoodPage coordinates:", coordinates);
 
   const fetchDirections = async (destination) => {
     try {
-      const response = await axios.get("http://localhost:3001/api/directions", {
+      const response = await axios.get( `${url}/api/directions` , {
         params: {
           origin: `${coordinates.lat},${coordinates.lng}`,
           destination: `${destination.lat},${destination.lng}`
@@ -120,7 +119,7 @@ console.log("FoodPage coordinates:", coordinates);
 
   useEffect(() => {
     fetchData(setPlaces, coordinates);
-  }, [coordinates]);
+  }, []);
 
   return (
     <div>
