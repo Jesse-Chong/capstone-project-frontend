@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import car from "../assets/car.png";
 import { useTranslation } from "react-i18next";
@@ -45,7 +45,7 @@ const fetchData = async (setPlaces, coordinates) => {
   }
 };
 
-function DMVPage() {
+function DMVPage({ coordinates }) {
   const [isLoadingDirections, setIsLoadingDirections] = useState(false);
   const [visible, setVisible] = useState(3);
   const [places, setPlaces] = useState([]);
@@ -55,14 +55,23 @@ function DMVPage() {
   const [markerIcon, setMarkerIcon] = useState("");
   const [origin, setOrigin] = useState(null);
   const [showDirectionsButton, setShowDirectionsButton] = useState(false);
-  const [directions, setDirections] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const location = useLocation();
-  const coordinates = location.state?.coordinates || {
-    lat: 40.7128,
-    lng: -74.006,
-  };
+
+  useEffect(() => {
+    if (coordinates) {
+      fetchData(setPlaces, coordinates);
+      console.log(coordinates);
+    }
+  }, [coordinates]);
+
+  if (coordinates === null) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   function Loadmore() {
     setVisible(visible + 3);
@@ -106,7 +115,6 @@ function DMVPage() {
         },
       });
       console.log("Directions response:", response.data);
-      setDirections(response.data.routes[0].legs[0].steps);
       console.log("Directions state:", response.data.routes[0].legs[0].steps);
       setOrigin(coordinates);
     } catch (error) {
@@ -116,9 +124,6 @@ function DMVPage() {
     }
   };
 
-  useEffect(() => {
-    fetchData(setPlaces, coordinates);
-  }, []);
   return (
     <div>
       <NavBar />
@@ -147,8 +152,6 @@ function DMVPage() {
               showDirectionsButton={showDirectionsButton}
               handleDirectionsClick={handleDirectionsClick}
               origin={origin}
-              setDirections={setDirections}
-              directions={directions}
               isLoadingDirections={isLoadingDirections}
             />
           </div>

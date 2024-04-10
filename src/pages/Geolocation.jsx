@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 // const API_KEY = import.meta.env.VITE_API_KEY;
 
-function Geolocation({ userCoordinates, setUserCoordinates }) {
+function Geolocation({ setCoordinates }) {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -54,18 +54,20 @@ function Geolocation({ userCoordinates, setUserCoordinates }) {
                 });
 
                 const { latitude, longitude } = position.coords;
-                setUserCoordinates({ lat: latitude, lng: longitude });
+                setCoordinates({ lat: latitude, lng: longitude });
                 setIsLoading(false);
+                localStorage.setItem('geolocationAllowed', true);
                 navigate("/");
             } catch (error) {
                 console.error('Error fetching geolocation data:', error);
                 setIsLoading(false);
+                localStorage.setItem('geolocationAllowed', false);
                 navigate("/");
             }
         };
 
         getUserLocation();
-    }, [setUserCoordinates]);
+    }, [setCoordinates]);
     return (
         <div>
             {isLoading ? (

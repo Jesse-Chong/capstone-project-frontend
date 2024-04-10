@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import Scroll from "../components/Scroll";
 import { useNavigate } from "react-router-dom";
@@ -8,17 +7,31 @@ const boroughCoordinates = {
   queens: { lat: 40.7282, lng: -73.7949 },
   brooklyn: { lat: 40.6782, lng: -73.9442 },
   bronx: { lat: 40.8448, lng: -73.8648 },
-  statenIsland: { lat: 40.5795, lng: -74.1502 },
+  statenIsland: { lat: 40.5795, lng: -74.1502 }
 };
 
-function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPopup, setShowGeolocationPopup, userCoordinates, setUserCoordinates }) {
+function LandingPage({ setLanguageSelected, setCoordinates }) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLanguageSelected(true);
     navigate("/geolocation");
   }
-  const navigate = useNavigate();
+  const handleBoroughClick = (borough) => {
+    const geolocationAllowed = localStorage.getItem('geolocationAllowed') === 'true'
+    if (geolocationAllowed) {
+        // Use user's coordinates
+        navigate("/resources");
+    } else {
+        // Use coordinates of the selected borough
+        const selectedCoordinates = boroughCoordinates[borough];
+        setCoordinates(selectedCoordinates);
+        navigate("/resources");
+    }
+};
+
   return (
     <div>
       <div className="container">
@@ -64,7 +77,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("en")}
                       >
-                                             {t("language.english")} / English
+                        {t("language.english")} / English
                       </a>
                     </li>
                     <li>
@@ -82,7 +95,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("zh_CN")}
                       >
-                       {t("language.chinese")} / Chinese
+                        {t("language.chinese")} / Chinese
                       </a>
                     </li>
                     <li>
@@ -100,7 +113,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("ar")}
                       >
-                       {t("language.arabic")} / Arabic
+                        {t("language.arabic")} / Arabic
                       </a>
                     </li>
                     <li>
@@ -109,7 +122,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("fr")}
                       >
-                       {t("language.french")} / French
+                        {t("language.french")} / French
                       </a>
                     </li>
                     <li>
@@ -118,7 +131,7 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                         href="#"
                         onClick={() => changeLanguage("ru")}
                       >
-                       {t("language.russian")} / Russian
+                        {t("language.russian")} / Russian
                       </a>
                     </li>
                     <li>
@@ -160,70 +173,50 @@ function LandingPage({ languageSelected, setLanguageSelected, showGeolocationPop
                     style={{ width: "100%" }}
                   >
                     <li>
-                  <a
-                    className="dropdown-item fs-3 text-center"
-                    href="#"
-                    onClick={() => {
-                      const coordinates = userCoordinates || boroughCoordinates.manhattan;
-                      console.log("Selected coordinates:", coordinates);
-                      navigate("/resources", { state: { coordinates } });
-                    }}
-                  >
-                    {t("borough.manhattan")} / Manhattan
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item fs-3 text-center"
-                    href="#"
-                    onClick={() => {
-                      const coordinates = userCoordinates || boroughCoordinates.queens;
-                      console.log("Selected coordinates:", coordinates);
-                      navigate("/resources", { state: { coordinates } });
-                    }}
-                  >
-                    {t("borough.queens")} / Queens
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item fs-3 text-center"
-                    href="#"
-                    onClick={() => {
-                      const coordinates = userCoordinates || boroughCoordinates.brooklyn;
-                      console.log("Selected coordinates:", coordinates);
-                      navigate("/resources", { state: { coordinates } });
-                    }}
-                  >
-                    {t("borough.brooklyn")} / Brooklyn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item fs-3 text-center"
-                    href="#"
-                    onClick={() => {
-                      const coordinates = userCoordinates || boroughCoordinates.bronx
-                      console.log("Selected coordinates:", coordinates);
-                      navigate("/resources", { state: { coordinates } });
-                    }}
-                  >
-                    {t("borough.bronx")} / Bronx
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item fs-3 text-center"
-                    href="#"
-                    onClick={() => {
-                      const coordinates = userCoordinates || boroughCoordinates.statenIsland;
-                      console.log("Selected coordinates:", coordinates);
-                      navigate("/resources", { state: { coordinates } });
-                    }}
-                  >
-                    {t("borough.staten_island")} / Staten Island
-                  </a>
-                </li>
+                      <a
+                        className="dropdown-item fs-3 text-center"
+                        href="#"
+                        onClick={() => handleBoroughClick("manhattan")}
+                      >
+                        {t("borough.manhattan")} / Manhattan
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item fs-3 text-center"
+                        href="#"
+                        onClick={() => handleBoroughClick("queens")}
+                      >
+                        {t("borough.queens")} / Queens
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item fs-3 text-center"
+                        href="#"
+                        onClick={() => handleBoroughClick("brooklyn")}
+                      >
+                        {t("borough.brooklyn")} / Brooklyn
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item fs-3 text-center"
+                        href="#"
+                        onClick={() => handleBoroughClick("bronx")}
+                      >
+                        {t("borough.bronx")} / Bronx
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item fs-3 text-center"
+                        href="#"
+                        onClick={() => handleBoroughClick("statenIsland")}
+                      >
+                        {t("borough.staten_island")} / Staten Island
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
