@@ -22,6 +22,7 @@ import HelperFile from "./components/HelperFile";
 import FavNavBar from "./pages/FavNavBar";
 import Geolocation from "./pages/Geolocation";
 import Favorite from "./components/Favorite";
+import MyDocs from "./components/MyDocs";
 // import IndexFav from "./pages/IndexFav";
 // import ShowFav from "./pages/ShowFav";
 
@@ -88,6 +89,17 @@ function App() {
           element={
             <ProtectedRoute
               element={Favorite}
+              isAuthenticated={!!user && !!token}
+              user={user}
+              token={token}
+            />
+          }
+        />
+                       <Route
+          path="/favorite/mydocs"
+          element={
+            <ProtectedRoute
+              element={MyDocs}
               isAuthenticated={!!user && !!token}
               user={user}
               token={token}
