@@ -8,13 +8,12 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { LiaStarSolid } from "react-icons/lia";
 import { FaFolderPlus } from "react-icons/fa";
 import Scroll from "./Scroll";
+import Footer from "../pages/Footer";
 
-function favorite() {
+function favorite({user, token}) {
   const { t } = useTranslation();
   const [show, setShow] = useState([]);
-  console.log(show);
   const API = import.meta.env.VITE_BASE_URL;
-  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,27 +25,41 @@ function favorite() {
       let result = await axios.get(`${API}/favorite`);
       console.log(result.data);
       setShow(result.data);
-      console.log(show);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function deleteButton(id) {
+  async function addDoc(favoriteId) {
     try {
-      let result = await axios.delete(`${API}/favorite/${id}`);
-      console.log(result);
-      setShow(show.filter((item) => item.favorite_id !== id));
-      // const confirmDeleteBox = window.confirm(
-      //   `🚨 WAIT!!!!! Are you sure you want to 💥 delete 💥 ${item.name}? 🚨`
-      // );
-      // if (!confirmDeleteBox) {
-      //   return;
-      // }
-      navigate("/favorite");
+      const confirmAddBox = window.confirm(
+        `Document added!`
+      );
+      if (!confirmAddBox) {
+        return;
+      }
+      let myDoc = await axios.post(`${API}/users-favorites`, {user_id:user.user_id, favorite_id:favoriteId});
+     console.log(myDoc)
     } catch (error) {
       console.log(error);
     }
+  }
+
+  // async function deleteButton(id) {
+  //   try {
+  //     let result = await axios.delete(`${API}/favorite/${id}`);
+  //     console.log(result);
+  //     setShow(show.filter((item) => item.favorite_id !== id));
+  //     // const confirmDeleteBox = window.confirm(
+  //     //   `🚨 WAIT!!!!! Are you sure you want to 💥 delete 💥 ${item.name}? 🚨`
+  //     // );
+  //     // if (!confirmDeleteBox) {
+  //     //   return;
+  //     // }
+  //     navigate("/favorite");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
     // try {
     //   fetch(`${API}/favoritepractice/${id}`, {
     //     method: "DELETE",
@@ -60,7 +73,7 @@ function favorite() {
     // } catch (error) {
     //   return error;
     // }
-  }
+  //}
   // useEffect(() => {
   // function fetchOneFavorite() {
   //   try {
@@ -110,7 +123,7 @@ function favorite() {
             <th scope="col">{t("favorite.name")}</th>
             <th scope="col">{t("favorite.document")}</th>
             <th scope="col">Add Document</th>
-            <th scope="col">{t("favorite.delete")}</th>
+            {/* <th scope="col">{t("favorite.delete")}</th> */}
           </tr>
         </thead>
         <tbody>
@@ -146,11 +159,14 @@ function favorite() {
                 </td>
 
                 <td>
-                  <button style={{ textDecoration: "none", color: "black" }}>
+                  <button 
+                  onClick={() => addDoc(item.favorite_id)}
+                  // onClick={() => console.log(item.favorite_id)}
+                  style={{ textDecoration: "none", color: "black" }}>
                     Add <FaFolderPlus style={{ color: "green" }} />
                   </button>
                 </td>
-                <td>
+                {/* <td>
                   <button
                     onClick={() => deleteButton(item.favorite_id)}
                     style={{ color: "black" }}
@@ -158,13 +174,14 @@ function favorite() {
                     {t("favorite.favorite")}{" "}
                     <RiDeleteBin5Fill style={{ color: "red" }} />
                   </button>
-                </td>
+                </td> */}
               </tr>
             );
           })}
         </tbody>
       </table>
       <Scroll />
+      <Footer />
     </div>
   );
 }
