@@ -7,12 +7,12 @@ import {
   useJsApiLoader,
   InfoWindow,
   DirectionsService,
-  DirectionsRenderer,
+  DirectionsRenderer
 } from "@react-google-maps/api";
 
 const containerStyle = {
   width: "100%",
-  height: "600px",
+  height: "600px"
 };
 
 const libraries = ["places", "routes"];
@@ -30,11 +30,8 @@ const GoogleMapsComponent = ({
   origin,
   showDirectionsButton,
   handleDirectionsClick,
-  directions,
-  setDirections,
-  isLoadingDirections,
+  isLoadingDirections
 }) => {
-  // console.log("Directions prop in GoogleMapsComponent:", directions);
   const { t } = useTranslation();
   const [directionsInfo, setDirectionsInfo] = useState([]);
   const [travelMode, setTravelMode] = useState("DRIVING");
@@ -42,12 +39,12 @@ const GoogleMapsComponent = ({
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
-    libraries: libraries,
+    libraries: libraries
   });
 
   const center = {
     lat: coordinates.lat,
-    lng: coordinates.lng,
+    lng: coordinates.lng
   };
 
   const [response, setResponse] = useState(null);
@@ -71,7 +68,7 @@ const GoogleMapsComponent = ({
             ""
           ),
           distance: step.distance.text,
-          duration: step.duration.text,
+          duration: step.duration.text
         }));
         console.log(directionsSteps);
         setDirectionsInfo(formattedDirections);
@@ -162,7 +159,7 @@ const GoogleMapsComponent = ({
             key={place.place_id}
             position={{
               lat: place.geometry.location.lat,
-              lng: place.geometry.location.lng,
+              lng: place.geometry.location.lng
             }}
             title={place.name}
             onClick={() => handleMarkerClick(place)}
@@ -173,7 +170,7 @@ const GoogleMapsComponent = ({
           <InfoWindow
             position={{
               lat: selectedPlace.geometry.location.lat,
-              lng: selectedPlace.geometry.location.lng,
+              lng: selectedPlace.geometry.location.lng
             }}
             onCloseClick={handleCloseInfoWindow}
           >
@@ -262,10 +259,10 @@ const GoogleMapsComponent = ({
         {origin && selectedPlace && (
           <DirectionsService
             options={{
-              origin: `${origin.lat},${origin.lng}`,
+              origin: `${coordinates.lat},${coordinates.lng}`,
               destination: `${selectedPlace.geometry.location.lat},${selectedPlace.geometry.location.lng}`,
               travelMode: travelMode,
-              provideRouteAlternatives: true,
+              provideRouteAlternatives: true
             }}
             callback={directionsCallback}
           />

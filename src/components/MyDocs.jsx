@@ -61,49 +61,53 @@ function MyDocs({ user, token }) {
         {user.first_name} {user.last_name}'s Saved Documents
       </h2>
       <div className="container">
-        <table className="table table-hover table-bordered text-center my-5 max-auto">
-          <thead className="fs-3" style={{ backgroundColor: "#38b6ff" }}>
-            <tr>
-              <th scope="col">{t("favorite.category")}</th>
-              <th scope="col">{t("favorite.name")}</th>
-              <th scope="col">{t("favorite.document")}</th>
-              <th scope="col">{t("favorite.delete")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userFav.map((el) => {
-              return (
-                <tr key={el.index}>
-                  <td>{el.category}</td>
-                  <td>{el.name}</td>
-                  <td>
-                    <button>
-                      <a
-                        href={el.image}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{ textDecoration: "none", color: "black" }}
+        <div className="table-responsive">
+          <table className="table table-hover table-bordered text-center my-5 mx-auto">
+            <thead className="fs-3" style={{ backgroundColor: "#38b6ff" }}>
+              <tr>
+                <th scope="col">{t("favorite.category")}</th>
+                <th scope="col">{t("favorite.name")}</th>
+                <th scope="col">{t("favorite.document")}</th>
+                <th scope="col">{t("favorite.delete")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userFav.map((el) => {
+                return (
+                  <tr key={el.index}>
+                    <td>{el.category}</td>
+                    <td>{el.name}</td>
+                    <td>
+                      <button>
+                        <a
+                          href={el.image}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          <BiSolidPrinter style={{ color: "#38b6ff" }} />{" "}
+                          {t("favorite.print_/_download")}{" "}
+                          <RiFileDownloadFill style={{ color: "#38b6ff" }} />
+                        </a>
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          deleteUserFav(el.user_id, el.favorite_id)
+                        }
+                        style={{ color: "black" }}
                       >
-                        <BiSolidPrinter style={{ color: "#38b6ff" }} />{" "}
-                        {t("favorite.print_/_download")}{" "}
-                        <RiFileDownloadFill style={{ color: "#38b6ff" }} />
-                      </a>
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => deleteUserFav(el.user_id, el.favorite_id)}
-                      style={{ color: "black" }}
-                    >
-                      {t("favorite.favorite")}{" "}
-                      <RiDeleteBin5Fill style={{ color: "red" }} />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                        {t("favorite.favorite")}{" "}
+                        <RiDeleteBin5Fill style={{ color: "red" }} />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
       <button className="m-5">
         <Link

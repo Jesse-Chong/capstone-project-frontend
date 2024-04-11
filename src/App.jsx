@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense } from "react";
 import HomePage from "./pages/HomePage";
@@ -29,9 +29,23 @@ import MyDocs from "./components/MyDocs";
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [languageSelected, setLanguageSelected] = useState(false); // State to track
-  const [showGeolocationPopup, setShowGeolocationPopup] = useState(false); // State to track geolocation popup
-  const [userCoordinates, setUserCoordinates] = useState(null);
+  const [languageSelected, setLanguageSelected] = useState(false);
+  const [coordinates, setCoordinates] = useState(null);
+
+    // Load coordinates from local storage on initial render
+    useEffect(() => {
+      const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'));
+      if (storedCoordinates) {
+        setCoordinates(storedCoordinates);
+      }
+    }, []);
+  
+    // Update coordinates in local storage whenever it changes
+    useEffect(() => {
+      if (coordinates) {
+        localStorage.setItem('coordinates', JSON.stringify(coordinates));
+      }
+    }, [coordinates]);
 
   return (
     <Router>
@@ -42,8 +56,8 @@ function App() {
           path="/geolocation"
           element={
             <Geolocation
-              userCoordinates={userCoordinates}
-              setUserCoordinates={setUserCoordinates}
+            setCoordinates={setCoordinates}
+            coordinates={coordinates}
             />
           }
         />
@@ -51,26 +65,22 @@ function App() {
           path="/"
           element={
             <LandingPage
-              userCoordinates={userCoordinates}
-              setUserCoordinates={setUserCoordinates}
-              languageSelected={languageSelected}
               setLanguageSelected={setLanguageSelected}
-              showGeolocationPopup={showGeolocationPopup}
-              setShowGeolocationPopup={setShowGeolocationPopup}
+              setCoordinates={setCoordinates}
             />
           }
         />
-        <Route path="/resources" element={<HomePage />} />
+        <Route path="/resources" element={<HomePage coordinates={coordinates}/>} />
         <Route path="/details" element={<ShowDetailsPage />} />
-        <Route path="/food" element={<FoodPage />} />
-        <Route path="/jobs" element={<JobsPage />} />
-        <Route path="/banking" element={<BankingPage />} />
-        <Route path="/dmv" element={<DMVPage />} />
-        <Route path="/education" element={<EducationPage />} />
-        <Route path="/faith" element={<FaithPage />} />
-        <Route path="/government" element={<GovernmentPage />} />
-        <Route path="/healthcare" element={<HealthcarePage />} />
-        <Route path="/housing" element={<HousingPage />} />
+        <Route path="/food" element={<FoodPage coordinates={coordinates}/>} />
+        <Route path="/jobs" element={<JobsPage coordinates={coordinates}/>} />
+        <Route path="/banking" element={<BankingPage coordinates={coordinates}/>} />
+        <Route path="/dmv" element={<DMVPage coordinates={coordinates}/>} />
+        <Route path="/education" element={<EducationPage coordinates={coordinates}/>} />
+        <Route path="/faith" element={<FaithPage coordinates={coordinates}/>} />
+        <Route path="/government" element={<GovernmentPage coordinates={coordinates}/>} />
+        <Route path="/healthcare" element={<HealthcarePage coordinates={coordinates}/>} />
+        <Route path="/housing" element={<HousingPage coordinates={coordinates} />} />
         <Route path="/helperfile" element={<HelperFile />} />
         {/* <Route path="/favoritepractice" element={<FavoritePractice />} /> */}
         {/* <Route path="/favorite/:id" element={<ShowFav />} /> */}
