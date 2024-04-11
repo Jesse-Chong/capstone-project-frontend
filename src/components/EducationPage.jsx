@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import GoogleMaps from "./GoogleMaps";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import education from "../assets/education.png";
 import { useTranslation } from "react-i18next";
@@ -45,7 +45,7 @@ const fetchData = async (setPlaces, coordinates) => {
   }
 };
 
-function EducationPage() {
+function EducationPage({ coordinates }) {
   const [isLoadingDirections, setIsLoadingDirections] = useState(false);
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState([]);
@@ -58,11 +58,21 @@ function EducationPage() {
   const [directions, setDirections] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const location = useLocation();
-  const coordinates = location.state?.coordinates || {
-    lat: 40.7128,
-    lng: -74.006,
-  };
+
+  useEffect(() => {
+    if (coordinates) {
+      fetchData(setPlaces, coordinates);
+      console.log(coordinates);
+    }
+  }, [coordinates]);
+
+  if (coordinates === null) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   function Loadmore() {
     setVisible(visible + 3);
@@ -116,10 +126,6 @@ function EducationPage() {
     }
   };
 
-  useEffect(() => {
-    fetchData(setPlaces, coordinates);
-  }, []);
-
   return (
     <div>
       <NavBar />
@@ -148,8 +154,6 @@ function EducationPage() {
               showDirectionsButton={showDirectionsButton}
               handleDirectionsClick={handleDirectionsClick}
               origin={origin}
-              setDirections={setDirections}
-              directions={directions}
               isLoadingDirections={isLoadingDirections}
             />
           </div>
