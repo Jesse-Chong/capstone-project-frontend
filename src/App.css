@@ -101,6 +101,12 @@ button:hover {
   display: inline-block;
 }
 
+.sticky-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 /* dropdown, table */
 
 .dropdown-item:hover,

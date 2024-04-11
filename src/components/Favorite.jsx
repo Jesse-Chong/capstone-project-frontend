@@ -116,23 +116,24 @@ function favorite({ user, token }) {
     <div>
       <h2 className="m-5">{t("favorite.available_documents")}</h2>
       <div className="container">
-        <table className="table table-hover table-bordered text-center my-5 mx-auto">
-          <thead className="fs-3" style={{ backgroundColor: "#38b6ff" }}>
-            <tr>
-              {/* <th scope="col">{t("favorite.number")}</th>
+        <div className="table-responsive">
+          <table className="table table-hover table-bordered text-center my-5 mx-auto">
+            <thead className="fs-3" style={{ backgroundColor: "#38b6ff" }}>
+              <tr>
+                {/* <th scope="col">{t("favorite.number")}</th>
             <th scope="col">{t("favorite.favorite")}</th> */}
-              <th scope="col">{t("favorite.category")}</th>
-              <th scope="col">{t("favorite.name")}</th>
-              <th scope="col">{t("favorite.document")}</th>
-              <th scope="col">Add Document</th>
-              {/* <th scope="col">{t("favorite.delete")}</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {show.map((item, index) => {
-              return (
-                <tr key={index} className="table-row">
-                  {/* <td>{item.favorite_id}</td>
+                <th scope="col">{t("favorite.category")}</th>
+                <th scope="col">{t("favorite.name")}</th>
+                <th scope="col">{t("favorite.document")}</th>
+                <th scope="col">Add Document</th>
+                {/* <th scope="col">{t("favorite.delete")}</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {show.map((item, index) => {
+                return (
+                  <tr key={index} className="table-row">
+                    {/* <td>{item.favorite_id}</td>
                 <td>
                   {item.is_favorite ? (
                     <span>
@@ -142,34 +143,34 @@ function favorite({ user, token }) {
                     <span>{""}</span>
                   )}
                 </td> */}
-                  <td>{item.category}</td>
-                  <td>{item.name}</td>
+                    <td>{item.category}</td>
+                    <td>{item.name}</td>
 
-                  <td>
-                    <button>
-                      <a
-                        href={item.image}
-                        target="_blank"
-                        rel="noreferrer"
+                    <td>
+                      <button>
+                        <a
+                          href={item.image}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          <BiSolidPrinter style={{ color: "#38b6ff" }} />{" "}
+                          {t("favorite.print_/_download")}{" "}
+                          <RiFileDownloadFill style={{ color: "#38b6ff" }} />
+                        </a>
+                      </button>
+                    </td>
+
+                    <td>
+                      <button
+                        onClick={() => addDoc(item.favorite_id)}
+                        // onClick={() => console.log(item.favorite_id)}
                         style={{ textDecoration: "none", color: "black" }}
                       >
-                        <BiSolidPrinter style={{ color: "#38b6ff" }} />{" "}
-                        {t("favorite.print_/_download")}{" "}
-                        <RiFileDownloadFill style={{ color: "#38b6ff" }} />
-                      </a>
-                    </button>
-                  </td>
-
-                  <td>
-                    <button
-                      onClick={() => addDoc(item.favorite_id)}
-                      // onClick={() => console.log(item.favorite_id)}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      Add <FaFolderPlus style={{ color: "green" }} />
-                    </button>
-                  </td>
-                  {/* <td>
+                        Add <FaFolderPlus style={{ color: "green" }} />
+                      </button>
+                    </td>
+                    {/* <td>
                   <button
                     onClick={() => deleteButton(item.favorite_id)}
                     style={{ color: "black" }}
@@ -178,11 +179,12 @@ function favorite({ user, token }) {
                     <RiDeleteBin5Fill style={{ color: "red" }} />
                   </button>
                 </td> */}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
       <Scroll />
       <Footer />
