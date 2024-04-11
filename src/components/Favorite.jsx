@@ -125,7 +125,7 @@ function favorite({ user, token }) {
                 <th scope="col">{t("favorite.category")}</th>
                 <th scope="col">{t("favorite.name")}</th>
                 <th scope="col">{t("favorite.document")}</th>
-                <th scope="col">Add Document</th>
+                <th scope="col">{t("favorite.add_document")}</th>
                 {/* <th scope="col">{t("favorite.delete")}</th> */}
               </tr>
             </thead>
@@ -167,7 +167,8 @@ function favorite({ user, token }) {
                         // onClick={() => console.log(item.favorite_id)}
                         style={{ textDecoration: "none", color: "black" }}
                       >
-                        Add <FaFolderPlus style={{ color: "green" }} />
+                        {t("favorite.add")}{" "}
+                        <FaFolderPlus style={{ color: "green" }} />
                       </button>
                     </td>
                     {/* <td>

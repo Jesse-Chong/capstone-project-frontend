@@ -7,12 +7,12 @@ import {
   useJsApiLoader,
   InfoWindow,
   DirectionsService,
-  DirectionsRenderer
+  DirectionsRenderer,
 } from "@react-google-maps/api";
 
 const containerStyle = {
   width: "100%",
-  height: "600px"
+  height: "600px",
 };
 
 const libraries = ["places", "routes"];
@@ -30,8 +30,11 @@ const GoogleMapsComponent = ({
   origin,
   showDirectionsButton,
   handleDirectionsClick,
-  isLoadingDirections
+  directions,
+  setDirections,
+  isLoadingDirections,
 }) => {
+  // console.log("Directions prop in GoogleMapsComponent:", directions);
   const { t } = useTranslation();
   const [directionsInfo, setDirectionsInfo] = useState([]);
   const [travelMode, setTravelMode] = useState("DRIVING");
@@ -39,12 +42,12 @@ const GoogleMapsComponent = ({
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
-    libraries: libraries
+    libraries: libraries,
   });
 
   const center = {
     lat: coordinates.lat,
-    lng: coordinates.lng
+    lng: coordinates.lng,
   };
 
   const [response, setResponse] = useState(null);
@@ -68,7 +71,7 @@ const GoogleMapsComponent = ({
             ""
           ),
           distance: step.distance.text,
-          duration: step.duration.text
+          duration: step.duration.text,
         }));
         console.log(directionsSteps);
         setDirectionsInfo(formattedDirections);
@@ -159,7 +162,7 @@ const GoogleMapsComponent = ({
             key={place.place_id}
             position={{
               lat: place.geometry.location.lat,
-              lng: place.geometry.location.lng
+              lng: place.geometry.location.lng,
             }}
             title={place.name}
             onClick={() => handleMarkerClick(place)}
@@ -170,7 +173,7 @@ const GoogleMapsComponent = ({
           <InfoWindow
             position={{
               lat: selectedPlace.geometry.location.lat,
-              lng: selectedPlace.geometry.location.lng
+              lng: selectedPlace.geometry.location.lng,
             }}
             onCloseClick={handleCloseInfoWindow}
           >
@@ -259,10 +262,10 @@ const GoogleMapsComponent = ({
         {origin && selectedPlace && (
           <DirectionsService
             options={{
-              origin: `${coordinates.lat},${coordinates.lng}`,
+              origin: `${origin.lat},${origin.lng}`,
               destination: `${selectedPlace.geometry.location.lat},${selectedPlace.geometry.location.lng}`,
               travelMode: travelMode,
-              provideRouteAlternatives: true
+              provideRouteAlternatives: true,
             }}
             callback={directionsCallback}
           />
@@ -271,18 +274,34 @@ const GoogleMapsComponent = ({
       </GoogleMap>
       {directionsInfo.length > 0 && (
         <div>
-          <h3>Directions:</h3>
-          <ol>
-            {directionsInfo.map((direction) => (
-              <li key={direction.key}>
-                <div>{direction.instruction}</div>
-                <div>Distance: {direction.distance}</div>
-                <div>Duration: {direction.duration}</div>
-              </li>
-            ))}
-          </ol>
+          <h3 className="mt-3" style={{ color: "#38B6FF" }}>
+            Directions:
+          </h3>
+          {/* <ol> */}
+          {directionsInfo.map((direction, index) => (
+            // <li key={direction.key}>
+            <div className="card h-100 p-2">
+              <div className="card-body" style={{ color: "#38B6FF" }}>
+                <p>
+                  <span className="fw-bold">Step{index + 1}</span> -{" "}
+                  {direction.instruction}
+                </p>
+                <p>
+                  <span className="fw-bold">Distance:</span>{" "}
+                  {direction.distance}
+                </p>
+                <p>
+                  <span className="fw-bold">Duration:</span>{" "}
+                  {direction.duration}
+                </p>
+              </div>
+            </div>
+            // </li>
+          ))}
+          {/* </ol> */}
         </div>
       )}
+
       <HelperFile
         selectedPlace={selectedPlace}
         selectedPlaceDetails={selectedPlaceDetails}
