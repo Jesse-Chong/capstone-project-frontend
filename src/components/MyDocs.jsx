@@ -58,7 +58,7 @@ function MyDocs({ user, token }) {
   return (
     <div>
       <h2 className="m-5">
-        {user.first_name} {user.last_name}'s Saved Documents
+        {user.first_name} {user.last_name}'s {t("mydoc.saved_documents")}
       </h2>
       <div className="container">
         <div className="table-responsive">
@@ -98,7 +98,7 @@ function MyDocs({ user, token }) {
                         }
                         style={{ color: "black" }}
                       >
-                        {t("favorite.favorite")}{" "}
+                        {t("favorite.delete")}{" "}
                         <RiDeleteBin5Fill style={{ color: "red" }} />
                       </button>
                     </td>
@@ -114,7 +114,7 @@ function MyDocs({ user, token }) {
           to={"/favorite"}
           style={{ textDecoration: "none", color: "black" }}
         >
-          Back To Documents
+          {t("mydoc.back_to_documents")}
         </Link>
       </button>
       <Scroll />

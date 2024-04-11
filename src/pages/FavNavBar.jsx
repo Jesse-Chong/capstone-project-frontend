@@ -53,7 +53,7 @@ const FavNavBar = ({ user, setUser, setToken }) => {
               id="navbarNavAltMarkup"
             >
               <h2 className="d-flex justify-content-center">
-                Welcome {user.first_name} {user.last_name}
+                {t("favorite.welcome")} {user.first_name} {user.last_name}
               </h2>
               <div className="navbar-nav">
                 <button className="m-3">
@@ -61,11 +61,11 @@ const FavNavBar = ({ user, setUser, setToken }) => {
                     to="/favorite/mydocs"
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    My Saved Documents
+                    {t("favorite.my_saved_documents")}
                   </Link>
                 </button>
                 <button className="m-3" onClick={handleLogout}>
-                  Log Out
+                  {t("favorite.log_out")}
                 </button>
               </div>
             </div>
