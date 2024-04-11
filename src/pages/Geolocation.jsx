@@ -72,7 +72,7 @@ function Geolocation({ setCoordinates }) {
         <div>
             {isLoading ? (
                 <div>
-                    <img src="/loading.gif" alt="Loading" />
+                    <img src="/giphy.gif" alt="Loading" height="500" width="500"/>
                 </div>
             ) : (
                 <h1>Loading...</h1>
