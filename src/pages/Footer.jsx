@@ -17,9 +17,9 @@ import { TbBuildingChurch } from "react-icons/tb";
 function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="sticky-bottom">
+    <footer className="sticky-footer">
       <nav
-        className="navbar sticky-bottom navbar navbar-dark"
+        className="navbar navbar-dark"
         style={{ backgroundColor: "#38B6FF" }}
       >
         <div className="container-fluid">
