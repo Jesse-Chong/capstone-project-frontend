@@ -237,7 +237,8 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                 <div className="ratio ratio-16x9">
                   <iframe
                     className="shadow-1-strong rounded"
-                    src="https://www.youtube.com/embed/RGJr6NCLMbc?si=Wrh2DF-1_0EY8Sat"
+                    src="https://www.youtube.com/embed/Q_XRlBqh0EU?si=UXhJSUMRxWXwrba_"
+                    //https://youtu.be/Q_XRlBqh0EU?si=UXhJSUMRxWXwrba_
                     title="YouTube video"
                     allowFullScreen
                   ></iframe>
