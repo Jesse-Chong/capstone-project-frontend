@@ -1,6 +1,7 @@
 import HelperFile from "./HelperFile";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useCallback } from "react";
+
 import {
   GoogleMap,
   Marker,
@@ -126,7 +127,7 @@ const GoogleMapsComponent = ({
 
   return isLoaded ? (
     <>
-      <div>
+      {/* <div>
         <label htmlFor="travelMode">{t("map.travel_mode")}:</label>
         <select
           id="travelMode"
@@ -154,7 +155,112 @@ const GoogleMapsComponent = ({
             <option value="RAIL">{t("map.rail")}</option>
           </select>
         </div>
-      )}
+      )} */}
+
+      <div className="row">
+        <div className="col-md-6 mb-3">
+          <div className="btn-group">
+            <button
+              type="button"
+              className="button dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {t("map.travel_mode")}
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <button
+                  className="dropdown-item text-center"
+                  onClick={() => handleTravelModeChange("DRIVING")}
+                >
+                  {t("map.driving")}
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item text-center"
+                  onClick={() => handleTravelModeChange("TRANSIT")}
+                >
+                  {t("map.transit")}
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item text-center"
+                  onClick={() => handleTravelModeChange("BICYCLING")}
+                >
+                  {t("map.bicycling")}
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item text-center"
+                  onClick={() => handleTravelModeChange("WALKING")}
+                >
+                  {t("map.walking")}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {travelMode === "TRANSIT" && (
+          <div className="col-md-6 mb-3">
+            <div className="btn-group">
+              <button
+                type="button"
+                className="button dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {t("map.transit_mode")}
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button
+                    className="dropdown-item text-center"
+                    onClick={() => handleTransitModeChange("BUS")}
+                  >
+                    {t("map.bus")}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item text-center"
+                    onClick={() => handleTransitModeChange("SUBWAY")}
+                  >
+                    {t("map.subway")}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item text-center"
+                    onClick={() => handleTransitModeChange("TRAIN")}
+                  >
+                    {t("map.train")}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item text-center"
+                    onClick={() => handleTransitModeChange("TRAM")}
+                  >
+                    {t("map.tram")}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item text-center"
+                    onClick={() => handleTransitModeChange("RAIL")}
+                  >
+                    {t("map.rail")}
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
 
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
         {places.map((place) => (
@@ -181,14 +287,14 @@ const GoogleMapsComponent = ({
               {selectedPlaceDetails ? (
                 <>
                   <p>
-                    <span className="fw-bold border fs-6">
+                    <span className="fw-bold fs-6">
                       {" "}
                       {t("infoWindow.name")}:
                     </span>{" "}
                     {selectedPlaceDetails.name}
                   </p>
                   <p>
-                    <span className="fw-bold border fs-6">
+                    <span className="fw-bold fs-6">
                       {" "}
                       {t("infoWindow.address")}:
                     </span>
@@ -235,13 +341,13 @@ const GoogleMapsComponent = ({
                     </>
                   )}
 
-                  {selectedPlaceDetails.photos &&
+                  {/* {selectedPlaceDetails.photos &&
                     selectedPlaceDetails.photos.length > 0 && (
                       <img
                         src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=${selectedPlaceDetails.photos[0].photo_reference}&key=${apiKey}`}
                         alt="Place Photo"
                       />
-                    )}
+                    )} */}
                 </>
               ) : (
                 <p>{t("infoWindow.noDetails")}</p>
