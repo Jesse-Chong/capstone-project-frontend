@@ -74,7 +74,7 @@ function MyDocs({ user, token }) {
             <tbody>
               {userFav.map((el) => {
                 return (
-                  <tr key={el.index}>
+                  <tr key={el.index} className="table-row">
                     <td>{el.category}</td>
                     <td>{el.name}</td>
                     <td>
