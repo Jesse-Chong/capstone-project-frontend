@@ -58,7 +58,9 @@ function MyDocs({ user, token }) {
   return (
     <div>
       <h2 className="m-5">
-        {user.first_name} {user.last_name}'s {t("mydoc.saved_documents")}
+        <span className="fs-1">{user.first_name}</span>{" "}
+        <span className="fs-3">{user.last_name}</span>'s{" "}
+        {t("mydoc.saved_documents")}
       </h2>
       <div className="container">
         <div className="table-responsive">
