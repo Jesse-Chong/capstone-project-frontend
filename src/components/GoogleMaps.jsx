@@ -64,16 +64,48 @@ const GoogleMapsComponent = ({
         setResponse(res);
         // Extract the directions information
         const directionsSteps = res.routes[0].legs[0].steps;
-        const formattedDirections = directionsSteps.map((step, index) => ({
-          key: index,
-          // Regex is used to remove the <b> that google uses to bold text and <div> google uses to change font
-          instruction: step.instructions.replace(
+        const formattedDirections = directionsSteps.map((step, index) => {
+          let instruction = step.instructions.replace(
             /<\/?(?:b|div[^>]*?|wbr\/?)>/g,
             ""
-          ),
-          distance: step.distance.text,
-          duration: step.duration.text,
-        }));
+          );
+    
+          // Replace direction phrases with translation keys
+          instruction = instruction
+            .replace(/Continue onto/g, t("directions.continue_onto"))
+            .replace(/Destination will be on the left/g, t("directions.destination_will_be_on_the_left"))
+            .replace(/Destination will be on the right/g, t("directions.destination_will_be_on_the_right"))
+            .replace(/Head east/g, t("directions.head_east"))
+            .replace(/Head east on/g, t("directions.head_east_on"))
+            .replace(/Head north/g, t("directions.head_north"))
+            .replace(/Head north on/g, t("directions.head_north_on"))
+            .replace(/Head south/g, t("directions.head_south"))
+            .replace(/Head south on/g, t("directions.head_south_on"))
+            .replace(/Head west/g, t("directions.head_west"))
+            .replace(/Head west on/g, t("directions.head_west_on"))
+            .replace(/Keep left/g, t("directions.keep_left"))
+            .replace(/Keep right/g, t("directions.keep_right"))
+            .replace(/Merge onto/g, t("directions.merge_onto"))
+            .replace(/To stay on/g, t("directions.to_stay_on"))
+            .replace(/towards/g, t("directions.towards"))
+            .replace(/Turn left at the/g, t("directions.turn_left_at_the"))
+            .replace(/Turn left onto/g, t("directions.turn_left_onto"))
+            .replace(/Turn left to merge/g, t("directions.turn_left_to_merge"))
+            .replace(/Turn left to merge onto/g, ("directions.turn_left_to_merge_onto"))
+            .replace(/Turn left towards/g, t("directions.turn_left_towards"))
+            .replace(/Turn right at the/g, t("directions.turn_right_at_the"))
+            .replace(/Turn right onto/g, t("directions.turn_right_onto"))
+            .replace(/Turn right to merge/g, t("directions.turn_right_to_merge"))
+            .replace(/Turn right to merge onto/g, t("directions.turn_right_to_merge_onto"))
+            .replace(/Turn right towards/g, t("directions.turn_right_towards"));
+    
+          return {
+            key: index,
+            instruction,
+            distance: step.distance.text,
+            duration: step.duration.text,
+          };
+        });
         console.log(directionsSteps);
         setDirectionsInfo(formattedDirections);
       } else {
