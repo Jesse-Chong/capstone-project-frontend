@@ -19,7 +19,7 @@ const fetchData = async (setPlaces, coordinates) => {
         location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "food_banks",
-        keyword: "food_banks"
+        keyword: "food_banks",
       },
     });
 
@@ -29,7 +29,7 @@ const fetchData = async (setPlaces, coordinates) => {
       const detailsResponse = await axios.get(`${url}/placeDetails`, {
         params: {
           key: API_KEY,
-          place_id: placeIds.join(",")
+          place_id: placeIds.join(","),
         },
       });
 
@@ -72,7 +72,6 @@ function FoodPage({ coordinates }) {
       </div>
     );
   }
-  
 
   function Loadmore() {
     setVisible(visible + 3);
@@ -109,10 +108,10 @@ function FoodPage({ coordinates }) {
 
   const fetchDirections = async (destination) => {
     try {
-      const response = await axios.get( `${url}/api/directions` , {
+      const response = await axios.get(`${url}/api/directions`, {
         params: {
           origin: `${coordinates.lat},${coordinates.lng}`,
-          destination: `${destination.lat},${destination.lng}`
+          destination: `${destination.lat},${destination.lng}`,
         },
       });
       console.log("Directions response:", response.data);
@@ -135,29 +134,29 @@ function FoodPage({ coordinates }) {
             setMarkerIcon(food);
           }}
         >
-          Food Banks
+          {t("food.food_banks")}
         </button>
         <div className="row">
           <div className="col-md-6 mt-3">
-          <GoogleMaps
-            key={`${coordinates.lat},${coordinates.lng}`}
-      places={places}
-      apiKey={API_KEY}
-      markerIcon={markerIcon}
-      selectedPlace={selectedPlace}
-      setSelectedPlace={setSelectedPlace}
-      selectedPlaceDetails={selectedPlaceDetails}
-      setSelectedPlaceDetails={setSelectedPlaceDetails}
-      handlePlaceClick={handlePlaceClick}
-      coordinates={coordinates}
-      showDirectionsButton={showDirectionsButton}
-      handleDirectionsClick={handleDirectionsClick}
-      origin={origin}
-      isLoadingDirections={isLoadingDirections}
+            <GoogleMaps
+              key={`${coordinates.lat},${coordinates.lng}`}
+              places={places}
+              apiKey={API_KEY}
+              markerIcon={markerIcon}
+              selectedPlace={selectedPlace}
+              setSelectedPlace={setSelectedPlace}
+              selectedPlaceDetails={selectedPlaceDetails}
+              setSelectedPlaceDetails={setSelectedPlaceDetails}
+              handlePlaceClick={handlePlaceClick}
+              coordinates={coordinates}
+              showDirectionsButton={showDirectionsButton}
+              handleDirectionsClick={handleDirectionsClick}
+              origin={origin}
+              isLoadingDirections={isLoadingDirections}
             />
           </div>
           <div className="col-md-6">
-          {places.slice(0, visible).map((item) => {
+            {places.slice(0, visible).map((item) => {
               // console.log(places);
               return (
                 <div
@@ -170,7 +169,9 @@ function FoodPage({ coordinates }) {
                     <div className="card-body" style={{ color: "#38B6FF" }}>
                       <span className="fw-bold ">{t("infoWindow.name")} </span>
                       <p className="card-title">{item.name}</p>
-                      <span className="fw-bold">{t("infowindow.currently")} </span>
+                      <span className="fw-bold">
+                        {t("infowindow.currently")}{" "}
+                      </span>
                       {item.opening_hours?.open_now ? "Open Now" : "Closed"}
                     </div>
                   </div>
@@ -179,15 +180,18 @@ function FoodPage({ coordinates }) {
             })}
             {visible < places.length && (
               <button type="button" className="m-5" onClick={Loadmore}>
-                LOAD MORE
+                {t("all.load_more")}
               </button>
             )}
           </div>
         </div>
       </div>
       <button className="m-5">
-        <Link to={"/resources"} style={{ textDecoration: "none", color: "black" }}>
-          Back
+        <Link
+          to={"/resources"}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          {t("all.back")}
         </Link>
       </button>
       <Scroll />

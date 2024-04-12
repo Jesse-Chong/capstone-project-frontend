@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function HelperFile({ selectedPlaceDetails }) {
+  const { t } = useTranslation();
   const [showDetails, setShowDetails] = useState(false);
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -8,7 +10,7 @@ function HelperFile({ selectedPlaceDetails }) {
     <div>
       {!selectedPlaceDetails ? (
         <button className="mt-3 mb-3">
-          Click on the marker to view place details
+          {t("all.click_on_the_marker_to_view_place_details")}
         </button>
       ) : (
         <div>
@@ -74,7 +76,7 @@ function HelperFile({ selectedPlaceDetails }) {
                       )}
                     </>
                   )}
-                  {selectedPlaceDetails.photos &&
+                  {/* {selectedPlaceDetails.photos &&
                     selectedPlaceDetails.photos.length > 0 && (
                       <li
                         className="list-group-item"
@@ -85,7 +87,7 @@ function HelperFile({ selectedPlaceDetails }) {
                           alt="Place Photo"
                         />
                       </li>
-                    )}
+                    )} */}
                 </ul>
               </div>
             </div>

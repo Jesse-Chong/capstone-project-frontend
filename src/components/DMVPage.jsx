@@ -19,7 +19,7 @@ const fetchData = async (setPlaces, coordinates) => {
         location: `${coordinates.lat},${coordinates.lng}`,
         radius: "5000",
         type: "department_of_motor_vehicles",
-        keyword: "DMV"
+        keyword: "DMV",
       },
     });
 
@@ -29,7 +29,7 @@ const fetchData = async (setPlaces, coordinates) => {
       const detailsResponse = await axios.get(`${url}/placeDetails`, {
         params: {
           key: API_KEY,
-          place_id: placeIds.join(",")
+          place_id: placeIds.join(","),
         },
       });
 
@@ -108,10 +108,10 @@ function DMVPage({ coordinates }) {
 
   const fetchDirections = async (destination) => {
     try {
-      const response = await axios.get( `${url}/api/directions` , {
+      const response = await axios.get(`${url}/api/directions`, {
         params: {
           origin: `${coordinates.lat},${coordinates.lng}`,
-          destination: `${destination.lat},${destination.lng}`
+          destination: `${destination.lat},${destination.lng}`,
         },
       });
       console.log("Directions response:", response.data);
@@ -134,12 +134,12 @@ function DMVPage({ coordinates }) {
             setMarkerIcon(car);
           }}
         >
-          DMV
+          {t("favorite.dmv")}
         </button>
         <div className="row">
           <div className="col-md-6 mt-3">
             <GoogleMaps
-                key={`${coordinates.lat},${coordinates.lng}`}
+              key={`${coordinates.lat},${coordinates.lng}`}
               places={places}
               apiKey={API_KEY}
               markerIcon={markerIcon}
@@ -167,9 +167,11 @@ function DMVPage({ coordinates }) {
                   <br />
                   <div className="card h-100 p-2">
                     <div className="card-body" style={{ color: "#38B6FF" }}>
-                    <span className="fw-bold ">{t("infoWindow.name")} </span>
+                      <span className="fw-bold ">{t("infoWindow.name")} </span>
                       <p className="card-title">{item.name}</p>
-                      <span className="fw-bold">{t("infowindow.currently")} </span>
+                      <span className="fw-bold">
+                        {t("infowindow.currently")}{" "}
+                      </span>
                       {item.opening_hours?.open_now ? "Open Now" : "Closed"}
                     </div>
                   </div>
@@ -178,15 +180,18 @@ function DMVPage({ coordinates }) {
             })}
             {visible < places.length && (
               <button type="button" className="m-5" onClick={Loadmore}>
-                LOAD MORE
+                {t("all.load_more")}
               </button>
             )}
           </div>
         </div>
       </div>
       <button className="m-5">
-        <Link to={"/resources"} style={{ textDecoration: "none", color: "black" }}>
-          Back
+        <Link
+          to={"/resources"}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          {t("all.back")}
         </Link>
       </button>
       <Scroll />
