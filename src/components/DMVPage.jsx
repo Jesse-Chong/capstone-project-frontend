@@ -134,7 +134,7 @@ function DMVPage({ coordinates }) {
             setMarkerIcon(car);
           }}
         >
-          {t("favorite.dmv")}
+          {t("dmv.dmv")}
         </button>
         <div className="row">
           <div className="col-md-6 mt-3">
@@ -203,7 +203,7 @@ function DMVPage({ coordinates }) {
         data-bs-target="#offcanvasBottom"
         aria-controls="offcanvasBottom"
       >
-        DMV Services
+        {t("dmv.dmv")}
       </button>
 
       <div
@@ -218,7 +218,7 @@ function DMVPage({ coordinates }) {
             style={{ color: "#38B6FF" }}
             id="offcanvasBottomLabel"
           >
-            DMV
+            {t("dmv.dmv")}
           </h5>
           <button
             type="button"
@@ -228,10 +228,7 @@ function DMVPage({ coordinates }) {
           ></button>
         </div>
         <div className="offcanvas-body fs-3" style={{ color: "#38B6FF" }}>
-          The DMV located close to the user will be listed including that
-          location's information. The user will able to choose the type of
-          transportation to the listed location and also be able to view the
-          directions to that location.
+          {t("card.dmv")}
         </div>
       </div>
     </div>

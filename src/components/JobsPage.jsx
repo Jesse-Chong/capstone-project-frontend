@@ -203,7 +203,7 @@ function JobsPage({ coordinates }) {
         data-bs-target="#offcanvasBottom"
         aria-controls="offcanvasBottom"
       >
-        Job Services
+        {t("jobs.job_agencies")}
       </button>
 
       <div
@@ -218,7 +218,7 @@ function JobsPage({ coordinates }) {
             style={{ color: "#38B6FF" }}
             id="offcanvasBottomLabel"
           >
-            Jobs
+            {t("jobs.job_agencies")}
           </h5>
           <button
             type="button"
@@ -228,10 +228,7 @@ function JobsPage({ coordinates }) {
           ></button>
         </div>
         <div className="offcanvas-body fs-3" style={{ color: "#38B6FF" }}>
-          The job services located close to the user will be listed including
-          that location's information. The user will also be able to choose the
-          type of transportation to the listed location and also be able to view
-          the directions to that location.
+          {t("card.jobs")}
         </div>
       </div>
     </div>
