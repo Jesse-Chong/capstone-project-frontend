@@ -69,12 +69,18 @@ const GoogleMapsComponent = ({
             /<\/?(?:b|div[^>]*?|wbr\/?)>/g,
             ""
           );
-    
+
           // Replace direction phrases with translation keys
           instruction = instruction
             .replace(/Continue onto/g, t("directions.continue_onto"))
-            .replace(/Destination will be on the left/g, t("directions.destination_will_be_on_the_left"))
-            .replace(/Destination will be on the right/g, t("directions.destination_will_be_on_the_right"))
+            .replace(
+              /Destination will be on the left/g,
+              t("directions.destination_will_be_on_the_left")
+            )
+            .replace(
+              /Destination will be on the right/g,
+              t("directions.destination_will_be_on_the_right")
+            )
             .replace(/Head east/g, t("directions.head_east"))
             .replace(/Head east on/g, t("directions.head_east_on"))
             .replace(/Head north/g, t("directions.head_north"))
@@ -91,14 +97,70 @@ const GoogleMapsComponent = ({
             .replace(/Turn left at the/g, t("directions.turn_left_at_the"))
             .replace(/Turn left onto/g, t("directions.turn_left_onto"))
             .replace(/Turn left to merge/g, t("directions.turn_left_to_merge"))
-            .replace(/Turn left to merge onto/g, ("directions.turn_left_to_merge_onto"))
+            .replace(
+              /Turn left to merge onto/g,
+              "directions.turn_left_to_merge_onto"
+            )
             .replace(/Turn left towards/g, t("directions.turn_left_towards"))
             .replace(/Turn right at the/g, t("directions.turn_right_at_the"))
             .replace(/Turn right onto/g, t("directions.turn_right_onto"))
-            .replace(/Turn right to merge/g, t("directions.turn_right_to_merge"))
-            .replace(/Turn right to merge onto/g, t("directions.turn_right_to_merge_onto"))
-            .replace(/Turn right towards/g, t("directions.turn_right_towards"));
-    
+            .replace(
+              /Turn right to merge/g,
+              t("directions.turn_right_to_merge")
+            )
+            .replace(
+              /Turn right to merge onto/g,
+              t("directions.turn_right_to_merge_onto")
+            )
+            .replace(/Turn right towards/g, t("directions.turn_right_towards"))
+            .replace(/toward/g, t("directions.toward"))
+            .replace(/Head north toward/g, t("directions.head_north_toward"))
+            .replace(/Turn right toward/g, t("directions.turn_right_toward"))
+            .replace(
+              /Turn right to merge/g,
+              t("directions.turn_right_to_merge")
+            )
+            .replace(/Keep right to stay/g, t("directions.keep_right_to_stay"))
+            .replace(/Keep left to stay/g, t("directions.keep_left_to_stay"))
+            .replace(
+              /Keep left to continue on/g,
+              t("directions.keep_left_to_continue_on")
+            )
+            .replace(
+              /Keep right to continue on/g,
+              t("directions.keep_right_to_continue_on")
+            )
+            .replace(/follow signs/g, t("directions.follow_signs"))
+            .replace(/exit/g, t("directions.exit"))
+            .replace(
+              /Use any lane to take/g,
+              t("directions.use_any_lane_to_take")
+            )
+            .replace(/continue on/g, t("directions.continue_on"))
+            .replace(/Drive to/g, t("directions.drive_to"))
+            .replace(/Slight left onto/g, t("directions.slight_left_onto"))
+            .replace(/Slight right onto/g, t("directions.slight_right_onto"))
+            .replace(/continue straight/g, t("directions.continue_straight"))
+            .replace(
+              /continue straight onto/g,
+              t("directions.continue_straight_onto")
+            )
+            .replace(/Take the ramp to/g, t("directions.Take_the_ramp_to"))
+            .replace(/Use the right/g, t("directions.use_the_right"))
+            .replace(
+              /lanes to merge onto/g,
+              t("directions.lanes_to_merge_onto")
+            )
+            .replace(/follow/g, t("directions.follow"))
+            .replace(
+              /turns slightly right and becomes/g,
+              t("directions.turns_slightly_right_and_becomes")
+            )
+            .replace(
+              /turns slightly left and becomes/g,
+              t("directions.turns_slightly_left_and_becomes")
+            )
+            .replace(/Take exit/g, t("directions.take_exit"));
           return {
             key: index,
             instruction,
