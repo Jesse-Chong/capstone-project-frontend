@@ -18,18 +18,18 @@ function HelperFile({ selectedPlaceDetails }) {
             className="mt-3 mb-3"
             onClick={() => setShowDetails(!showDetails)}
           >
-            {showDetails ? "Hide Details" : "Show Details"}
+            {showDetails ? t("map.show_details") : t("map.hide_details")}
           </button>
           {showDetails && (
             <div className="card h-100 p-2">
               <div className="card-body" style={{ color: "#38B6FF" }}>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item" style={{ color: "#38B6FF" }}>
-                    <span className="fw-bold">Name:</span>{" "}
+                    <span className="fw-bold">{t("infoWindow.name")}:</span>{" "}
                     {selectedPlaceDetails.name}
                   </li>
                   <li className="list-group-item" style={{ color: "#38B6FF" }}>
-                    <span className="fw-bold">Address:</span>{" "}
+                    <span className="fw-bold">{t("infoWindow.address")}:</span>{" "}
                     {selectedPlaceDetails.formatted_address}
                   </li>
                   {selectedPlaceDetails.formatted_phone_number && (
@@ -37,12 +37,12 @@ function HelperFile({ selectedPlaceDetails }) {
                       className="list-group-item"
                       style={{ color: "#38B6FF" }}
                     >
-                      <span className="fw-bold">Phone: </span>
+                      <span className="fw-bold">{t("infoWindow.phone")}: </span>
                       {selectedPlaceDetails.formatted_phone_number}
                     </li>
                   )}
                   <li className="list-group-item" style={{ color: "#38B6FF" }}>
-                    <span className="fw-bold">Rating: </span>
+                    <span className="fw-bold">{t("infoWindow.rating")}: </span>
                     {selectedPlaceDetails.rating}
                   </li>
                   {selectedPlaceDetails.website && (
@@ -50,7 +50,7 @@ function HelperFile({ selectedPlaceDetails }) {
                       className="list-group-item"
                       style={{ color: "#38B6FF" }}
                     >
-                      <span className="fw-bold">Website: </span>
+                      <span className="fw-bold">{t("infoWindow.website")}: </span>
                       {selectedPlaceDetails.website}
                     </li>
                   )}
@@ -60,7 +60,7 @@ function HelperFile({ selectedPlaceDetails }) {
                         className="list-group-item"
                         style={{ color: "#38B6FF" }}
                       >
-                        <span className="fw-bold">Opening Hours:</span>
+                        <span className="fw-bold">{t("infoWindow.openingHours")}:</span>
                       </li>
 
                       {selectedPlaceDetails.opening_hours.weekday_text.map(
