@@ -198,6 +198,44 @@ function EducationPage({ coordinates }) {
       </button>
       <Scroll />
       <Footer />
+      <button
+        className="button"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom"
+      >
+        Education Services
+      </button>
+
+      <div
+        className="offcanvas offcanvas-bottom"
+        tabindex="-1"
+        id="offcanvasBottom"
+        aria-labelledby="offcanvasBottomLabel"
+      >
+        <div className="offcanvas-header">
+          <h5
+            className="offcanvas-title fs-1"
+            style={{ color: "#38B6FF" }}
+            id="offcanvasBottomLabel"
+          >
+            Education
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body small fs-3" style={{ color: "#38B6FF" }}>
+          The schools located close to the user will be listed including that
+          location's information. The user will also be able to choose the type
+          of transportation to the listed location and also be able to view the
+          directions to that location.
+        </div>
+      </div>
     </div>
   );
 }
