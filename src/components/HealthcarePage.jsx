@@ -202,7 +202,7 @@ function HealthcarePage({ coordinates }) {
         data-bs-target="#offcanvasBottom"
         aria-controls="offcanvasBottom"
       >
-        Healthcare Services
+        {t("health.healthcare")}
       </button>
       <div
         className="offcanvas offcanvas-bottom"
@@ -216,7 +216,7 @@ function HealthcarePage({ coordinates }) {
             style={{ color: "#38B6FF" }}
             id="offcanvasBottomLabel"
           >
-            Healthcare
+            {t("health.healthcare")}
           </h5>
           <button
             type="button"
@@ -226,10 +226,7 @@ function HealthcarePage({ coordinates }) {
           ></button>
         </div>
         <div className="offcanvas-body fs-3" style={{ color: "#38B6FF" }}>
-          The healthcare services located close to the user will be listed
-          including that location's information. The user will also be able to
-          choose the type of transportation to the listed location and also be
-          able to view the directions to that location.
+          {t("card.healthcare")}
         </div>
       </div>
     </div>

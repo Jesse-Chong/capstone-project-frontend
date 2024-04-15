@@ -203,7 +203,7 @@ function GovernmentPage({ coordinates }) {
         data-bs-target="#offcanvasBottom"
         aria-controls="offcanvasBottom"
       >
-        Government Services
+        {t("government.government_services")}
       </button>
       <div
         className="offcanvas offcanvas-bottom"
@@ -217,7 +217,7 @@ function GovernmentPage({ coordinates }) {
             style={{ color: "#38B6FF" }}
             id="offcanvasBottomLabel"
           >
-            Government Services
+            {t("government.government_services")}
           </h5>
           <button
             type="button"
@@ -227,10 +227,7 @@ function GovernmentPage({ coordinates }) {
           ></button>
         </div>
         <div className="offcanvas-body fs-3" style={{ color: "#38B6FF" }}>
-          The government services located close to the user will be listed
-          including that location's information. The user will also be able to
-          choose the type of transportation to the listed location and also be
-          able to view the directions to that location.
+          {t("card.government")}
         </div>
       </div>
     </div>
