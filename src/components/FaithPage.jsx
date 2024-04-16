@@ -203,7 +203,7 @@ function FaithPage({ coordinates }) {
         data-bs-target="#offcanvasBottom"
         aria-controls="offcanvasBottom"
       >
-       Worship
+        {t("faith.religous_services")}
       </button>
       <div
         className="offcanvas offcanvas-bottom"
@@ -217,7 +217,7 @@ function FaithPage({ coordinates }) {
             style={{ color: "#38B6FF" }}
             id="offcanvasBottomLabel"
           >
-            Places of Worship
+            {t("card.worship")}
           </h5>
           <button
             type="button"
@@ -227,10 +227,7 @@ function FaithPage({ coordinates }) {
           ></button>
         </div>
         <div className="offcanvas-body fs-3" style={{ color: "#38B6FF" }}>
-          The places of worship located to the user will be listed including
-          that location's information. The user will also be able to choose the
-          type of transportation to the listed location and also be able to view
-          the directions to that location.
+          {t("card.faith")}
         </div>
       </div>
     </div>

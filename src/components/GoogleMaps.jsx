@@ -160,7 +160,11 @@ const GoogleMapsComponent = ({
               /turns slightly left and becomes/g,
               t("directions.turns_slightly_left_and_becomes")
             )
-            .replace(/Take exit/g, t("directions.take_exit"));
+            .replace(/Walk to/g, t("directions.walk_to"))
+            .replace(/Take exit/g, t("directions.take_exit"))
+            .replace(/Turn left/g, t("directions.turn_left"))
+            .replace(/Turn right/g, t("directions.turn_right"))
+            .replace(/Take the crosswalk/g, t("directions.take_the_crosswalk"));
           return {
             key: index,
             instruction,
@@ -453,7 +457,7 @@ const GoogleMapsComponent = ({
                 >
                   {isLoadingDirections
                     ? "Loading Directions..."
-                    : "Get Directions"}
+                    : t("directions.get_directions")}
                 </button>
               )}
             </div>
@@ -475,7 +479,7 @@ const GoogleMapsComponent = ({
       {directionsInfo.length > 0 && (
         <div>
           <h3 className="mt-3" style={{ color: "#38B6FF" }}>
-            Directions:
+          {t("directions.directions")}:
           </h3>
           {/* <ol> */}
           {directionsInfo.map((direction, index) => (
@@ -483,15 +487,15 @@ const GoogleMapsComponent = ({
             <div className="card h-100 p-2">
               <div className="card-body" style={{ color: "#38B6FF" }}>
                 <p>
-                  <span className="fw-bold">Step{index + 1}</span> -{" "}
+                  <span className="fw-bold">{t("directions.step")}: {index + 1}</span> -{" "}
                   {direction.instruction}
                 </p>
                 <p>
-                  <span className="fw-bold">Distance:</span>{" "}
+                  <span className="fw-bold">{t("directions.distance")}:</span>{" "}
                   {direction.distance}
                 </p>
                 <p>
-                  <span className="fw-bold">Duration:</span>{" "}
+                  <span className="fw-bold">{t("directions.duration")}:</span>{" "}
                   {direction.duration}
                 </p>
               </div>

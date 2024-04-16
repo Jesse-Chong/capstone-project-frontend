@@ -203,7 +203,7 @@ function FoodPage({ coordinates }) {
         data-bs-target="#offcanvasBottom"
         aria-controls="offcanvasBottom"
       >
-        Food Banks
+        {t("food.food_banks")}
       </button>
 
       <div
@@ -218,7 +218,7 @@ function FoodPage({ coordinates }) {
             style={{ color: "#38B6FF" }}
             id="offcanvasBottomLabel"
           >
-            Food Banks
+            {t("food.food_banks")}
           </h5>
           <button
             type="button"
@@ -228,10 +228,7 @@ function FoodPage({ coordinates }) {
           ></button>
         </div>
         <div className="offcanvas-body fs-3" style={{ color: "#38B6FF" }}>
-          The food banks located close to the user will be listed including that
-          location's information. The user will be able to choose the type of
-          transportation to the listed location and also be able to view the
-          directions to that location.
+          {t("card.food")}
         </div>
       </div>
     </div>
