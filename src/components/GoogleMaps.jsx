@@ -161,7 +161,10 @@ const GoogleMapsComponent = ({
               t("directions.turns_slightly_left_and_becomes")
             )
             .replace(/Walk to/g, t("directions.walk_to"))
-            .replace(/Take exit/g, t("directions.take_exit"));
+            .replace(/Take exit/g, t("directions.take_exit"))
+            .replace(/Turn left/g, t("directions.turn_left"))
+            .replace(/Turn right/g, t("directions.turn_right"))
+            .replace(/Take the crosswalk/g, t("directions.take_the_crosswalk"));
           return {
             key: index,
             instruction,
