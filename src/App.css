@@ -13,6 +13,7 @@ img:hover {
 .card:hover {
   transform: scale(1.03);
   box-shadow: 0 0 2px 2px orange;
+  margin: 15px
 }
 
 /* button */
