@@ -11,9 +11,9 @@ const SignUpPage = ({ setUser, setToken }) => {
   const API = import.meta.env.VITE_BASE_URL;
   const { t, i18n } = useTranslation();
   const [signUp, setSignUp] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
+    first_name: "Manny",
+    last_name: "Gonzalez",
+    email: "gon1@email.com",
     password_hash: "",
   });
 
