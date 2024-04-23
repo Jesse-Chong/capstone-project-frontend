@@ -86,7 +86,7 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("es")}
                       >
-                        {t("language.spanish")} / Spanish
+                        Español / Spanish
                       </a>
                     </li>
                     <li>
@@ -95,7 +95,7 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("zh_CN")}
                       >
-                        {t("language.chinese")} / Chinese
+                        中国人 / Chinese
                       </a>
                     </li>
                     <li>
@@ -104,7 +104,7 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("hi")}
                       >
-                        {t("language.hindi")} / Hindi
+                        हिंदी / Hindi
                       </a>
                     </li>
                     <li>
@@ -113,7 +113,7 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("ar")}
                       >
-                        {t("language.arabic")} / Arabic
+                        عربي / Arabic
                       </a>
                     </li>
                     <li>
@@ -122,7 +122,7 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("fr")}
                       >
-                        {t("language.french")} / French
+                        Français / French
                       </a>
                     </li>
                     <li>
@@ -131,7 +131,8 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("ru")}
                       >
-                        {t("language.russian")} / Russian
+                        
+                        Русский / Russian
                       </a>
                     </li>
                     <li>
@@ -140,7 +141,7 @@ function LandingPage({ setLanguageSelected, setCoordinates }) {
                         href="#"
                         onClick={() => changeLanguage("ko")}
                       >
-                        {t("language.korean")} / Korean
+                        한국인 / Korean
                       </a>
                     </li>
                   </ul>
