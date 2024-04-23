@@ -13,7 +13,7 @@ const SignUpPage = ({ setUser, setToken }) => {
   const [signUp, setSignUp] = useState({
     first_name: "Manny",
     last_name: "Gonzalez",
-    email: "gon1@email.com",
+    email: "mannygonzalez1@pursuit.org",
     password_hash: "",
   });
 
